@@ -1,0 +1,263 @@
+# Translation of Plugins - Pods &#8211; Custom Content Types and Fields - Stable (latest release) in Spanish (Mexico)
+# This file is distributed under the same license as the Plugins - Pods &#8211; Custom Content Types and Fields - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-02-19 14:14:43+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.0\n"
+"Language: es_MX\n"
+"Project-Id-Version: Plugins - Pods &#8211; Custom Content Types and Fields - Stable (latest release)\n"
+
+#: components/Templates/Templates.php:207
+msgid "No access message"
+msgstr "Mensaje de no acceso"
+
+#: components/Templates/includes/auto-template/Pods_Templates_Auto_Template_Settings.php:256
+msgid "When enabled, the template will be executed whenever the specified filter is called. Only use this if you know you need to. There could be unforeseen consequences such as content in widgets and other areas of the site getting the templates added."
+msgstr "Cuando esté activada, la plantilla se ejecutará siempre que se llame al filtro especificado. Usa esto sólo si lo necesitas. Podría haber consecuencias imprevistas, como el que se añada las plantillas a el contenido de los widgets y otras áreas del sitio."
+
+#: components/Templates/includes/auto-template/Pods_Templates_Auto_Template_Settings.php:248
+msgid "Which custom filter to use for archive/list views."
+msgstr "Que filtro personalizado usar para ver archivos/listas."
+
+#: src/Pods/Admin/Config/Pod.php:1348
+msgid "Enables additional capabilities for this Taxonomy including: manage_{capability}_terms, edit_{capability}_terms, assign_{capability}_terms, and delete_{capability}_terms"
+msgstr "Permite capacidades adicionales para esta taxonomía, incluyendo: manage_{capability}_terms, edit_{capability}_terms, assign_{capability}_terms, and delete_{capability}_terms"
+
+#: src/Pods/Admin/Config/Pod.php:1335
+msgid "Uses WordPress term capabilities by default"
+msgstr "Usar las capacidades de WordPress por defecto "
+
+#: classes/PodsInit.php:2019 src/Pods/Admin/Config/Pod.php:418
+msgid "Uploaded to this %s"
+msgstr "Subido a este %s"
+
+#: classes/PodsInit.php:2016 src/Pods/Admin/Config/Pod.php:391
+msgid "%s Archives"
+msgstr "%s Archivos"
+
+#: classes/PodsInit.php:2018 src/Pods/Admin/Config/Pod.php:409
+msgid "Insert into %s"
+msgstr "Insertar en %s"
+
+#: classes/PodsInit.php:2015
+msgid "Use as featured image"
+msgstr "Usar como imagen destacada"
+
+#: classes/PodsInit.php:2013
+msgid "Set featured image"
+msgstr "Asignar imagen destacada"
+
+#: classes/PodsInit.php:2014
+msgid "Remove featured image"
+msgstr "Quitar imagen destacada"
+
+#: classes/fields/currency.php:127 components/I18n/I18n.php:821
+#: src/Pods/Admin/Config/Group.php:230 ui/fields/color.php:20
+msgid "Default"
+msgstr "Por defecto"
+
+#: src/Pods/Admin/Config/Pod.php:957 ui/admin/widgets/field.php:21
+#: ui/admin/widgets/form.php:21 ui/admin/widgets/list.php:23
+#: ui/admin/widgets/single.php:23 ui/admin/widgets/view.php:21
+msgid "Title"
+msgstr "Titulo"
+
+#: src/Pods/Admin/Config/Pod.php:967
+msgid "Author"
+msgstr "Autor"
+
+#: ui/admin/upgrade/upgrade_2_0_0.php:20 ui/admin/upgrade/upgrade_2_1_0.php:20
+msgid "Getting Started"
+msgstr "Empezando"
+
+#: src/Pods/Admin/Config/Field.php:219
+msgid "Required"
+msgstr "Requerido(s)"
+
+#: classes/fields/color.php:39 classes/fields/color.php:97
+#: ui/fields/color.php:21
+msgid "Select Color"
+msgstr "Elige un color"
+
+#: ui/fields/color.php:22
+msgid "Current Color"
+msgstr "Color actual"
+
+#: components/Roles/ui/edit.php:46 ui/forms/form.php:179
+msgid "Save"
+msgstr "Guardar"
+
+#: components/Roles/Roles.php:92 components/Roles/ui/add.php:23
+msgid "Capabilities"
+msgstr "Capacidades"
+
+#: components/Migrate-Packages/ui/wizard.php:381
+msgid "Continue"
+msgstr "Continuar"
+
+#: ui/admin/setup-add.php:195 ui/admin/setup-add.php:412
+msgid "Content Type"
+msgstr "Content Type"
+
+#: classes/widgets/PodsWidgetForm.php:38 classes/widgets/PodsWidgetForm.php:59
+#: classes/widgets/PodsWidgetForm.php:74
+#: components/Builder/modules/form/PodsBuilderModuleForm.php:47
+#: components/Builder/modules/form/PodsBuilderModuleForm.php:145
+msgid "Submit"
+msgstr "Enviar"
+
+#: classes/fields/pick.php:732 src/Pods/Admin/Config/Pod.php:993
+#: ui/admin/setup-add.php:422
+msgid "Comments"
+msgstr "Comentarios"
+
+#: classes/fields/pick.php:699 src/Pods/Admin/Config/Pod.php:1073
+#: src/Pods/Admin/Config/Pod.php:1074
+msgid "Taxonomies"
+msgstr "Taxonomías"
+
+#: classes/fields/datetime.php:129 classes/fields/pick.php:565
+msgid "Custom"
+msgstr "Personalizado"
+
+#: classes/PodsUI.php:4907
+msgid "Go to the last page"
+msgstr "Ir a la última página"
+
+#: classes/PodsUI.php:4906
+msgid "Go to the next page"
+msgstr "Ir a la siguiente página"
+
+#: classes/fields/boolean.php:206 classes/fields/color.php:132
+#: classes/fields/oembed.php:212 classes/fields/password.php:129
+#: classes/fields/text.php:195 classes/PodsI18n.php:147
+msgid "This field is required."
+msgstr "Este campo es obligatorio."
+
+#: classes/PodsUI.php:4873
+msgid "Go to the first page"
+msgstr "Ir a la primera página"
+
+#: classes/fields/boolean.php:54 classes/fields/boolean.php:223
+#: classes/fields/boolean.php:246 classes/PodsAdmin.php:4628
+#: classes/PodsAdmin.php:4632 classes/PodsAdmin.php:4640
+#: classes/PodsAdmin.php:4644 classes/PodsAdmin.php:4648
+#: classes/PodsAdmin.php:4652 classes/PodsAdmin.php:4656
+#: classes/PodsAdmin.php:4660 classes/PodsAdmin.php:4664
+#: classes/PodsAdmin.php:4668 classes/PodsAdmin.php:4672
+#: classes/PodsAdmin.php:4684 classes/PodsAdmin.php:4692
+#: classes/PodsAdmin.php:4696 classes/PodsAdmin.php:4700
+#: classes/PodsAdmin.php:4708 classes/PodsAdmin.php:4712
+#: classes/PodsAdmin.php:4716 classes/PodsAdmin.php:4720
+#: classes/PodsAdmin.php:4724 classes/PodsAdmin.php:4728
+#: classes/PodsAdmin.php:4772 classes/PodsUI.php:2915 classes/PodsUI.php:3353
+#: classes/PodsUI.php:3610 src/Pods/Whatsit/Block_Field.php:295
+msgid "Yes"
+msgstr "Si"
+
+#: classes/fields/boolean.php:59 classes/fields/boolean.php:224
+#: classes/fields/boolean.php:247 classes/PodsAdmin.php:4628
+#: classes/PodsAdmin.php:4632 classes/PodsAdmin.php:4640
+#: classes/PodsAdmin.php:4644 classes/PodsAdmin.php:4648
+#: classes/PodsAdmin.php:4652 classes/PodsAdmin.php:4656
+#: classes/PodsAdmin.php:4660 classes/PodsAdmin.php:4664
+#: classes/PodsAdmin.php:4668 classes/PodsAdmin.php:4672
+#: classes/PodsAdmin.php:4684 classes/PodsAdmin.php:4692
+#: classes/PodsAdmin.php:4696 classes/PodsAdmin.php:4700
+#: classes/PodsAdmin.php:4708 classes/PodsAdmin.php:4712
+#: classes/PodsAdmin.php:4716 classes/PodsAdmin.php:4720
+#: classes/PodsAdmin.php:4724 classes/PodsAdmin.php:4728
+#: classes/PodsAdmin.php:4772 classes/PodsUI.php:2916 classes/PodsUI.php:3354
+#: classes/PodsUI.php:3611 src/Pods/Whatsit/Block_Field.php:299
+msgid "No"
+msgstr "No"
+
+#: classes/PodsUI.php:3067
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: classes/fields/color.php:45 classes/fields/color.php:100
+#: classes/PodsUI.php:3512 classes/PodsUI.php:3571 classes/PodsUI.php:3620
+#: classes/PodsUI.php:3659 ui/fields/color.php:19
+msgid "Clear"
+msgstr "Limpiar"
+
+#: classes/PodsAdmin.php:3706 src/Pods/Admin/Config/Field.php:147
+msgid "Description"
+msgstr "Descripción"
+
+#: classes/PodsUI.php:4874
+msgid "Go to the previous page"
+msgstr "Ir a la página anterior"
+
+#: classes/PodsUI.php:4878
+msgid "Current page"
+msgstr "Página actual"
+
+#: classes/PodsUI.php:3247
+msgid "Reset"
+msgstr "Reiniciar"
+
+#: classes/PodsAdmin.php:947 classes/PodsAdmin.php:1375
+#: classes/PodsAdmin.php:1488 classes/PodsAdmin.php:1902
+#: src/Pods/Tools/Repair.php:402
+msgid "Type"
+msgstr "mensaje"
+
+#: classes/Pods.php:4048 classes/PodsAdmin.php:788 classes/PodsForm.php:422
+#: ui/admin/components-admin.php:113
+msgid "Save Changes"
+msgstr "Guardar Cambios"
+
+#: classes/PodsAdmin.php:281 classes/PodsAdmin.php:355 classes/PodsI18n.php:171
+#: classes/PodsInit.php:2001 classes/PodsUI.php:748 classes/PodsUI.php:4474
+#: src/Pods/Admin/Config/Pod.php:199 src/Pods/Admin/Config/Pod.php:1575
+msgid "Edit"
+msgstr "Editar"
+
+#: classes/PodsAdmin.php:944 classes/PodsAdmin.php:1485
+#: classes/PodsAdmin.php:3690 classes/PodsUI.php:790
+#: components/Roles/Roles.php:91 components/Roles/ui/add.php:50
+#: src/Pods/Admin/Config/Field.php:136 src/Pods/Admin/Config/Group.php:99
+#: src/Pods/Tools/Repair.php:326 src/Pods/Tools/Repair.php:400
+#: src/Pods/Tools/Repair.php:823 src/Pods/Tools/Repair.php:893
+#: src/Pods/Tools/Repair.php:1039
+msgid "Name"
+msgstr "Nombre"
+
+#: classes/Pods.php:4524 classes/PodsAdmin.php:1337 classes/PodsUI.php:4530
+#: src/Pods/Admin/Config/Pod.php:1577 ui/admin/view.php:85
+#: ui/forms/type/post.php:134
+msgid "Delete"
+msgstr "Borrar"
+
+#: classes/fields/pick.php:295 classes/fields/pick.php:1016
+#: classes/PodsAdmin.php:357 classes/PodsAdmin.php:376
+#: classes/PodsAdmin.php:544 classes/PodsField.php:596 classes/PodsI18n.php:151
+#: src/Pods/Admin/Config/Field.php:258 src/Pods/Admin/Config/Pod.php:1574
+msgid "Add New"
+msgstr "Añadir nuevo"
+
+#: classes/Pods.php:3361
+msgid "Next &rsaquo;"
+msgstr "Siguiente &rsaquo;"
+
+#: classes/Pods.php:4517 components/Migrate-Packages/ui/wizard.php:65
+#: src/Pods/Admin/Config/Pod.php:1579
+msgid "Export"
+msgstr "Exportar"
+
+#: classes/PodsAdmin.php:562 classes/PodsAdmin.php:583
+#: ui/admin/components-admin.php:16 ui/admin/settings-settings.php:94
+#: ui/admin/settings-settings.php:98 ui/admin/settings.php:26
+#: ui/admin/upgrade/upgrade_2_0_0.php:208
+msgid "Settings"
+msgstr "Ajustes"
+
+#: classes/Pods.php:3360
+msgid "&lsaquo; Previous"
+msgstr "&lsaquo; Anterior"

@@ -1,0 +1,70 @@
+[05:30:48] <strong>Record</strong> #1
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #2
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #3
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #4
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #5
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #6
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #7
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #8
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #9
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #10
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #11
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #12
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #13
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #14
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #15
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #16
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #17
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #18
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #19
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:48] <strong>Record</strong> #20
+[05:30:48] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #21
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #22
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #23
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #24
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #25
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #26
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #27
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #28
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #29
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #30
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #31
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #32
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #33
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #34
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
+[05:30:49] <strong>Record</strong> #35
+[05:30:49] <strong>SKIPPED</strong> : Skip New Items
