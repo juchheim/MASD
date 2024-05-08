@@ -189,3 +189,141 @@ function create_custom_post_types() {
 }
 
 add_action('init', 'create_custom_post_types');
+
+
+// flyer and alerts
+
+function add_flyers_and_alerts_role() {
+    // Remove the role first to reset the capabilities if the role already exists
+    if (get_role('flyers_and_alerts')) {
+        remove_role('flyers_and_alerts');
+    }
+
+    // Add the Flyers and Alerts role with specific capabilities
+    add_role('flyers_and_alerts', 'Flyers and Alerts', array(
+        'read' => true,  // basic capability to access the admin dashboard
+        'upload_files' => true,
+
+        // Capabilities for Flyers
+        'publish_flyers' => true,
+        'edit_flyers' => true,
+        'edit_others_flyers' => true,
+        'delete_flyers' => true,
+        'delete_others_flyers' => true,
+        'edit_published_flyers' => true,
+        'delete_published_flyers' => true,
+
+        // Capabilities for Alerts
+        'publish_alerts' => true,
+        'edit_alerts' => true,
+        'edit_others_alerts' => true,
+        'delete_alerts' => true,
+        'delete_others_alerts' => true,
+        'edit_published_alerts' => true,
+        'delete_published_alerts' => true,
+    ));
+}
+
+add_action('init', 'add_flyers_and_alerts_role');
+
+
+function register_custom_post_types() {
+    // Register the 'Flyer' custom post type with specific capabilities
+    register_post_type('flyer', array(
+        'labels' => array(
+            'name' => 'Flyers',
+            'singular_name' => 'Flyer',
+            'menu_name' => 'Flyers',
+            'name_admin_bar' => 'Flyer',
+            'add_new' => 'Add New',
+            'add_new_item' => 'Add New Flyer',
+            'new_item' => 'New Flyer',
+            'edit_item' => 'Edit Flyer',
+            'view_item' => 'View Flyer',
+            'all_items' => 'All Flyers',
+            'search_items' => 'Search Flyers',
+            'parent_item_colon' => 'Parent Flyer:',
+            'not_found' => 'No flyers found.',
+            'not_found_in_trash' => 'No flyers found in trash.'
+        ),
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'flyer'),
+        'capability_type' => 'flyer',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => null,
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'map_meta_cap' => true,
+        'capabilities' => array(
+            'publish_posts' => 'publish_flyers',
+            'edit_posts' => 'edit_flyers',
+            'edit_others_posts' => 'edit_others_flyers',
+            'delete_posts' => 'delete_flyers',
+            'delete_others_posts' => 'delete_others_flyers',
+            'read_private_posts' => 'read_private_flyers',
+            'edit_post' => 'edit_flyer',
+            'delete_post' => 'delete_flyer',
+            'read_post' => 'read_flyer',
+        ),
+    ));
+
+    // Register the 'Alert' custom post type with specific capabilities
+    register_post_type('alert', array(
+        'labels' => array(
+            'name' => 'Alerts',
+            'singular_name' => 'Alert',
+            'menu_name' => 'Alerts',
+            'name_admin_bar' => 'Alert',
+            'add_new' => 'Add New',
+            'add_new_item' => 'Add New Alert',
+            'new_item' => 'New Alert',
+            'edit_item' => 'Edit Alert',
+            'view_item' => 'View Alert',
+            'all_items' => 'All Alerts',
+            'search_items' => 'Search Alerts',
+            'parent_item_colon' => 'Parent Alert:',
+            'not_found' => 'No alerts found.',
+            'not_found_in_trash' => 'No alerts found in trash.'
+        ),
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'alert'),
+        'capability_type' => 'alert',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => null,
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'map_meta_cap' => true,
+        'capabilities' => array(
+            'publish_posts' => 'publish_alerts',
+            'edit_posts' => 'edit_alerts',
+            'edit_others_posts' => 'edit_others_alerts',
+            'delete_posts' => 'delete_alerts',
+            'delete_others_posts' => 'delete_others_alerts',
+            'read_private_posts' => 'read_private_alerts',
+            'edit_post' => 'edit_alert',
+            'delete_post' => 'delete_alert',
+            'read_post' => 'read_alert',
+        ),
+    ));
+}
+
+add_action('init', 'register_custom_post_types');
+
+
+// how to remove roles: 
+/*
+function remove_custom_roles() {
+    remove_role('flyers_manager');
+    remove_role('alerts_manager');
+}
+
+add_action('init', 'remove_custom_roles');
+*/
