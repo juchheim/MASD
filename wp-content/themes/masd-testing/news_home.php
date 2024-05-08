@@ -1,7 +1,3 @@
-<div class="headline"><h1>News</h1></div>
-
-<div class="threeColumn">
-
 <?php
 
 function removeAfterLastSpace($str) {
@@ -20,6 +16,13 @@ $params = array(
 );
 
 $pod->find( $params );
+
+if ($pod->total() > 0) {
+    ?>
+    <div class="headline"><h1>News</h1></div>
+    <div class="threeColumn">
+    <?php
+}
         
 if ($pod->total() > 0) {
     while ($pod->fetch()) {

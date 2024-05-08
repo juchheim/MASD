@@ -1,0 +1,73 @@
+ID,Title,Content,Excerpt,Date,"Post Type",Permalink,_elementor_css,_elementor_edit_mode,_elementor_template_type,_elementor_version,_wp_desired_post_slug,_wp_page_template,_wp_trash_meta_status,_wp_trash_meta_time,"Image URL","Images Filename","Images Path","Images ID","Images Title","Images Caption","Images Description","Images Alt Text","Attachment URL","Attachments Filename","Attachments Path","Attachments ID","Attachments Title","Attachments Caption","Attachments Description","Attachments Alt Text",Status,"Author ID","Author Username","Author Email","Author First Name","Author Last Name",Slug,Format,"Post Password",Template,Parent,"Parent Slug",Order,"Comment Status","Ping Status","Post Modified Date"
+2,"Sample Page","<!-- wp:paragraph -->
+<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class=""wp-block-quote""><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p>...or something like this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class=""wp-block-quote""><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p>As a new WordPress user, you should go to <a href=""http://masd.local/yazoo-city-high-school/wp-admin/"">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
+<!-- /wp:paragraph -->",,"2024-04-17 16:08:49",page,http://masd.local/yazoo-city-high-school/?page_id=2,,,,,sample-page,default,publish,1713800801,,,,,,,,,,,,,,,,,trash,1,admin,ejuchheim@masd.k12.ms.us,,,sample-page__trashed,,,default,,,,closed,open,"2024-04-22 15:46:41"
+7,Home,"<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center"">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<!-- /wp:paragraph -->",,"2024-04-17 16:11:02",page,http://masd.local/yazoo-city-high-school/,,,,,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,home,,,,,,,closed,closed,"2024-05-07 16:02:22"
+11,"Yazoo City High School Teachers","<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center""><strong>We at Yazoo City High School are dedicated to empowering students to reach their full potential.</strong> Our team of passionate educators is committed to providing a nurturing and supportive learning environment that fosters academic excellence and personal growth. Our teachers understand the unique challenges our students may face, and we are here to inspire and guide them on their educational journey.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center"">In our classrooms, we prioritize innovative teaching methods, individualized instruction, and meaningful engagement to ensure that every student receives the support they need to succeed. We believe in the power of collaboration, both among our staff and with our students' families and communities, to create a strong network of support for student achievement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {""textAlign"":""center""} -->
+<h2 class=""wp-block-heading has-text-align-center"">Together, our teachers strive to make each scholar a success story.</h2>
+<!-- /wp:heading -->",,"2024-04-17 16:13:37",page,http://masd.local/yazoo-city-high-school/teachers/,"a:7:{s:4:""time"";i:1714938385;s:5:""fonts"";a:0:{}s:5:""icons"";a:0:{}s:20:""dynamic_elements_ids"";a:0:{}s:6:""status"";s:5:""empty"";i:0;s:0:"""";s:3:""css"";s:0:"""";}",builder,wp-page,3.21.3,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,teachers,,,,,,,closed,closed,"2024-04-29 18:36:06"
+49,News,,,"2024-04-22 20:28:40",page,http://masd.local/yazoo-city-high-school/news/,,,,,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,news,,,,,,,closed,closed,"2024-04-22 20:28:41"
+140,About,"<!-- wp:heading {""textAlign"":""center""} -->
+<h2 class=""wp-block-heading has-text-align-center"">Vision:</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center"">The vision of YCHS is to prepare students for success in the 21st century by engaging them in rigorous and relevant learning opportunities that promote academic, physical, and social-emotional growth.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {""textAlign"":""center""} -->
+<h2 class=""wp-block-heading has-text-align-center"">Mission:</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center"">Striving for Excellence “EVERYDAY” is the ONLY Option</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {""textAlign"":""center""} -->
+<h2 class=""wp-block-heading has-text-align-center"">Motto:</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center"">KAIZEN (Continuous Improvement)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class=""wp-block-separator has-alpha-channel-opacity""/>
+<!-- /wp:separator -->
+
+<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center"">Yazoo City High School (YCHS) is a public school that serves grades 9-12. It is located at 1825 Martin Luther King Drive in Yazoo City, MS.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {""align"":""center""} -->
+<p class=""has-text-align-center""></p>
+<!-- /wp:paragraph -->",,"2024-04-30 19:33:54",page,http://masd.local/yazoo-city-high-school/about/,,,,,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,about,,,,,,,closed,closed,"2024-05-05 19:31:51"
+142,Leadership,,,"2024-04-30 19:34:09",page,http://masd.local/yazoo-city-high-school/leadership/,,,,,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,leadership,,,,,,,closed,closed,"2024-04-30 19:34:10"
+144,"School Supply List",,,"2024-04-30 19:34:25",page,http://masd.local/yazoo-city-high-school/school-supply-list/,,,,,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,school-supply-list,,,,,,,closed,closed,"2024-04-30 19:34:25"
+151,Staff,,,"2024-04-30 19:35:46",page,http://masd.local/yazoo-city-high-school/staff/,,,,,,,,,,,,,,,,,,,,,,,,,publish,1,admin,ejuchheim@masd.k12.ms.us,,,staff,,,,,,,closed,closed,"2024-04-30 19:35:46"

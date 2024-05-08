@@ -1,0 +1,18 @@
+[04:19:59] <strong>Record</strong> #1
+[04:19:59] Existing item found #2
+[04:19:59] <strong>SKIPPED</strong> : Skip Existing Items
+[04:19:59] <strong>Record</strong> #2
+[04:19:59] Existing item found #7
+[04:19:59] <strong>SKIPPED</strong> : Skip Existing Items
+[04:19:59] <strong>Record</strong> #3
+[04:19:59] post #23 Successfully Imported
+[04:19:59] <strong>Record</strong> #4
+[04:19:59] post #24 Successfully Imported
+[04:19:59] <strong>Record</strong> #5
+[04:19:59] post #25 Successfully Imported
+[04:19:59] <strong>Record</strong> #6
+[04:19:59] post #26 Successfully Imported
+[04:19:59] <strong>Record</strong> #7
+[04:19:59] post #27 Successfully Imported
+[04:19:59] <strong>Record</strong> #8
+[04:19:59] post #28 Successfully Imported

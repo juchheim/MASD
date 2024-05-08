@@ -160,3 +160,4 @@ function add_custom_body_class($classes) {
     return $classes;
 }
 add_filter('body_class', 'add_custom_body_class');
+

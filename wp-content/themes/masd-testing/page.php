@@ -208,6 +208,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   }
 
+  if ($slug == 'leadership') {
+    require 'school_leadership.php';
+  }
+
+  if ($slug == 'staff') {
+    require 'school_staff.php';
+  }
+
   ?>
   
   <!-- closes tags from staff (staff won't work otherwise, am troubleshooting) -->
