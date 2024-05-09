@@ -99,7 +99,9 @@ function dismissAlert(button) {
         <div class="header-inner">
             <div class="logo">
                 <!-- Add your logo here -->
-                <a href="<?php echo $current_site_slug ?>" class="custom-logo-link" rel="home" aria-current="page"><img fetchpriority="high" width="350" height="155" src="/wp-content/uploads/2024/05/logo_reversed_smallv3.png" class="custom-logo" alt="MASD" decoding="async" srcset="/wp-content/uploads/2024/05/logo_reversed_smallv3.png 350w, /wp-content/uploads/2024/05/logo_reversed_smallv3.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></a>
+            <!--    <a href="<?php // echo $current_site_slug ?>" class="custom-logo-link" rel="home" aria-current="page"><img fetchpriority="high" width="350" height="155" src="/wp-content/uploads/2024/05/logo_reversed_smallv3.png" class="custom-logo" alt="MASD" decoding="async" srcset="/wp-content/uploads/2024/05/logo_reversed_smallv3.png 350w, /wp-content/uploads/2024/05/logo_reversed_smallv3.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></a> -->
+                <a href="http://masd.local/" class="custom-logo-link" rel="home" aria-current="page"><img fetchpriority="high" width="350" height="155" src="/wp-content/uploads/2024/05/logo_reversed_smallv3.png" class="custom-logo" alt="MASD" decoding="async" srcset="/wp-content/uploads/2024/05/logo_reversed_smallv3.png 350w, /wp-content/uploads/2024/05/logo_reversed_smallv3.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></a>
+                
             </div>
             <nav>
             
