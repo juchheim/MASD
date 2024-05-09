@@ -6,7 +6,6 @@ Version: 1.0
 Author: Ernest Juchheim
 */
 
-/*
 function add_teacher_role() {
     if (get_role('teacher')) {
         remove_role('teacher');
@@ -27,7 +26,6 @@ function add_teacher_role() {
 
 add_action('init', 'add_teacher_role', 11); // Ensuring it runs after the CPT is registered
 
-*/
 
 
 function create_teacher_post_type() {
