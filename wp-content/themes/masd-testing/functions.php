@@ -161,3 +161,8 @@ function add_custom_body_class($classes) {
 }
 add_filter('body_class', 'add_custom_body_class');
 
+function custom_enqueue_scripts() {
+    // Enqueue jQuery
+    wp_enqueue_script('jquery');
+}
+add_action('wp_enqueue_scripts', 'custom_enqueue_scripts');

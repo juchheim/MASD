@@ -1,10 +1,14 @@
 jQuery(document).ready(function($) {
     // Check if the current page URL includes '/teachers'
     if (window.location.pathname.includes('/teachers')) {
+        console.log('Page is /teachers');
+
         // Variables to store data about teachers and state management
         let podData = []; // Array to store fetched teacher data
         let currentSiteId = teacherData.current_site_id; // Get the current site ID from global teacherData
+        console.log('Current Site ID:', currentSiteId);
         let teachersPerPage = currentSiteId === 1 ? 100 : 20; // Number of teachers per page, varies by site ID
+        console.log('Teachers Per Page:', teachersPerPage);
 
         // State object for managing the pagination and initial load state
         let state = {
@@ -13,6 +17,7 @@ jQuery(document).ready(function($) {
             isInitialLoad: true,
             searchQuery: '' // Empty string to store current search query
         };
+        console.log('Initial State:', state);
 
         // UI utility functions to manage display elements
         const ui = {
@@ -29,14 +34,32 @@ jQuery(document).ready(function($) {
                     $('.threeColumn').after('<button id="scrollToTopButton" class="to-top-button" style="display: none;">Return to Top</button>');
                 }
             },
-            showReturnTopButton: () => $('#scrollToTopButton').show()
+            showReturnTopButton: () => $('#scrollToTopButton').css('display', 'block') // Ensure the button is visible
         };
-        
 
-        // Fetch total count of teachers matching the search query
+        // Generate HTML for each teacher entry
+        function generatePodHtml(startIndex) {
+            return podData.slice(startIndex).map(teacher => `
+                <div class="threeColumnSingle">
+                    <img class='teacherPhoto' loading='lazy' src="${teacher.image || 'http://masd.local/wp-content/uploads/2024/04/no_image_available-1.jpeg'}" alt="${teacher.first_name} ${teacher.last_name} Image"><br>
+                    <h2>${teacher.first_name || 'N/A'} ${teacher.last_name || 'N/A'}</h2>
+                    <a href='mailto:${teacher.email}'>${teacher.email}</a><br>
+                    <p class="teacher-school">${teacher.school}</p>
+                    <p>${formatList(teacher.grade)} ${formatList(teacher.subject)}</p>
+                </div>
+            `).join('');
+        }
+
+        // Helper function to format arrays as comma-separated strings
+        function formatList(items) {
+            return items && Array.isArray(items) ? items.join(', ') : items || '';
+        }
+
         function fetchTotalCount(searchQuery = '') {
+            console.log('Fetching Total Count for query:', searchQuery);
             ui.showLoading();
             state.isInitialLoad = !searchQuery; // Update initial load flag based on query presence
+            console.log('Updated State for Total Count Fetch:', state);
             $.ajax({
                 url: teacherData.ajax_url,
                 type: 'GET',
@@ -48,9 +71,9 @@ jQuery(document).ready(function($) {
             });
         }
 
-        // Handle response from total count fetch
         function handleTotalCountResponse(data, status, xhr) {
             state.totalCount = parseInt(xhr.getResponseHeader('X-WP-Total')); // Parse total count from response headers
+            console.log('Total Count Fetched:', state.totalCount);
             if (state.totalCount > 0) {
                 fetchPage(state.searchQuery); // If teachers exist, fetch first page
             } else {
@@ -59,8 +82,8 @@ jQuery(document).ready(function($) {
             }
         }
 
-        // Fetch a page of teacher data
         function fetchPage(searchQuery = '') {
+            console.log('Fetching Page:', state.currentPage, 'for query:', searchQuery);
             $.ajax({
                 url: teacherData.ajax_url,
                 type: 'GET',
@@ -73,13 +96,14 @@ jQuery(document).ready(function($) {
         }
 
         function handlePageResponse(data) {
+            console.log('Page Response:', data);
             if (data.length > 0) {
                 podData = podData.concat(data);
                 displayPodData(data.length);
                 if (state.currentPage * teachersPerPage < state.totalCount) {
                     state.currentPage++;
+                    console.log('Loading next page:', state.currentPage);
                     fetchPage(state.searchQuery);
-                    ui.hideLoading();
                 } else {
                     ui.hideLoadingSearch(); // Hide the search loading indicator once all pages are loaded
                     $('#searchContainer, #resetButton').show();
@@ -91,44 +115,23 @@ jQuery(document).ready(function($) {
             }
         }
 
-        // Display fetched teacher data
         function displayPodData(numNewTeachers) {
             let startIndex = podData.length - numNewTeachers; // Determine start index for new teachers
+            console.log('Displaying data for', numNewTeachers, 'new teachers starting at index', startIndex);
             let podDataHtml = generatePodHtml(startIndex); // Generate HTML for new teachers
             ui.updateDisplay(podDataHtml); // Update the display with new HTML
-            if ($('#scrollToTopButton').length === 0) { // Append 'Return to Top' button if not already present
-                $('.threeColumn').after('<button id="scrollToTopButton" class="to-top-button">Return to Top</button>');
-            }
-            $('#scrollToTopButton').show();
+            ui.appendReturnTopButton(); // Check and append 'Return to Top' button if not already present
+            ui.showReturnTopButton(); // Ensure 'Return to Top' button is visible
         }
 
-        // Generate HTML for each teacher entry
-        function generatePodHtml(startIndex) {
-            return podData.slice(startIndex).map(teacher => `
-                <div class="threeColumnSingle">
-                    <img class='teacherPhoto' loading='lazy' src="${teacher.image || 'http://masd.local/wp-content/uploads/2024/04/no_image_available-1.jpeg'}" alt="${teacher.first_name} ${teacher.last_name} Image"><br>
-                    <h2>${teacher.first_name || 'N/A'} ${teacher.last_name || 'N/A'}</h2>
-                    <a href='mailto:${teacher.email}'>${teacher.email}</a><br>
-                    <p class="teacher-school">${teacher.school}</p>
-                    <p>${formatList(teacher.grade)} ${formatList(teacher.subject)}</p>
-                </div>
-            `).join(''); // Join all entries to form a single HTML string
-        }
-
-        // Helper function to format arrays as comma-separated strings
-        function formatList(items) {
-            return items && Array.isArray(items) ? items.join(', ') : items || '';
-        }
-
-        // Handle AJAX errors
         function handleAjaxError(jqXHR, textStatus, errorThrown) {
             console.log(`AJAX Error: ${textStatus}: ${errorThrown}`); // Log error details
             ui.hideLoading();
             ui.showNoResultsMessage(); // Show no results message in case of error
         }
 
-        // Reset and fetch data based on new or updated search query
         function resetAndFetch(searchQuery = '') {
+            console.log('Reset and Fetch for new query:', searchQuery);
             state.currentPage = 1;
             podData = [];
             ui.hideNoResultsMessage(); // Hide any existing no results message
@@ -139,8 +142,8 @@ jQuery(document).ready(function($) {
             ui.showLoadingSearch(); // Show loading indicator for search when reset
             $('#searchContainer, #resetButton').hide(); // Hide search and reset buttons
         }
-        
-        // Set up event handlers
+
+        // Event Handlers
         $(document).on('click', '#scrollToTopButton', function() {
             $('html, body').animate({scrollTop: 0}, 'slow'); // Smooth scroll to top of page
         });
