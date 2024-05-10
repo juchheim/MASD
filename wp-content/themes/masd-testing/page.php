@@ -23,7 +23,7 @@ get_header();
   <div class="slider-dots"></div>
   <div class="slider">
     <?php
-      $pod = pods( 'flyer' );
+      $pod = pods( 'slider' );
       $params = array(
         'limit' => -1,
         'orderby' => 'publish_date DESC'

@@ -168,12 +168,27 @@ function custom_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'custom_enqueue_scripts');
 
 
+// hide certain post type fields from the admin
+function hide_editor_custom_post_type() {
+    remove_post_type_support('slider', 'editor');    // removes text editor
+    remove_post_type_support('slider', 'comments'); // Removes comments
+    remove_post_type_support('slider', 'author');   // Removes author
+    remove_post_type_support('slider', 'excerpt');  // Removes excerpt
+    remove_post_type_support('slider', 'trackbacks'); // Removes trackbacks
+    
+}
+
 add_action('init', 'hide_editor_custom_post_type');
 
-function hide_editor_custom_post_type() {
-    remove_post_type_support('flyer', 'editor');    // removes text editor
-    remove_post_type_support('flyer', 'comments'); // Removes comments
-    remove_post_type_support('flyer', 'author');   // Removes author
-    remove_post_type_support('flyer', 'excerpt');  // Removes excerpt
-    remove_post_type_support('flyer', 'trackbacks'); // Removes trackbacks
+// hide custom post types from child sites
+function hide_post_type() {
+    if ( is_multisite() && ! is_main_site() ) {
+        // If it's a multisite and not the main site
+        unregister_post_type( 'teacher' );
+        unregister_post_type( 'school_staff' );
+        unregister_post_type( 'school_leadership' );
+        unregister_post_type( 'request_for_proposal' );
+    }
 }
+
+add_action('init', 'hide_post_type');

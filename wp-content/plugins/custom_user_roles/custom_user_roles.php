@@ -29,6 +29,88 @@ add_action('init', 'add_teacher_role', 11); // Ensuring it runs after the CPT is
 
 */
 
+function add_slider_role() {
+    if (get_role('slider')) {
+        remove_role('slider');
+    }
+
+    add_role('slider', 'Sliders', array(
+        'read' => true,
+        'upload_files' => true,
+        'publish_sliders' => true,
+        'edit_sliders' => true,
+        'edit_others_sliders' => true,
+        'delete_sliders' => true,
+        'delete_others_sliders' => true,
+        'edit_published_sliders' => true,
+        'delete_published_slider' => true,
+    ));
+}
+
+add_action('init', 'add_slider_role', 11); // Ensuring it runs after the CPT is registered
+
+function create_slider_post_type() {
+    $labels = array(
+        'name'                  => _x('Sliders', 'Post type general name', 'textdomain'),
+        'singular_name'         => _x('Slider', 'Post type singular name', 'textdomain'),
+        'menu_name'             => _x('Sliders', 'Admin Menu text', 'textdomain'),
+        'name_admin_bar'        => _x('Slider', 'Add New on Toolbar', 'textdomain'),
+        'add_new'               => __('Add New', 'textdomain'),
+        'add_new_item'          => __('Add New Slider', 'textdomain'),
+        'new_item'              => __('New Slider', 'textdomain'),
+        'edit_item'             => __('Edit Slider', 'textdomain'),
+        'view_item'             => __('View Slider', 'textdomain'),
+        'all_items'             => __('All Sliders', 'textdomain'),
+        'search_items'          => __('Search Sliders', 'textdomain'),
+        'parent_item_colon'     => __('Parent Sliders:', 'textdomain'),
+        'not_found'             => __('No sliders found.', 'textdomain'),
+        'not_found_in_trash'    => __('No sliders found in Trash.', 'textdomain'),
+        'featured_image'        => _x('Slider Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'set_featured_image'    => _x('Set slider image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'remove_featured_image' => _x('Remove slider image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'use_featured_image'    => _x('Use as slider image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'archives'              => _x('Slider archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain'),
+        'insert_into_item'      => _x('Insert into slider', 'Overrides the “Insert into post”/“Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain'),
+        'uploaded_to_this_item' => _x('Uploaded to this slider', 'Overrides the “Uploaded to this post”/“Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain'),
+        'filter_items_list'     => _x('Filter sliders list', 'Screen reader text for the filter links heading on the admin screen. Default “Filter posts list”/“Filter pages list”. Added in 4.4', 'textdomain'),
+        'items_list_navigation' => _x('Sliders list navigation', 'Screen reader text for the pagination heading on the admin screen. Default “Posts list navigation”/“Pages list navigation”. Added in 4.4', 'textdomain'),
+        'items_list'            => _x('Sliders list', 'Screen reader text for the items list heading on the admin screen. Default “Posts list”/“Pages list”. Added in 4.4', 'textdomain'),
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array('slug' => 'slider'),
+        'capability_type'    => 'slider',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'supports'           => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'map_meta_cap'       => true, // Important for correct mapping of custom capabilities
+        'capabilities'       => array(
+            'publish_posts'       => 'publish_sliders',
+            'edit_posts'          => 'edit_sliders',
+            'edit_others_posts'   => 'edit_others_sliders',
+            'delete_posts'        => 'delete_sliders',
+            'delete_others_posts' => 'delete_others_sliders',
+            'read_private_posts'  => 'read_private_sliders',
+            'edit_post'           => 'edit_slider',
+            'delete_post'         => 'delete_slider',
+            'read_post'           => 'read_slider',
+        ),
+    );
+
+    register_post_type('slider', $args);
+}
+
+add_action('init', 'create_slider_post_type');
+
+
+
 
 function create_teacher_post_type() {
     $labels = array(
@@ -90,232 +172,6 @@ function create_teacher_post_type() {
 
 add_action('init', 'create_teacher_post_type');
 
-
-/* flyers and alerts */
-
-function create_custom_post_types() {
-    // Register the Flyers post type
-    $labels_flyers = array(
-        'name' => 'Flyers',
-        'singular_name' => 'Flyer',
-        'menu_name' => 'Flyers',
-        'name_admin_bar' => 'Flyer',
-        'add_new' => 'Add New',
-        'add_new_item' => 'Add New Flyer',
-        'new_item' => 'New Flyer',
-        'edit_item' => 'Edit Flyer',
-        'view_item' => 'View Flyer',
-        'all_items' => 'All Flyers',
-        'search_items' => 'Search Flyers',
-        'parent_item_colon' => 'Parent Flyer:',
-        'not_found' => 'No flyers found.',
-        'not_found_in_trash' => 'No flyers found in trash.'
-    );
-
-    $args_flyers = array(
-        'labels' => $labels_flyers,
-        'public' => true,
-        'publicly_queryable' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'flyer'),
-        'capability_type' => 'flyer',
-        'has_archive' => true,
-        'hierarchical' => false,
-        'menu_position' => null,
-        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-        'map_meta_cap' => true,
-        'capabilities' => array(
-            'publish_posts' => 'publish_flyers',
-            'edit_posts' => 'edit_flyers',
-            'edit_others_posts' => 'edit_others_flyers',
-            'delete_posts' => 'delete_flyers',
-            'delete_others_posts' => 'delete_others_flyers',
-            'read_private_posts' => 'read_private_flyers',
-            'edit_post' => 'edit_flyer',
-            'delete_post' => 'delete_flyer',
-            'read_post' => 'read_flyer',
-        )
-    );
-
-    // Register the Alerts post type
-    $labels_alerts = array(
-        'name' => 'Alerts',
-        'singular_name' => 'Alert',
-        'menu_name' => 'Alerts',
-        'name_admin_bar' => 'Alert',
-        'add_new' => 'Add New',
-        'add_new_item' => 'Add New Alert',
-        'new_item' => 'New Alert',
-        'edit_item' => 'Edit Alert',
-        'view_item' => 'View Alert',
-        'all_items' => 'All Alerts',
-        'search_items' => 'Search Alerts',
-        'parent_item_colon' => 'Parent Alert:',
-        'not_found' => 'No alerts found.',
-        'not_found_in_trash' => 'No alerts found in trash.'
-    );
-
-    $args_alerts = array(
-        'labels' => $labels_alerts,
-        'public' => true,
-        'publicly_queryable' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'alert'),
-        'capability_type' => 'alert',
-        'has_archive' => true,
-        'hierarchical' => false,
-        'menu_position' => null,
-        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-        'map_meta_cap' => true,
-        'capabilities' => array(
-            'publish_posts' => 'publish_alerts',
-            'edit_posts' => 'edit_alerts',
-            'edit_others_posts' => 'edit_others_alerts',
-            'delete_posts' => 'delete_alerts',
-            'delete_others_posts' => 'delete_others_alerts',
-            'read_private_posts' => 'read_private_alerts',
-            'edit_post' => 'edit_alert',
-            'delete_post' => 'delete_alert',
-            'read_post' => 'read_alert',
-        )
-    );
-
-    register_post_type('flyer', $args_flyers);
-    register_post_type('alert', $args_alerts);
-}
-
-add_action('init', 'create_custom_post_types');
-
-
-// flyer and alerts
-
-function add_flyers_and_alerts_role() {
-    // Remove the role first to reset the capabilities if the role already exists
-    if (get_role('flyers_and_alerts')) {
-        remove_role('flyers_and_alerts');
-    }
-
-    // Add the Flyers and Alerts role with specific capabilities
-    add_role('flyers_and_alerts', 'Flyers and Alerts', array(
-        'read' => true,  // basic capability to access the admin dashboard
-        'upload_files' => true,
-
-        // Capabilities for Flyers
-        'publish_flyers' => true,
-        'edit_flyers' => true,
-        'edit_others_flyers' => true,
-        'delete_flyers' => true,
-        'delete_others_flyers' => true,
-        'edit_published_flyers' => true,
-        'delete_published_flyers' => true,
-
-        // Capabilities for Alerts
-        'publish_alerts' => true,
-        'edit_alerts' => true,
-        'edit_others_alerts' => true,
-        'delete_alerts' => true,
-        'delete_others_alerts' => true,
-        'edit_published_alerts' => true,
-        'delete_published_alerts' => true,
-    ));
-}
-
-add_action('init', 'add_flyers_and_alerts_role');
-
-
-function register_custom_post_types() {
-    // Register the 'Flyer' custom post type with specific capabilities
-    register_post_type('flyer', array(
-        'labels' => array(
-            'name' => 'Flyers',
-            'singular_name' => 'Flyer',
-            'menu_name' => 'Flyers',
-            'name_admin_bar' => 'Flyer',
-            'add_new' => 'Add New',
-            'add_new_item' => 'Add New Flyer',
-            'new_item' => 'New Flyer',
-            'edit_item' => 'Edit Flyer',
-            'view_item' => 'View Flyer',
-            'all_items' => 'All Flyers',
-            'search_items' => 'Search Flyers',
-            'parent_item_colon' => 'Parent Flyer:',
-            'not_found' => 'No flyers found.',
-            'not_found_in_trash' => 'No flyers found in trash.'
-        ),
-        'public' => true,
-        'publicly_queryable' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'flyer'),
-        'capability_type' => 'flyer',
-        'has_archive' => true,
-        'hierarchical' => false,
-        'menu_position' => null,
-        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-        'map_meta_cap' => true,
-        'capabilities' => array(
-            'publish_posts' => 'publish_flyers',
-            'edit_posts' => 'edit_flyers',
-            'edit_others_posts' => 'edit_others_flyers',
-            'delete_posts' => 'delete_flyers',
-            'delete_others_posts' => 'delete_others_flyers',
-            'read_private_posts' => 'read_private_flyers',
-            'edit_post' => 'edit_flyer',
-            'delete_post' => 'delete_flyer',
-            'read_post' => 'read_flyer',
-        ),
-    ));
-
-    // Register the 'Alert' custom post type with specific capabilities
-    register_post_type('alert', array(
-        'labels' => array(
-            'name' => 'Alerts',
-            'singular_name' => 'Alert',
-            'menu_name' => 'Alerts',
-            'name_admin_bar' => 'Alert',
-            'add_new' => 'Add New',
-            'add_new_item' => 'Add New Alert',
-            'new_item' => 'New Alert',
-            'edit_item' => 'Edit Alert',
-            'view_item' => 'View Alert',
-            'all_items' => 'All Alerts',
-            'search_items' => 'Search Alerts',
-            'parent_item_colon' => 'Parent Alert:',
-            'not_found' => 'No alerts found.',
-            'not_found_in_trash' => 'No alerts found in trash.'
-        ),
-        'public' => true,
-        'publicly_queryable' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'alert'),
-        'capability_type' => 'alert',
-        'has_archive' => true,
-        'hierarchical' => false,
-        'menu_position' => null,
-        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-        'map_meta_cap' => true,
-        'capabilities' => array(
-            'publish_posts' => 'publish_alerts',
-            'edit_posts' => 'edit_alerts',
-            'edit_others_posts' => 'edit_others_alerts',
-            'delete_posts' => 'delete_alerts',
-            'delete_others_posts' => 'delete_others_alerts',
-            'read_private_posts' => 'read_private_alerts',
-            'edit_post' => 'edit_alert',
-            'delete_post' => 'delete_alert',
-            'read_post' => 'read_alert',
-        ),
-    ));
-}
-
-add_action('init', 'register_custom_post_types');
 
 
 // request for proposals
@@ -573,4 +429,5 @@ function remove_unwanted_menu_items() {
 }
 
 add_action('admin_menu', 'remove_unwanted_menu_items', 999);
+
 
