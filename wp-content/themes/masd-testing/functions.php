@@ -166,3 +166,14 @@ function custom_enqueue_scripts() {
     wp_enqueue_script('jquery');
 }
 add_action('wp_enqueue_scripts', 'custom_enqueue_scripts');
+
+
+add_action('init', 'hide_editor_custom_post_type');
+
+function hide_editor_custom_post_type() {
+    remove_post_type_support('flyer', 'editor');    // removes text editor
+    remove_post_type_support('flyer', 'comments'); // Removes comments
+    remove_post_type_support('flyer', 'author');   // Removes author
+    remove_post_type_support('flyer', 'excerpt');  // Removes excerpt
+    remove_post_type_support('flyer', 'trackbacks'); // Removes trackbacks
+}
