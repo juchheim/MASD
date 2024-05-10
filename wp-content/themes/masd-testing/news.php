@@ -36,7 +36,7 @@ if ($pod->total() > 0) {
             echo '<a href="' . esc_url($permalink) . '">' .'<img src="' . $leading_image . '" alt="Leading Image"></a>';
         }
 */
-        echo '<a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a><br>'. $date_published .'<br>';
+        echo '<a href="' . esc_url($permalink) . '"><h3>' . esc_html($title) . '</h3></a><br>'. $date_published .'<br>';
         echo $news_item_excerpt;
         echo "<hr></div>";
     }
