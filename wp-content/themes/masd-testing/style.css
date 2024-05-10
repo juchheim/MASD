@@ -1534,6 +1534,7 @@ header {
         width: 100%; /* Display as one column */
         float: none;
     }
+	#parallax { display: none; }
 }
 
 .menu-item {
