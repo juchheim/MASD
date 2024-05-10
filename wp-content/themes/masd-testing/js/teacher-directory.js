@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
         function generatePodHtml(startIndex) {
             return podData.slice(startIndex).map(teacher => `
                 <div class="threeColumnSingle">
-                    <img class='teacherPhoto' loading='lazy' src="${teacher.image || 'http://masd.local/wp-content/uploads/2024/04/no_image_available-1.jpeg'}" alt="${teacher.first_name} ${teacher.last_name} Image"><br>
+                    <img class='teacherPhoto' loading='lazy' src="${teacher.image || '/wp-content/uploads/2024/04/no_image_available-1.jpeg'}" alt="${teacher.first_name} ${teacher.last_name} Image"><br>
                     <h2>${teacher.first_name || 'N/A'} ${teacher.last_name || 'N/A'}</h2>
                     <a href='mailto:${teacher.email}'>${teacher.email}</a><br>
                     <p class="teacher-school">${teacher.school}</p>

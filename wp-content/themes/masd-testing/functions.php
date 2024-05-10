@@ -192,6 +192,27 @@ function hide_post_type() {
 }
 
 add_action('init', 'hide_post_type');
-
-
 add_post_type_support( 'slider', 'page-attributes' );
+
+
+
+
+// Enable manual sorting for the 'slider' custom post type and set initial sorting by menu_order
+function enable_manual_ordering_for_slider($query) {
+    global $pagenow;
+
+    // Ensure we are in the admin area and on the edit screen for the 'slider' post type
+    if (is_admin() && $pagenow == 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] == 'slider') {
+        // Check if the orderby parameter is not already set (to avoid overriding if user chooses a different order)
+        if (!isset($_GET['orderby'])) {
+            $query->set('orderby', 'menu_order');
+            // Check if the order parameter is not already set
+            if (!isset($_GET['order'])) {
+                // Set the default order to ASC
+                $query->set('order', 'ASC');
+            }
+        }
+    }
+}
+add_action('pre_get_posts', 'enable_manual_ordering_for_slider');
+
