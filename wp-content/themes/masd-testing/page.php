@@ -34,7 +34,7 @@ get_header();
         while ($pod->fetch()) {
           $image = $pod->display('image');
           $title = $pod->display('title');
-          echo "<img src='".$image."' alt='".$title."' />";
+          echo "<img class='slider-image' src='".$image."' alt='".$title."' />";
         }
       }
     ?>

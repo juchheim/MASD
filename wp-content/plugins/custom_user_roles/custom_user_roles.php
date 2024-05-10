@@ -327,6 +327,81 @@ function register_custom_post_type_school_leadership() {
 add_action('init', 'register_custom_post_type_school_leadership');
 
 
+// alerts
+function add_alert_role() {
+    if (get_role('alert')) {
+        remove_role('alert');
+    }
+
+    add_role('alert', 'Alerts', array(
+        'read' => true,
+        'upload_files' => true,
+        'publish_alerts' => true,
+        'edit_alerts' => true,
+        'edit_others_alerts' => true,
+        'delete_alerts' => true,
+        'delete_others_alerts' => true,
+        'read_private_alerts' => true,
+        'edit_published_alerts' => true,
+        'delete_published_alerts' => true
+    ));
+}
+
+add_action('init', 'add_alert_role', 11);
+
+function register_custom_post_type_alert() {
+    $labels = array(
+        'name' => 'Alerts',
+        'singular_name' => 'Alert',
+        'menu_name' => 'Alerts',
+        'name_admin_bar' => 'Alert',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New Alert',
+        'new_item' => 'New Alert',
+        'edit_item' => 'Edit Alert',
+        'view_item' => 'View Alert',
+        'all_items' => 'All Alerts',
+        'search_items' => 'Search Alerts',
+        'parent_item_colon' => 'Parent Alert:',
+        'not_found' => 'No alerts found.',
+        'not_found_in_trash' => 'No alerts found in trash.'
+    );
+
+    $capabilities = array(
+        'publish_posts' => 'publish_alerts',
+        'edit_posts' => 'edit_alerts',
+        'edit_others_posts' => 'edit_others_alerts',
+        'delete_posts' => 'delete_alerts',
+        'delete_others_posts' => 'delete_others_alerts',
+        'read_private_posts' => 'read_private_alerts',
+        'edit_post' => 'edit_alert',
+        'delete_post' => 'delete_alert',
+        'read_post' => 'read_alert',
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'alert'),
+        'capability_type' => 'alert',
+        'capabilities' => $capabilities,
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => null,
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'map_meta_cap' => true
+    );
+
+    register_post_type('alert', $args);
+}
+
+add_action('init', 'register_custom_post_type_alert');
+
+
 // school staff
 
 function add_school_staff_role() {

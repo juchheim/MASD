@@ -1207,7 +1207,9 @@ nav {
 }
 
 .site-header {
-	padding:35px 80px 20px 80px;
+	border-top: 7px solid rgb(222, 1, 1);
+	margin:0;
+	padding:1.25% 0 1% 5%;
 }
 
 /* news item pages */
@@ -1356,19 +1358,9 @@ body.news-template-default .threeColumnSingle p {
 	text-align: center;
 }
 
-
-
 header {
     background-color: #00274c;
 }
-
-.site-header {
-	margin:0;
-	padding:2% 0 1% 5%;
-}
-
-
-
 
 /* CSS to style the full-screen div */
 .fullscreen-div {
@@ -1958,29 +1950,32 @@ article .entry-header .entry-title {
 	padding-bottom:20px;
   }
   
+  /*
   body::before {
     content: "";
     display: block;
-    height: 6px; /* You can adjust the height as needed */
-    background-color: rgb(222, 1, 1); /* This sets the color of the strip */
+    height: 6px; 
+    background-color: rgb(222, 1, 1);
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; /* High z-index to ensure it stays on top */
+    z-index: 1000;
 }
+
 
 body::after {
     content: "";
     display: block;
-    height: 10px; /* Adjust the height as needed */
-    background-color: #00274c; /* Sets the color of the strip */
+    height: 10px;
+    background-color: #00274c;
     width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 99999; /* High z-index to ensure it stays above other content */
+    z-index: 99999;
 }
+*/
 
 .social-icons a {
     color: #fff; /* Set the icon color to white */
