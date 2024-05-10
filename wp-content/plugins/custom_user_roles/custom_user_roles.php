@@ -320,7 +320,7 @@ add_action('init', 'register_custom_post_types');
 
 // request for proposals
 
-/*
+
 function add_request_for_proposal_role() {
     if (get_role('request_for_proposal')) {
         remove_role('request_for_proposal');
@@ -343,16 +343,16 @@ function add_request_for_proposal_role() {
 // Ensure the role addition function runs after the CPTs are registered
 add_action('init', 'add_request_for_proposal_role', 11);
 
-*/
+
 
 function register_custom_post_type_request_for_proposals() {
     // Register the 'Request for Proposal' custom post type with specific capabilities
     register_post_type('request_for_proposal', array(
         'labels' => array(
             'name' => 'Request for Proposals',
-            'singular_name' => 'Request for Proposal',
-            'menu_name' => 'Requests for Proposal',
-            'name_admin_bar' => 'Request for Proposal',
+            'singular_name' => 'Request for Proposals',
+            'menu_name' => 'Request for Proposals',
+            'name_admin_bar' => 'Request for Proposals',
             'add_new' => 'Add New',
             'add_new_item' => 'Add New Request',
             'new_item' => 'New Request',
@@ -394,7 +394,7 @@ add_action('init', 'register_custom_post_type_request_for_proposals');
 
 
 // school leadership
-/*
+
 function add_school_leadership_role() {
     if (get_role('school_leadership')) {
         remove_role('school_leadership');
@@ -415,7 +415,7 @@ function add_school_leadership_role() {
 }
 
 add_action('init', 'add_school_leadership_role', 11);
-*/
+
 
 
 function register_custom_post_type_school_leadership() {
@@ -472,7 +472,7 @@ add_action('init', 'register_custom_post_type_school_leadership');
 
 
 // school staff
-/*
+
 function add_school_staff_role() {
     if (get_role('school_staff')) {
         remove_role('school_staff');
@@ -493,7 +493,7 @@ function add_school_staff_role() {
 }
 
 add_action('init', 'add_school_staff_role', 11);
-*/
+
 
 function register_custom_post_type_school_staff() {
     $labels = array(

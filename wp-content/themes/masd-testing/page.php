@@ -216,8 +216,14 @@ document.addEventListener('DOMContentLoaded', function() {
     require 'school_staff.php';
   }
 
+
+  if ($slug == 'home' && get_current_blog_id() == 1) {
+    echo "<div class='headline'><h1>Calendar of Events</h1></div>";
+    echo do_shortcode('[calendar id="318"]');
+  }
   ?>
-  
+
+
   <!-- closes tags from staff (staff won't work otherwise, am troubleshooting) -->
   </div>
   
