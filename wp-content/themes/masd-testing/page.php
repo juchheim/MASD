@@ -26,7 +26,7 @@ get_header();
       $pod = pods( 'slider' );
       $params = array(
         'limit' => -1,
-        'orderby' => 'publish_date DESC'
+        'orderby' => 'menu_order ASC'
       );
       
       $pod->find( $params );

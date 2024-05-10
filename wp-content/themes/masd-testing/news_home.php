@@ -41,13 +41,13 @@ if ($pod->total() > 0) {
         if ( !empty($leading_image) ) {
             ?>
             <div class="image-container"><?php
-            echo '<a href="' . esc_url($permalink) . '">' .'<img src="' . $leading_image . '" alt="News Image"></a><br>';
+            echo '<a href="' . esc_url($permalink) . '">' .'<img class="news_home_image" src="' . $leading_image . '" alt="News Image"></a><br>';
             ?>
             </div>
             <?php
             
         } else
-        echo "<a href='". esc_url($permalink) ."'><img src='/wp-content/uploads/2024/04/no_image_available_news-1.jpg' /></a>";
+        echo "<a href='". esc_url($permalink) ."'><img class='news_home_image' src='/wp-content/uploads/2024/05/no_image_available1.jpg' /></a>";
         echo "<div class='news_home_title'><a href='" . esc_url($permalink) . "'><h3>" . esc_html($title) . "</h3></a></div>";
         echo "<div class='news_home_excerpt'>" .$news_item_excerpt. "</div>";
         echo "<div class='news_home_read_more'><a href='" . esc_url($permalink) . "'><h4>[ read more ]</h4></a></div>";

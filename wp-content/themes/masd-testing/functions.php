@@ -192,3 +192,6 @@ function hide_post_type() {
 }
 
 add_action('init', 'hide_post_type');
+
+
+add_post_type_support( 'slider', 'page-attributes' );

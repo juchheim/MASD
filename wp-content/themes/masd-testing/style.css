@@ -1009,9 +1009,9 @@ header {
 }
 
 .logo img {
-    max-width: 80%;
+    max-width: 70%;
     height: auto;
-	padding-top:8px;
+	padding-top:6px;
 }
 
 nav {
@@ -1209,7 +1209,7 @@ nav {
 .site-header {
 	border-top: 7px solid rgb(222, 1, 1);
 	margin:0;
-	padding:1.25% 0 1% 5%;
+	padding:1% 0 1% 5%;
 }
 
 /* news item pages */
@@ -2112,4 +2112,8 @@ body::after {
 .simcal-event-details a {
 	color: rgb(222, 1, 1);
 	font-weight: bold;
+}
+
+.news_home_image {
+	border-radius: 8px;
 }
