@@ -1210,6 +1210,9 @@ nav {
 	border-top: 7px solid rgb(222, 1, 1);
 	margin:0;
 	padding:1% 0 1% 5%;
+	background-image: url('/wp-content/uploads/2024/05/students_background2.jpg');
+    background-position: top center;
+	background-repeat: no-repeat;
 }
 
 /* news item pages */
