@@ -26,7 +26,7 @@ get_header();
       $pod = pods( 'slider' );
       $params = array(
         'limit' => -1,
-        'orderby' => 'menu_order ASC'
+        'orderby' => 'menu_order ASC' // sort by order as displayed in the admin
       );
       
       $pod->find( $params );

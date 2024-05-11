@@ -4,7 +4,7 @@
     $pod = pods('staff');
     $params = array(
         'limit' => -1,
-        'where' => "department.meta_value = '" . esc_sql($slug) . "'",
+        'where' => "department.meta_value = '" . esc_sql($slug) . "'", // the slug has to equal a department name for this pod to display
         'orderby' => 'priority.meta_value DESC, last_name.meta_value ASC'
     );
 
