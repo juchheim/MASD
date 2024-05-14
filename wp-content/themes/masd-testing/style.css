@@ -1122,7 +1122,7 @@ nav {
 	border-top: 7px solid rgb(222, 1, 1);
 	margin:0;
 	padding:1% 0 1% 5%;
-	background: linear-gradient(135deg, #00274c 20%, rgb(222, 1, 1)) 60%; /* Example gradient */
+	background: linear-gradient(135deg, #00274c 20%, rgb(222, 1, 1)) 60%;
 }
 
 /* news item pages */
@@ -1138,12 +1138,15 @@ body.news-template-default .threeColumnSingle p {
 
 .entry-title {
 	text-align: center;
-	margin:10px 0 10px 0;
+	margin:0px 0 0px 0;
 	padding:0;
 }
 
 .entry-header {
 	background-color: rgb(222, 1, 1);
+/*	background: linear-gradient(100deg, #00274c 20%, rgb(222, 1, 1)) 60%;	*/
+/*	border-top: 16px solid white;	*/
+	box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
 .image-container {
@@ -1262,7 +1265,8 @@ body.news-template-default .threeColumnSingle p {
 
 .site-footer {
 	text-align: center;
-	background-color: rgb(222, 1, 1);
+/*	background-color: rgb(222, 1, 1); */
+	background: linear-gradient(135deg, rgb(222, 1, 1) 50%, #00274c 50%);
 	min-height: 300px;
 	margin-top:30px;
 }
@@ -1482,7 +1486,7 @@ nav a {
 .site-columns {
     display: flex;
     justify-content: space-around;
-    margin: 0 100px; /* Adjusted margin for better spacing */
+    margin: 0 0; /* Adjusted margin for better spacing */
     flex-wrap: wrap; /* Enables wrapping of columns */
 }
 
@@ -1666,12 +1670,11 @@ body.search .entry-title a {
 form.search-form input.search-submit {
     background-color: darkblue;
 	color: white;
-	border: none;
+	border: 1px solid lightgra;
 }
 
 .search-submit {
-	padding: 6px 12px;
-    font-size: 14px;
+    font-size: 15px;
     background-color: darkblue;
     color: white;
     border: none;
@@ -2208,4 +2211,22 @@ th {
 }
 .details {
 	color: #555;
+}
+
+
+.breadcrumbs-container {
+	width: 100%;
+    margin: 0 auto; /* This centers the div horizontally */
+    padding: 10px 0 10px 5%; /* Optional: Add padding for better appearance */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+	border: 2px black;
+	background-color: lightgray;
+}
+
+.breadcrumbs {
+	font-size: 13px;
+}
+
+.breadcrumbs a {
+	color: #00305e;
 }
