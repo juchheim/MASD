@@ -55,7 +55,7 @@ if ($pod->total() > 0) {
         if (!empty($image)) {
             echo "<img class='staffPhoto' src='" . esc_url($image) . "' alt='Photo of $title'><br><br>";
         } else {
-            echo "<img class='staffPhoto' src='http://masd.local/wp-content/uploads/2024/04/no_image_available-1.jpeg' alt='No image available'><br><br>";
+            echo "<img class='staffPhoto' src='/wp-content/uploads/2024/04/no_image_available-1.jpeg' alt='No image available'><br><br>";
         }
         echo "<h2>" . esc_html($title) . "</h2>";
         echo "<p>" . esc_html($leadership_title) . "</p>";
