@@ -216,3 +216,4 @@ function enable_manual_ordering_for_slider($query) {
 }
 add_action('pre_get_posts', 'enable_manual_ordering_for_slider');
 
+wp_enqueue_style( 'theme-style', get_stylesheet_uri(), array(), '1.0.4', 'all' );

@@ -479,6 +479,93 @@ function register_custom_post_type_school_staff() {
 add_action('init', 'register_custom_post_type_school_staff');
 
 
+add_action('init', 'create_teacher_post_type');
+
+// Add Football Schedule Role
+function add_football_schedule_role() {
+    if (get_role('football_schedule')) {
+        remove_role('football_schedule');
+    }
+
+    add_role('football_schedule', 'Football Schedule Manager', array(
+        'read' => true,
+        'publish_football_schedules' => true,
+        'edit_football_schedules' => true,
+        'edit_others_football_schedules' => true,
+        'delete_football_schedules' => true,
+        'delete_others_football_schedules' => true,
+        'edit_published_football_schedules' => true,
+        'delete_published_football_schedules' => true,
+    ));
+}
+
+add_action('init', 'add_football_schedule_role', 10); // Ensuring it runs before the CPT is registered
+
+// Create Football Schedule Post Type
+function create_football_schedule_post_type() {
+    $labels = array(
+        'name'                  => _x('Football Schedules', 'Post type general name', 'textdomain'),
+        'singular_name'         => _x('Football Schedule', 'Post type singular name', 'textdomain'),
+        'menu_name'             => _x('Football Schedules', 'Admin Menu text', 'textdomain'),
+        'name_admin_bar'        => _x('Football Schedule', 'Add New on Toolbar', 'textdomain'),
+        'add_new'               => __('Add New', 'textdomain'),
+        'add_new_item'          => __('Add New Football Schedule', 'textdomain'),
+        'new_item'              => __('New Football Schedule', 'textdomain'),
+        'edit_item'             => __('Edit Football Schedule', 'textdomain'),
+        'view_item'             => __('View Football Schedule', 'textdomain'),
+        'all_items'             => __('All Football Schedules', 'textdomain'),
+        'search_items'          => __('Search Football Schedules', 'textdomain'),
+        'parent_item_colon'     => __('Parent Football Schedules:', 'textdomain'),
+        'not_found'             => __('No football schedules found.', 'textdomain'),
+        'not_found_in_trash'    => __('No football schedules found in Trash.', 'textdomain'),
+        'featured_image'        => _x('Football Schedule Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'set_featured_image'    => _x('Set football schedule image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'remove_featured_image' => _x('Remove football schedule image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'use_featured_image'    => _x('Use as football schedule image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'archives'              => _x('Football Schedule archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain'),
+        'insert_into_item'      => _x('Insert into football schedule', 'Overrides the “Insert into post”/“Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain'),
+        'uploaded_to_this_item' => _x('Uploaded to this football schedule', 'Overrides the “Uploaded to this post”/“Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain'),
+        'filter_items_list'     => _x('Filter football schedules list', 'Screen reader text for the filter links heading on the admin screen. Default “Filter posts list”/“Filter pages list”. Added in 4.4', 'textdomain'),
+        'items_list_navigation' => _x('Football schedules list navigation', 'Screen reader text for the pagination heading on the admin screen. Default “Posts list navigation”/“Pages list navigation”. Added in 4.4', 'textdomain'),
+        'items_list'            => _x('Football schedules list', 'Screen reader text for the items list heading on the admin screen. Default “Posts list”/“Pages list”. Added in 4.4', 'textdomain'),
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array('slug' => 'football_schedule'),
+        'capability_type'    => 'football_schedule',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'supports'           => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'map_meta_cap'       => true, // Important for correct mapping of custom capabilities
+        'capabilities'       => array(
+            'publish_posts'       => 'publish_football_schedules',
+            'edit_posts'          => 'edit_football_schedules',
+            'edit_others_posts'   => 'edit_others_football_schedules',
+            'delete_posts'        => 'delete_football_schedules',
+            'delete_others_posts' => 'delete_others_football_schedules',
+            'read_private_posts'  => 'read_private_football_schedules',
+            'edit_post'           => 'edit_football_schedule',
+            'delete_post'         => 'delete_football_schedule',
+            'read_post'           => 'read_football_schedule',
+        ),
+    );
+
+    register_post_type('football_schedule', $args);
+}
+
+add_action('init', 'create_football_schedule_post_type');
+
+
+
+
+
 function remove_unwanted_menu_items() {
     $user = wp_get_current_user();
 

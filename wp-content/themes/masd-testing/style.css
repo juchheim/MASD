@@ -502,11 +502,11 @@ ul,
 ol {
 	margin: 0 0 1.5em 3em;
 }
-
+/*
 ul {
 	list-style: disc;
 }
-
+*/
 ol {
 	list-style: decimal;
 }
@@ -1395,6 +1395,7 @@ header {
 .grid-container h2 a {
 	color: white;
 	text-decoration: none;
+	font-size:16px;
 }
 
 .grid-container h2 a:hover {
@@ -1464,11 +1465,7 @@ header {
 	margin:20px 0 0 0;
 }
 
-.grid-container h2 {
-	font-size: 16px;
-	padding:0;
-	margin:0;
-}
+
 
 .hamburger-icon {
 	font-size:22px;
@@ -1540,9 +1537,21 @@ header {
 	#parallax { display: none; }
 }
 
+/*
 .menu-item {
 	float:left;
 	text-align: left;
+}
+*/
+
+.sub-menu .menu-item {
+	padding:0;
+	margin:0;
+}
+
+.sub-menu .menu-item a {
+	padding:0;
+	margin:0;
 }
 
 .sub-menu {
@@ -1999,6 +2008,7 @@ body::after {
     font-size: 14px;
     text-align: center; /* Center the text */
 	padding-top:20px;
+	margin-top: 20px;
 }
 
 .footer-row {
@@ -2031,13 +2041,6 @@ body::after {
     color: #fff;
     margin: 0 10px;
     font-size: 24px;
-}
-
-.site-info {
-    text-align: center;
-    color: white;
-    font-size: 14px;
-    margin-top: 20px;
 }
 
 .mobile-app {
@@ -2120,4 +2123,178 @@ body::after {
 
 .news_home_image {
 	border-radius: 8px;
+}
+/* Custom style for all Gutenberg button blocks */
+.wp-block-button .wp-block-button__link {
+    background-color: rgb(222, 1, 1);;  /* Change to your preferred color */
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 12px 24px;
+	margin-top:24px;
+}
+
+/* Hover effect */
+.wp-block-button .wp-block-button__link:hover {
+    background-color: rgb(222, 1, 1);  /* Darker shade for hover */
+}
+
+
+/* Style for the Gutenberg details element */
+.wp-block-details details {
+    background-color: #f0f0f0;  /* Light gray background */
+    border: 1px solid #ccc;  /* Gray border */
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Style for the summary element */
+.wp-block-details summary {
+    font-weight: bold;
+	font-size: 24px;
+    cursor: pointer;
+    padding: 30px 0 0 43px;
+}
+
+/* Style for the summary element on hover */
+.wp-block-details summary:hover {
+    color: rgb(222, 1, 1);  /* WordPress blue for hover state */
+}
+
+/*
+ul {
+	margin: 0 0 0 75px;
+	padding: 0 0 0 0; 
+}
+
+ul li {
+	margin: 10px 0 10px 0;
+	padding: 0 0 0 0; 
+	font-size: 16px;
+	font-weight: bold;
+  }
+
+*/
+
+
+.wp-block-details ul li a {
+	color: #00305e !important;
+}
+
+.wp-block-table table tr:first-child {
+    /* CSS properties */
+    background-color: #00305e;  /* Example: sets a grey background */
+    color: white;                /* Example: sets the text color to red */
+    font-weight: bold;         /* Example: makes the text bold */
+}
+
+/* wp admin fixes do not delete */
+.button-link {
+	font-size: 13px;
+}
+
+.wp-list-table a {
+	color: #2271b1;
+}
+
+.wrap a {
+	color: #2271b1;
+}
+
+.menu-settings {
+	font-size: 13px;
+}
+
+.wp-submenu {
+	margin:0;
+	padding:0;
+}
+
+.main-nav {
+	text-align: left;
+}
+/* end wp admin fixes */
+
+.pgcal-branding { display: none; }
+
+
+
+/* Main navigation styling - Clearing defaults and applying new styles */
+.main-nav {
+    display: flex; /* Using flexbox to layout columns */
+    justify-content: space-between; /* Space between each column */
+    padding: 0 !important; /* Override default padding */
+    margin: 0 !important; /* Override default margin */
+    list-style: none !important; /* No bullet points */
+    width: 100%; /* Full width container */
+}
+
+.main-nav > ul > li, .main-nav ul ul li {
+    display: block; /* Display list items as block */
+    background-color: #f2f2f2; /* Background color for items */
+    border-bottom: 1px solid #ccc; /* Border bottom for separation */
+}
+
+.main-nav ul ul {
+    display: block; /* Ensure sub-menus are always visible */
+    padding-left: 12px; /* Indent sub-menus */
+}
+
+.main-nav a {
+    display: block; /* Ensures links take full space of li */
+    padding: 10px; /* Padding for clickable area */
+    text-decoration: none; /* No underline */
+    color: #333; /* Text color */
+}
+
+.main-nav a:hover {
+  /*  background-color: #00305e; */
+}
+
+/* Responsive adjustments - example for smaller screens */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column; /* Stack columns vertically on small screens */
+    }
+}
+
+/* Font size adjustments for headings in the navigation */
+.menu-column h1 {
+    font-size: 24px; /* Larger font size for top-level menu items */
+    font-weight:bold; /* Optional: makes the font bold */
+}
+
+.menu-column h2 {
+    font-size: 18px; /* Smaller font size for sub-menu items */
+    font-weight: normal; /* Optional: normal font weight */
+}
+
+.scoreboard-container {
+	display: flex;
+	justify-content: center; /* Center the container horizontally */
+	margin-top: 0;
+}
+table {
+	width: 80%;
+	border-collapse: collapse;
+}
+th, td {
+	border: 1px solid #ddd;
+	padding: 12px;
+	text-align: left;
+}
+th {
+	background-color: #f2f2f2;
+}
+.win {
+	color: #4CAF50; /* Green */
+}
+.loss {
+	color: #F44336; /* Red */
+}
+.draw {
+	color: #FFC107; /* Amber */
+}
+.details {
+	color: #555;
 }
