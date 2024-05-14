@@ -504,16 +504,16 @@ add_action('init', 'add_football_schedule_role', 10); // Ensuring it runs before
 // Create Football Schedule Post Type
 function create_football_schedule_post_type() {
     $labels = array(
-        'name'                  => _x('Football Schedules', 'Post type general name', 'textdomain'),
+        'name'                  => _x('Football Games', 'Post type general name', 'textdomain'),
         'singular_name'         => _x('Football Schedule', 'Post type singular name', 'textdomain'),
-        'menu_name'             => _x('Football Schedules', 'Admin Menu text', 'textdomain'),
+        'menu_name'             => _x('Athletics: Football', 'Admin Menu text', 'textdomain'),
         'name_admin_bar'        => _x('Football Schedule', 'Add New on Toolbar', 'textdomain'),
         'add_new'               => __('Add New', 'textdomain'),
         'add_new_item'          => __('Add New Football Schedule', 'textdomain'),
         'new_item'              => __('New Football Schedule', 'textdomain'),
         'edit_item'             => __('Edit Football Schedule', 'textdomain'),
         'view_item'             => __('View Football Schedule', 'textdomain'),
-        'all_items'             => __('All Football Schedules', 'textdomain'),
+        'all_items'             => __('All Football Games', 'textdomain'),
         'search_items'          => __('Search Football Schedules', 'textdomain'),
         'parent_item_colon'     => __('Parent Football Schedules:', 'textdomain'),
         'not_found'             => __('No football schedules found.', 'textdomain'),
@@ -564,7 +564,7 @@ add_action('init', 'create_football_schedule_post_type');
 
 
 
-
+/* Removes specific menu items from the WordPress admin dashboard for users with the 'school_staff' role, including 'Posts', 'Comments', 'Templates', 'Tools', 'Calendars', and 'District Staff'. */
 
 function remove_unwanted_menu_items() {
     $user = wp_get_current_user();
@@ -591,5 +591,13 @@ function remove_unwanted_menu_items() {
 }
 
 add_action('admin_menu', 'remove_unwanted_menu_items', 999);
+
+function remove_supports_for_football_schedule() {
+    remove_post_type_support('football_schedule', 'editor');
+    remove_post_type_support('football_schedule', 'thumbnail');
+    remove_post_type_support('football_schedule', 'excerpt');
+}
+add_action('init', 'remove_supports_for_football_schedule');
+
 
 

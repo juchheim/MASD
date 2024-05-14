@@ -180,8 +180,10 @@ function hide_editor_custom_post_type() {
 
 add_action('init', 'hide_editor_custom_post_type');
 
+add_post_type_support( 'slider', 'page-attributes' );
+
 // hide custom post types from child sites
-function hide_post_type() {
+function hide_post_type_from_child_sites() {
     if ( is_multisite() && ! is_main_site() ) {
         // If it's a multisite and not the main site
         unregister_post_type( 'teacher' );
@@ -191,8 +193,18 @@ function hide_post_type() {
     }
 }
 
-add_action('init', 'hide_post_type');
-add_post_type_support( 'slider', 'page-attributes' );
+add_action('init', 'hide_post_type_from_child_sites');
+
+
+// hide custom post types from main site
+function hide_post_type_from_main_site() {
+    if ( is_main_site() ) {
+        unregister_post_type( 'football_schedule' );
+    }
+}
+
+add_action('init', 'hide_post_type_from_main_site');
+
 
 
 
