@@ -1939,6 +1939,7 @@ body::after {
 
 .footer-column-left {
     text-align: left;
+	padding-left: 50px;
 }
 
 .footer-column-center {
@@ -1948,6 +1949,7 @@ body::after {
 .footer-column-right {
     text-align: right;
 	padding-top: 30px;
+	padding-right: 50px;
 }
 
 .social-icons a {
@@ -2230,3 +2232,8 @@ th {
 .breadcrumbs a {
 	color: #00305e;
 }
+
+.wp-block-heading a {
+	color: #00274c;
+}
+
