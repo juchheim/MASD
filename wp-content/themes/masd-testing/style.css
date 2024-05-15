@@ -421,6 +421,10 @@ h1, h2, h3, h4, h5, h6 {
     clear: both; /* Clears floated elements */
 }
 
+h2 {
+	font-weight: 700;
+}
+
 /* Paragraphs */
 p {
     margin-bottom: 1.5em;
@@ -442,6 +446,57 @@ p {
 .poppins-bold-italic, .poppins-extrabold-italic, .poppins-black-italic {
     font-style: italic;
 }
+
+/* Merriweather font weights and styles */
+.merriweather-light {
+	font-family: "Merriweather", serif;
+	font-weight: 300;
+	font-style: normal;
+  }
+  
+  .merriweather-regular {
+	font-family: "Merriweather", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+  .merriweather-bold {
+	font-family: "Merriweather", serif;
+	font-weight: 700;
+	font-style: normal;
+  }
+  
+  .merriweather-black {
+	font-family: "Merriweather", serif;
+	font-weight: 900;
+	font-style: normal;
+  }
+  
+  .merriweather-light-italic {
+	font-family: "Merriweather", serif;
+	font-weight: 300;
+	font-style: italic;
+  }
+  
+  .merriweather-regular-italic {
+	font-family: "Merriweather", serif;
+	font-weight: 400;
+	font-style: italic;
+  }
+  
+  .merriweather-bold-italic {
+	font-family: "Merriweather", serif;
+	font-weight: 700;
+	font-style: italic;
+  }
+  
+  .merriweather-black-italic {
+	font-family: "Merriweather", serif;
+	font-weight: 900;
+	font-style: italic;
+  }
+  
+
 
 /* Italic and block elements */
 dfn, cite, em, i, blockquote, address {
@@ -1109,6 +1164,7 @@ nav {
 	padding-right:5%;
 }
 
+/*
 .site-header {
 	border-top: 7px solid rgb(222, 1, 1);
 	margin:0;
@@ -1117,6 +1173,7 @@ nav {
     background-position: top center;
 	background-repeat: no-repeat;
 }
+*/
 
 .site-header {
 	border-top: 7px solid rgb(222, 1, 1);
@@ -1146,7 +1203,7 @@ body.news-template-default .threeColumnSingle p {
 	background-color: rgb(222, 1, 1);
 /*	background: linear-gradient(100deg, #00274c 20%, rgb(222, 1, 1)) 60%;	*/
 /*	border-top: 16px solid white;	*/
-	box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
 }
 
 .image-container {
@@ -1175,6 +1232,9 @@ body.news-template-default .threeColumnSingle p {
 .news_home_excerpt p {
 	font-size: smaller;
 	margin:20px 0 20px 0;
+	font-family: "Merriweather", serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 .darkblue-div {
@@ -1671,6 +1731,12 @@ nav a {
 	padding-top:10px;
 }
 
+.entry-content p {
+	font-family: "Merriweather", serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
 body.home .entry-header {
     display: none;
 }
@@ -1848,36 +1914,52 @@ article .entry-header .entry-title {
 }
 
 #parallax {
-	/* The image used */
-	background-image: url('/wp-content/uploads/2024/05/kids_red.jpg');
-  
-	/* Set a specific height */
+    background-image: url('/wp-content/uploads/2024/05/kids2.jpg');
     height: 500px; 
-
-    /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative; /* Ensures it is the positioning context for its children */
-    overflow: hidden; /* Ensures no content spills out */
-  }
+    position: relative;
+    overflow: hidden;
+}
 
-  #foreground {
-    /* The image used */
+#foreground {
     background-image: url('/wp-content/uploads/2024/05/kids_one_mission-2.png');
-
-    /* Positioning and size */
     position: absolute;
-    top: -200px; /* Start at the top of the #parallax div */
+    top: -200px;
     left: 0;
     right: 0;
-    height: 500px; /* Same height as #parallax for matching effect */
+    height: 500px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: 10; /* Ensure it's above the background */
+    z-index: 10;
 }
+
+#blue, #red {
+    position: absolute;
+    top: 0;
+    height: 500px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform 1s ease-out;
+    z-index: 5;
+}
+
+#blue {
+    background-image: url('/wp-content/uploads/2024/05/blue.png');
+    left: -100px;
+    background-position: center left;
+}
+
+#red {
+    background-image: url('/wp-content/uploads/2024/05/red.png');
+	left: -50px;
+    background-position: center right;
+}
+
 
 
   body.home .headline {
@@ -2248,4 +2330,6 @@ th {
 .wp-block-heading a {
 	color: #00274c;
 }
+
+
 

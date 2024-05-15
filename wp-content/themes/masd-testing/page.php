@@ -181,15 +181,40 @@ document.addEventListener('DOMContentLoaded', function() {
       ?>
       <div id="parallax">
         <div id="foreground"></div>
+        <div id="blue"></div>
+        <div id="red"></div>
       </div>
 
       <script>
 
       window.addEventListener('scroll', function() {
           var scrollPosition = window.pageYOffset;
+
+          // Existing functionality for foreground
           var slowScroll = scrollPosition * 0.5; // The image moves at half the scroll speed
           document.getElementById('foreground').style.top = (-200 + slowScroll) + 'px'; // Adjust starting point dynamically
+
+          // New functionality for blue and red images
+          var blue = document.getElementById('blue');
+          var red = document.getElementById('red');
+
+          // Keep blue and red in the middle until scrollPosition reaches 500px
+          var startTransformPoint = 500; // Adjust this value based on when you want the images to start moving
+          var blueTransform = 0;
+          var redTransform = 0;
+
+          if (scrollPosition > startTransformPoint) {
+              blueTransform = Math.min((scrollPosition - startTransformPoint) * 1.5, 1000); // Increase the factor for faster movement
+              redTransform = Math.min((scrollPosition - startTransformPoint) * 1.5, 1000);
+          }
+
+          blue.style.transform = `translateX(-${blueTransform}px)`;
+          red.style.transform = `translateX(${redTransform + 200}px)`; // Adjust the initial position offset
+
       });
+
+
+
 
       </script>
 

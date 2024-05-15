@@ -17,6 +17,17 @@ Template Post Type: news
 	get_header();
 	?>
 
+<?php if (!is_front_page()): ?>
+<div class="breadcrumbs-container">
+  <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+      <?php if(function_exists('bcn_display'))
+      {
+          bcn_display();
+      }?>
+  </div>
+</div>
+<?php endif; ?>
+
 	<?php
 		// Start the loop
 		while (have_posts()) :
