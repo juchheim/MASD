@@ -1950,13 +1950,13 @@ article .entry-header .entry-title {
 
 #blue {
     background-image: url('/wp-content/uploads/2024/05/blue.png');
-    left: -100px;
+    left: -50px;
     background-position: center left;
 }
 
 #red {
     background-image: url('/wp-content/uploads/2024/05/red.png');
-	left: -50px;
+	left: -100px;
     background-position: center right;
 }
 
