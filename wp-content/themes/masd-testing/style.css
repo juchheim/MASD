@@ -1528,12 +1528,20 @@ nav a {
 		min-height: 440px;
 	}
 
+	.hamburger-icon {
+		font-size: 32px;
+	}
+
 	.slider-container {
 		display: none;
 	}
 
 	.menu-button {
 		display: none;
+	}
+
+	nav {
+		padding-top:0;
 	}
 
 	.footer-column {
