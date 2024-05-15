@@ -1524,7 +1524,11 @@ nav a {
 		display: none;
 	}
 
-	#schools-link {
+	.schools_subnav { 
+		min-height: 440px;
+	}
+
+	.slider-container {
 		display: none;
 	}
 
