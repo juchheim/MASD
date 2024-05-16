@@ -2265,6 +2265,11 @@ ul li {
     .main-nav {
         flex-direction: column; /* Stack columns vertically on small screens */
     }
+	.footer-column-right {
+		text-align: center;
+		padding-top: 30px;
+		padding-right: 0;
+	}
 }
 
 /* Font size adjustments for headings in the navigation */
