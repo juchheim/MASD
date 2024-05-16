@@ -260,8 +260,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // athletics
   if ($slug == 'varsity-football') {
-    require 'varsity_football.php';
+    require 'athletics_football.php';
   }
+
+  // athletics
+  if ($slug == 'volleyball') {
+    require 'athletics_volleyball.php';
+  }
+
   ?>
 
 
