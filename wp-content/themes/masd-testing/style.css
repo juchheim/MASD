@@ -2265,10 +2265,25 @@ ul li {
     .main-nav {
         flex-direction: column; /* Stack columns vertically on small screens */
     }
+
+	.footer-column-left {
+		padding-left: 0;
+	}
+
+	.footer-column-center {
+		width:100%;
+		text-align: center;
+	}
+
 	.footer-column-right {
 		text-align: center;
 		padding-top: 30px;
 		padding-right: 0;
+		width:100%;
+	}
+
+	.search-submit {
+		margin-top:10px;
 	}
 }
 
