@@ -78,7 +78,8 @@ jQuery(document).ready(function($) {
                 fetchPage(state.searchQuery); // If teachers exist, fetch first page
             } else {
                 ui.showNoResultsMessage(); // Show no results message if count is 0
-                ui.hideLoading(); // Hide loading message
+                ui.hideLoadingSearch(); // Hide the search loading indicator
+                $('#searchContainer, #resetButton').show(); // Show search and reset buttons
             }
         }
 
@@ -110,9 +111,16 @@ jQuery(document).ready(function($) {
                 }
             } else {
                 ui.showNoResultsMessage();
-                ui.hideLoading();
                 ui.hideLoadingSearch();
+                $('#searchContainer, #resetButton').show(); // Show search and reset buttons
             }
+        }
+
+        function handleAjaxError(jqXHR, textStatus, errorThrown) {
+            console.log(`AJAX Error: ${textStatus}: ${errorThrown}`); // Log error details
+            ui.hideLoadingSearch();
+            ui.showNoResultsMessage(); // Show no results message in case of error
+            $('#searchContainer, #resetButton').show(); // Show search and reset buttons
         }
 
         function displayPodData(numNewTeachers) {
@@ -122,12 +130,6 @@ jQuery(document).ready(function($) {
             ui.updateDisplay(podDataHtml); // Update the display with new HTML
             ui.appendReturnTopButton(); // Check and append 'Return to Top' button if not already present
             ui.showReturnTopButton(); // Ensure 'Return to Top' button is visible
-        }
-
-        function handleAjaxError(jqXHR, textStatus, errorThrown) {
-            console.log(`AJAX Error: ${textStatus}: ${errorThrown}`); // Log error details
-            ui.hideLoading();
-            ui.showNoResultsMessage(); // Show no results message in case of error
         }
 
         function resetAndFetch(searchQuery = '') {
