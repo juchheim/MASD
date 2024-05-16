@@ -1232,7 +1232,6 @@ body.news-template-default .threeColumnSingle p {
 .news_home_excerpt p {
 	font-size: smaller;
 	margin:20px 0 20px 0;
-	font-family: "Merriweather", serif;
 	font-weight: 400;
 	font-style: normal;
 }
@@ -1732,7 +1731,6 @@ nav a {
 }
 
 .entry-content p {
-	font-family: "Merriweather", serif;
 	font-weight: 400;
 	font-style: normal;
 }
