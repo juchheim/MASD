@@ -34,7 +34,7 @@ function display_google_calendar_events($atts) {
     $data = json_decode($body, true);
 
     if (empty($data['items'])) {
-        return '<p>No upcoming events found.</p>';
+        return '';
     }
 
     // Add the headline before the events
