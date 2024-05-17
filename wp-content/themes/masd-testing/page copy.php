@@ -34,7 +34,13 @@ get_header();
         while ($pod->fetch()) {
           $image = $pod->display('image');
           $title = $pod->display('title');
-          echo "<img class='slider-image' src='".$image."' alt='".$title."' />";
+          $link = $pod->display('link');
+          
+          if (!empty($link)) {
+            echo "<div class='slider-image'><a href='".$link."' target='_blank'><img src='".$image."' alt='".$title."' /></a></div>";
+          } else {
+            echo "<div class='slider-image'><img src='".$image."' alt='".$title."' /></div>";
+          }
         }
       }
     ?>
@@ -49,16 +55,25 @@ get_header();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  const sliderContainer = document.querySelector('.slider-container');
   const slider = document.querySelector('.slider');
-  const images = document.querySelectorAll('.slider img');
-  const slideCount = images.length;
+  const slides = document.querySelectorAll('.slider .slider-image');
+  const slideCount = slides.length;
   const dotsContainer = document.querySelector('.slider-dots');
   let currentIndex = 0;
   let intervalId;
   let isPlaying = true; // Keep track of whether the slider is playing
 
+  // Set the width of the slider to be the number of slides times 100%
+  slider.style.width = `${slideCount * 100}%`;
+
+  // Set the width of each slide to be 100% divided by the number of slides
+  slides.forEach(slide => {
+    slide.style.width = `${100 / slideCount}%`;
+  });
+
   function updateSlider() {
-    const translateValue = -currentIndex * 100;
+    const translateValue = -currentIndex * (100 / slideCount);
     slider.style.transform = `translateX(${translateValue}%)`;
   }
 
@@ -78,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function createDots() {
     if (slideCount > 1) {
-      for (let i = 0; i < images.length; i++) {
+      for (let i = 0; i < slides.length; i++) {
         const dot = document.createElement('span');
         dot.classList.add('slider-dot');
         dot.dataset.index = i;
@@ -131,6 +146,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   resetInterval(); // Start the initial interval
+
+  // Make the slider visible and trigger fade-in effect
+  sliderContainer.classList.add('ready');
 });
 </script>
 
@@ -253,9 +271,45 @@ document.addEventListener('DOMContentLoaded', function() {
     require 'school_staff.php';
   }
 
+  // google calendars
   if ($slug == 'home' && get_current_blog_id() == 1) {
-    echo "<div class='headline'><h1>Calendar of Events</h1></div>";
-    echo do_shortcode('[calendar id="318"]');
+    echo do_shortcode('[google_calendar_events calendar_id="c_46f1e96c91dde30d948251d704ac1f5ba7e5f104d86eb6e7b254c15e9f093fe7@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 2) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_34ab838945ee6c9b192f8f914750d328755eaff90c20ed71682dc11e7eb53682@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 3) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_780db5863d569f8a66f5a7123880304c2530a4fe26512efb8ef8b3a91aa3f63f@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 4) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_8771017d68265998645f0dc093e011e4a0cf0ec2f1628bf1556a540ccb0d7273@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 5) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_f2214d22850b10b7927b8a570ea3aed9bd6e773390ddfeb46da9f402797d4d09@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 6) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_e298f06037cdcf4a011a26747bc71565b8bd425d81f1e75872ca1b228d1d94a0@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 7) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_e298f06037cdcf4a011a26747bc71565b8bd425d81f1e75872ca1b228d1d94a0@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 8) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_cd9e943f248dcc0b8ca71c751ac1abe627d8bb4a9d57a2ca2baef6c55f11606c@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 9) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_88e94a664577eac86cf036470c2fe5d719e715246dc1975264a3d1ce73d6ddfb@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 10) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_6be2f00db5e2d286182eae5fef2798eee664610dba66318f409263b5d97cc0ad@group.calendar.google.com" max_results="5"]');
   }
 
   // athletics
