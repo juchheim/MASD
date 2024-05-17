@@ -1735,6 +1735,10 @@ nav a {
 	font-style: normal;
 }
 
+.entry-content ul {
+	padding-left:20%;
+}
+
 body.home .entry-header {
     display: none;
 }
@@ -2347,4 +2351,27 @@ th {
 
 .wp-block-heading a {
 	color: #00274c;
+}
+
+.wp-block-button .fa-solid {
+	padding-right:10px;
+}
+
+.wp-block-image img {
+	border-radius: 15px;
+}
+
+.image-top-margin {
+	margin-top:15px;
+}
+
+
+
+.slider-container {
+	opacity: 0;
+	transition: opacity 1s ease-in;
+  }
+  
+.slider-container.ready {
+	opacity: 1;
 }

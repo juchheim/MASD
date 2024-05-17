@@ -327,3 +327,13 @@ function custom_breadcrumbs() {
         echo '</nav>';
     }
 }
+
+
+// Register a 'primary' menu location in your theme
+function register_my_menus() {
+    register_nav_menus(array(
+        'primary' => __('Primary Menu'),
+    ));
+}
+add_action('init', 'register_my_menus');
+?>

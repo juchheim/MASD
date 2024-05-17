@@ -22,6 +22,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bda91302af.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <?php wp_head(); ?>
@@ -88,8 +90,6 @@ function dismissAlert(button) {
 </script>
 
 
-
-
 <!-- used to dynamically set the logo link to the main page of the current site -->
 <?php 
     $current_blog = get_blog_details();
@@ -101,7 +101,9 @@ function dismissAlert(button) {
         <div class="header-inner">
             <div class="logo">
                 <!-- Add your logo here -->
-                <a href="<?php echo $current_site_slug ?>" class="custom-logo-link" rel="home" aria-current="page"><img fetchpriority="high" width="350" height="155" src="/wp-content/uploads/2024/05/logo_reversed_smallv3.png" class="custom-logo" alt="MASD" decoding="async" srcset="/wp-content/uploads/2024/05/logo_reversed_smallv3.png 350w, /wp-content/uploads/2024/05/logo_reversed_smallv3.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></a>
+            <!--    <a href="<?php // echo $current_site_slug ?>" class="custom-logo-link" rel="home" aria-current="page"><img fetchpriority="high" width="350" height="155" src="/wp-content/uploads/2024/05/logo_reversed_smallv3.png" class="custom-logo" alt="MASD" decoding="async" srcset="/wp-content/uploads/2024/05/logo_reversed_smallv3.png 350w, /wp-content/uploads/2024/05/logo_reversed_smallv3.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></a> -->
+                <a href="/" class="custom-logo-link" rel="home" aria-current="page"><img fetchpriority="high" width="350" height="155" src="/wp-content/uploads/2024/05/logo_reversed_smallv3.png" class="custom-logo" alt="MASD" decoding="async" srcset="/wp-content/uploads/2024/05/logo_reversed_smallv3.png 350w, /wp-content/uploads/2024/05/logo_reversed_smallv3.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></a>
+                
             </div>
             <nav>
             
@@ -251,3 +253,4 @@ function dismissAlert(button) {
 
     </div>
 </div>
+

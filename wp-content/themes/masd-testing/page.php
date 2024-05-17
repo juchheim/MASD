@@ -34,7 +34,13 @@ get_header();
         while ($pod->fetch()) {
           $image = $pod->display('image');
           $title = $pod->display('title');
-          echo "<img class='slider-image' src='".$image."' alt='".$title."' />";
+          $link = $pod->display('link');
+          
+          if (!empty($link)) {
+            echo "<div class='slider-image'><a href='".$link."' target='_blank'><img src='".$image."' alt='".$title."' /></a></div>";
+          } else {
+            echo "<div class='slider-image'><img src='".$image."' alt='".$title."' /></div>";
+          }
         }
       }
     ?>
@@ -49,16 +55,25 @@ get_header();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  const sliderContainer = document.querySelector('.slider-container');
   const slider = document.querySelector('.slider');
-  const images = document.querySelectorAll('.slider img');
-  const slideCount = images.length;
+  const slides = document.querySelectorAll('.slider .slider-image');
+  const slideCount = slides.length;
   const dotsContainer = document.querySelector('.slider-dots');
   let currentIndex = 0;
   let intervalId;
   let isPlaying = true; // Keep track of whether the slider is playing
 
+  // Set the width of the slider to be the number of slides times 100%
+  slider.style.width = `${slideCount * 100}%`;
+
+  // Set the width of each slide to be 100% divided by the number of slides
+  slides.forEach(slide => {
+    slide.style.width = `${100 / slideCount}%`;
+  });
+
   function updateSlider() {
-    const translateValue = -currentIndex * 100;
+    const translateValue = -currentIndex * (100 / slideCount);
     slider.style.transform = `translateX(${translateValue}%)`;
   }
 
@@ -78,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function createDots() {
     if (slideCount > 1) {
-      for (let i = 0; i < images.length; i++) {
+      for (let i = 0; i < slides.length; i++) {
         const dot = document.createElement('span');
         dot.classList.add('slider-dot');
         dot.dataset.index = i;
@@ -131,6 +146,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   resetInterval(); // Start the initial interval
+
+  // Make the slider visible and trigger fade-in effect
+  sliderContainer.classList.add('ready');
 });
 </script>
 
