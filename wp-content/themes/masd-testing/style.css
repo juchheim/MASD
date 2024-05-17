@@ -1297,13 +1297,10 @@ body.news-template-default .threeColumnSingle p {
 	text-decoration: underline;
 }
 
-
-
-
 .headline {
 	width:100%;
 	text-align: center;
-	padding:10px 10px 10px 10px;
+	padding:1px;
 	background-color: rgb(222, 1, 1);
 	color:white;
 	margin:50px 0 0 0;
@@ -2366,12 +2363,41 @@ th {
 }
 
 
-
+/* hide the slider until it is fully loaded */
 .slider-container {
 	opacity: 0;
-	transition: opacity 1s ease-in;
   }
   
 .slider-container.ready {
 	opacity: 1;
+}
+
+nav {
+	padding-right:0;
+}
+
+.header-inner nav {
+	padding-right:5%;
+}
+
+.google-calendar-events {
+	margin:0;
+	padding:0;
+}
+
+.google-calendar-events .event-summary {
+    padding:30px 0 5px 0;
+	margin:0;
+}
+
+.google-calendar-events .event-date {
+    /* Custom styles for the event date */
+}
+
+.google-calendar-events .event-location {
+    font-size:50px;
+}
+
+.google-calendar-events .event-description {
+    /* Custom styles for the event description */
 }

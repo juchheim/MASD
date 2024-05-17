@@ -271,9 +271,45 @@ document.addEventListener('DOMContentLoaded', function() {
     require 'school_staff.php';
   }
 
+  // google calendars
   if ($slug == 'home' && get_current_blog_id() == 1) {
-    echo "<div class='headline'><h1>Calendar of Events</h1></div>";
-    echo do_shortcode('[calendar id="318"]');
+    echo do_shortcode('[google_calendar_events calendar_id="c_46f1e96c91dde30d948251d704ac1f5ba7e5f104d86eb6e7b254c15e9f093fe7@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 2) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_34ab838945ee6c9b192f8f914750d328755eaff90c20ed71682dc11e7eb53682@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 3) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_780db5863d569f8a66f5a7123880304c2530a4fe26512efb8ef8b3a91aa3f63f@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 4) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_8771017d68265998645f0dc093e011e4a0cf0ec2f1628bf1556a540ccb0d7273@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 5) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_f2214d22850b10b7927b8a570ea3aed9bd6e773390ddfeb46da9f402797d4d09@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 6) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_e298f06037cdcf4a011a26747bc71565b8bd425d81f1e75872ca1b228d1d94a0@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 7) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_e298f06037cdcf4a011a26747bc71565b8bd425d81f1e75872ca1b228d1d94a0@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 8) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_cd9e943f248dcc0b8ca71c751ac1abe627d8bb4a9d57a2ca2baef6c55f11606c@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 9) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_88e94a664577eac86cf036470c2fe5d719e715246dc1975264a3d1ce73d6ddfb@group.calendar.google.com" max_results="5"]');
+  }
+
+  if ($slug == 'home' && get_current_blog_id() == 10) {
+    echo do_shortcode('[google_calendar_events calendar_id="c_6be2f00db5e2d286182eae5fef2798eee664610dba66318f409263b5d97cc0ad@group.calendar.google.com" max_results="5"]');
   }
 
   // athletics
