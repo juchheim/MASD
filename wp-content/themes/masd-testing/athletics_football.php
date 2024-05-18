@@ -9,7 +9,7 @@ $games = pods('football_schedule', $params);
 // Output the beginning of the scoreboard
 echo "<div class='scoreboard-container'>"; // Start the container
 
-echo "<table>"; // Start the table
+echo "<table class='rounded-corners'>"; // Start the table
 echo "<tr>
         <th>Date</th>
         <th>Matchup</th>
