@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
         currentSiteId = parseInt(currentSiteId, 10);
         console.log('Parsed Current Site ID:', currentSiteId);
 
-        let teachersPerPage = currentSiteId === 1 ? 100 : 20;
+        let teachersPerPage = currentSiteId === 1 ? 80 : 50;
         console.log('Teachers Per Page:', teachersPerPage);
 
         // State object for managing the pagination and initial load state
@@ -33,8 +33,6 @@ jQuery(document).ready(function($) {
             hideLoading: () => $('#loadingMessage').hide(),
             showLoadingSearch: () => $('#loadingSearch').show(),
             hideLoadingSearch: () => $('#loadingSearch').hide(),
-            showLoadingMore: () => $('#loadingMore').show(), // Show loading GIF for load more
-            hideLoadingMore: () => $('#loadingMore').hide(), // Hide loading GIF for load more
             updateDisplay: (content) => $('.threeColumn').append(content),
             clearDisplay: () => $('.threeColumn').empty(),
             showNoResultsMessage: () => $('.threeColumn').before('<div class="no-results">No teachers found.</div>'),
@@ -46,15 +44,11 @@ jQuery(document).ready(function($) {
             },
             showReturnTopButton: () => $('#scrollToTopButton').css('display', 'block'), // Ensure the button is visible
             appendLoadMoreButton: () => {
-                if (currentSiteId === 1 && $('#loadMoreTeachersButton').length === 0) { // Check if the button doesn't already exist and site ID is 1
+                if ($('#loadMoreTeachersButton').length === 0) { // Check if the button doesn't already exist
                     $('.threeColumn').after('<button id="loadMoreTeachersButton" class="load-more-button">Load More Teachers</button>');
                 }
             },
-            showLoadMoreButton: () => {
-                if (currentSiteId === 1) {
-                    $('#loadMoreTeachersButton').show();
-                }
-            },
+            showLoadMoreButton: () => $('#loadMoreTeachersButton').show(),
             hideLoadMoreButton: () => $('#loadMoreTeachersButton').hide()
         };
 
@@ -129,12 +123,10 @@ jQuery(document).ready(function($) {
                     ui.hideLoadMoreButton(); // Hide the Load More button if all teachers are loaded
                 }
                 ui.hideLoadingSearch(); // Hide the search loading indicator once the page data is loaded
-                ui.hideLoadingMore(); // Hide the load more loading indicator
                 $('#searchContainer, #resetButton').show();
             } else {
                 ui.showNoResultsMessage();
                 ui.hideLoadingSearch();
-                ui.hideLoadingMore(); // Hide the load more loading indicator
                 $('#searchContainer, #resetButton').show(); // Show search and reset buttons
             }
         }
@@ -142,7 +134,6 @@ jQuery(document).ready(function($) {
         function handleAjaxError(jqXHR, textStatus, errorThrown) {
             console.log(`AJAX Error: ${textStatus}: ${errorThrown}`); // Log error details
             ui.hideLoadingSearch();
-            ui.hideLoadingMore(); // Hide the load more loading indicator
             ui.showNoResultsMessage(); // Show no results message in case of error
             $('#searchContainer, #resetButton').show(); // Show search and reset buttons
         }
@@ -167,7 +158,6 @@ jQuery(document).ready(function($) {
             fetchTotalCount(searchQuery);
             ui.hideLoading();
             ui.showLoadingSearch(); // Show loading indicator for search when reset
-            ui.hideLoadMoreButton(); // Hide the Load More button when reset
             $('#searchContainer, #resetButton').hide(); // Hide search and reset buttons
         }
 
@@ -177,7 +167,6 @@ jQuery(document).ready(function($) {
         });
 
         $(document).on('click', '#loadMoreTeachersButton', function() {
-            ui.showLoadingMore(); // Show the loading GIF when the load more button is clicked
             fetchPage(state.searchQuery); // Fetch the next page of teachers when 'Load More Teachers' button is clicked
         });
 
