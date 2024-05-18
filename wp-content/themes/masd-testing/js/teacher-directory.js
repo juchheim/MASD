@@ -15,6 +15,8 @@ jQuery(document).ready(function($) {
         currentSiteId = parseInt(currentSiteId, 10);
         console.log('Parsed Current Site ID as integer:', currentSiteId);
 
+        // Set the number of teachers to display per page based on the current site ID.
+        // If the current site ID is 1, set teachersPerPage to 80. Otherwise, set it to 50.
         let teachersPerPage = currentSiteId === 1 ? 80 : 50;
         console.log('Teachers to display per page:', teachersPerPage);
 
@@ -55,9 +57,9 @@ jQuery(document).ready(function($) {
         };
 
         // Generate HTML for each teacher entry
-        function generatePodHtml(startIndex) {
-            // Create HTML for each teacher from the start index
-            return podData.slice(startIndex).map(teacher => `
+        function generatePodHtml(teachers) {
+            // Create HTML for each teacher in the array
+            return teachers.map(teacher => `
                 <div class="threeColumnSingle">
                     <img class='teacherPhoto' loading='lazy' src="${teacher.image || '/wp-content/uploads/2024/04/no_image_available-1.jpeg'}" alt="${teacher.first_name} ${teacher.last_name} Image"><br>
                     <h2>${teacher.first_name || 'N/A'} ${teacher.last_name || 'N/A'}</h2>
@@ -124,7 +126,7 @@ jQuery(document).ready(function($) {
             console.log('Page data received:', data);
             if (data.length > 0) {
                 podData = podData.concat(data); // Add new data to podData array
-                displayPodData(data.length); // Display the new teachers
+                displayPodData(data); // Display the new teachers
                 if (state.currentPage * teachersPerPage < state.totalCount) {
                     state.currentPage++;
                     console.log('More teachers available, showing Load More button.');
@@ -152,10 +154,9 @@ jQuery(document).ready(function($) {
         }
 
         // Display the fetched teacher data
-        function displayPodData(numNewTeachers) {
-            let startIndex = podData.length - numNewTeachers; // Determine start index for new teachers
-            console.log('Displaying', numNewTeachers, 'new teachers starting at index', startIndex);
-            let podDataHtml = generatePodHtml(startIndex); // Generate HTML for new teachers
+        function displayPodData(newTeachers) {
+            console.log('Displaying new teachers:', newTeachers);
+            let podDataHtml = generatePodHtml(newTeachers); // Generate HTML for new teachers
             ui.updateDisplay(podDataHtml); // Update the display with new HTML
             ui.appendReturnTopButton(); // Check and append 'Return to Top' button if not already present
             ui.showReturnTopButton(); // Ensure 'Return to Top' button is visible
