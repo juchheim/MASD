@@ -13,3 +13,7 @@
     <button id="searchButton" class="searchButton">Search</button>
     <button id="resetButton" class="resetButton">Reset</button>
 </div>
+
+<div id="loadingMore" style="display:none;">
+    <img src="/wp-content/uploads/2024/04/loading.gif" alt="Loading...">
+</div>

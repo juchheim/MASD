@@ -7,7 +7,15 @@ jQuery(document).ready(function($) {
         let podData = []; // Array to store fetched teacher data
         let currentSiteId = teacherData.current_site_id; // Get the current site ID from global teacherData
         console.log('Current Site ID:', currentSiteId);
-        let teachersPerPage = currentSiteId === 1 ? 100 : 20; // Number of teachers per page, varies by site ID
+
+        // Add a check to log the type and value of currentSiteId
+        console.log('Type of currentSiteId:', typeof currentSiteId);
+
+        // Ensure currentSiteId is an integer
+        currentSiteId = parseInt(currentSiteId, 10);
+        console.log('Parsed Current Site ID:', currentSiteId);
+
+        let teachersPerPage = currentSiteId === 1 ? 100 : 20;
         console.log('Teachers Per Page:', teachersPerPage);
 
         // State object for managing the pagination and initial load state
@@ -25,6 +33,8 @@ jQuery(document).ready(function($) {
             hideLoading: () => $('#loadingMessage').hide(),
             showLoadingSearch: () => $('#loadingSearch').show(),
             hideLoadingSearch: () => $('#loadingSearch').hide(),
+            showLoadingMore: () => $('#loadingMore').show(), // Show loading GIF for load more
+            hideLoadingMore: () => $('#loadingMore').hide(), // Hide loading GIF for load more
             updateDisplay: (content) => $('.threeColumn').append(content),
             clearDisplay: () => $('.threeColumn').empty(),
             showNoResultsMessage: () => $('.threeColumn').before('<div class="no-results">No teachers found.</div>'),
@@ -36,11 +46,15 @@ jQuery(document).ready(function($) {
             },
             showReturnTopButton: () => $('#scrollToTopButton').css('display', 'block'), // Ensure the button is visible
             appendLoadMoreButton: () => {
-                if ($('#loadMoreTeachersButton').length === 0) { // Check if the button doesn't already exist
+                if (currentSiteId === 1 && $('#loadMoreTeachersButton').length === 0) { // Check if the button doesn't already exist and site ID is 1
                     $('.threeColumn').after('<button id="loadMoreTeachersButton" class="load-more-button">Load More Teachers</button>');
                 }
             },
-            showLoadMoreButton: () => $('#loadMoreTeachersButton').show(),
+            showLoadMoreButton: () => {
+                if (currentSiteId === 1) {
+                    $('#loadMoreTeachersButton').show();
+                }
+            },
             hideLoadMoreButton: () => $('#loadMoreTeachersButton').hide()
         };
 
@@ -115,10 +129,12 @@ jQuery(document).ready(function($) {
                     ui.hideLoadMoreButton(); // Hide the Load More button if all teachers are loaded
                 }
                 ui.hideLoadingSearch(); // Hide the search loading indicator once the page data is loaded
+                ui.hideLoadingMore(); // Hide the load more loading indicator
                 $('#searchContainer, #resetButton').show();
             } else {
                 ui.showNoResultsMessage();
                 ui.hideLoadingSearch();
+                ui.hideLoadingMore(); // Hide the load more loading indicator
                 $('#searchContainer, #resetButton').show(); // Show search and reset buttons
             }
         }
@@ -126,6 +142,7 @@ jQuery(document).ready(function($) {
         function handleAjaxError(jqXHR, textStatus, errorThrown) {
             console.log(`AJAX Error: ${textStatus}: ${errorThrown}`); // Log error details
             ui.hideLoadingSearch();
+            ui.hideLoadingMore(); // Hide the load more loading indicator
             ui.showNoResultsMessage(); // Show no results message in case of error
             $('#searchContainer, #resetButton').show(); // Show search and reset buttons
         }
@@ -150,6 +167,7 @@ jQuery(document).ready(function($) {
             fetchTotalCount(searchQuery);
             ui.hideLoading();
             ui.showLoadingSearch(); // Show loading indicator for search when reset
+            ui.hideLoadMoreButton(); // Hide the Load More button when reset
             $('#searchContainer, #resetButton').hide(); // Hide search and reset buttons
         }
 
@@ -159,6 +177,7 @@ jQuery(document).ready(function($) {
         });
 
         $(document).on('click', '#loadMoreTeachersButton', function() {
+            ui.showLoadingMore(); // Show the loading GIF when the load more button is clicked
             fetchPage(state.searchQuery); // Fetch the next page of teachers when 'Load More Teachers' button is clicked
         });
 
