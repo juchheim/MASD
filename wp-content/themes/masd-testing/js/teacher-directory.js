@@ -53,7 +53,15 @@ jQuery(document).ready(function($) {
                 }
             },
             showLoadMoreButton: () => $('#loadMoreTeachersButton').show(), // Show "Load More Teachers" button
-            hideLoadMoreButton: () => $('#loadMoreTeachersButton').hide() // Hide "Load More Teachers" button
+            hideLoadMoreButton: () => $('#loadMoreTeachersButton').hide(), // Hide "Load More Teachers" button
+            appendLoadingMessage: () => {
+                // Add a loading message if it doesn't exist
+                if ($('#loadingMessage').length === 0) {
+                    $('.threeColumn').after('<div id="loadingMessage" style="text-align:center"><img src="/wp-content/uploads/2024/04/loading.gif" /></div>');
+                }
+            },
+            showLoadingMessage: () => $('#loadingMessage').show(), // Show loading message
+            hideLoadingMessage: () => $('#loadingMessage').hide() // Hide loading message
         };
 
         // Generate HTML for each teacher entry
@@ -110,6 +118,7 @@ jQuery(document).ready(function($) {
         // Fetch a specific page of teachers
         function fetchPage(searchQuery = '') {
             console.log('Fetching page:', state.currentPage, 'for query:', searchQuery);
+            ui.showLoadingMessage(); // Show loading message when fetching a page
             $.ajax({
                 url: teacherData.ajax_url, // URL to fetch the data from
                 type: 'GET', // Request type
@@ -136,11 +145,13 @@ jQuery(document).ready(function($) {
                     ui.hideLoadMoreButton(); // Hide the Load More button if all teachers are loaded
                 }
                 ui.hideLoadingSearch(); // Hide the search loading indicator once the page data is loaded
+                ui.hideLoadingMessage(); // Hide the loading message
                 $('#searchContainer, #resetButton').show();
             } else {
                 console.log('No more teachers found.');
                 ui.showNoResultsMessage(); // Show no results message if no teachers are found
                 ui.hideLoadingSearch(); // Hide the search loading indicator
+                ui.hideLoadingMessage(); // Hide the loading message
                 $('#searchContainer, #resetButton').show(); // Show search and reset buttons
             }
         }
@@ -149,6 +160,7 @@ jQuery(document).ready(function($) {
         function handleAjaxError(jqXHR, textStatus, errorThrown) {
             console.log(`AJAX Error occurred: ${textStatus}: ${errorThrown}`); // Log error details
             ui.hideLoadingSearch(); // Hide the search loading indicator
+            ui.hideLoadingMessage(); // Hide the loading message
             ui.showNoResultsMessage(); // Show no results message in case of error
             $('#searchContainer, #resetButton').show(); // Show search and reset buttons
         }
