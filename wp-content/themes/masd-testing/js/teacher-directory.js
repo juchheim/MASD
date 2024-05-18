@@ -34,7 +34,14 @@ jQuery(document).ready(function($) {
                     $('.threeColumn').after('<button id="scrollToTopButton" class="to-top-button" style="display: none;">Return to Top</button>');
                 }
             },
-            showReturnTopButton: () => $('#scrollToTopButton').css('display', 'block') // Ensure the button is visible
+            showReturnTopButton: () => $('#scrollToTopButton').css('display', 'block'), // Ensure the button is visible
+            appendLoadMoreButton: () => {
+                if ($('#loadMoreTeachersButton').length === 0) { // Check if the button doesn't already exist
+                    $('.threeColumn').after('<button id="loadMoreTeachersButton" class="load-more-button">Load More Teachers</button>');
+                }
+            },
+            showLoadMoreButton: () => $('#loadMoreTeachersButton').show(),
+            hideLoadMoreButton: () => $('#loadMoreTeachersButton').hide()
         };
 
         // Generate HTML for each teacher entry
@@ -103,12 +110,12 @@ jQuery(document).ready(function($) {
                 displayPodData(data.length);
                 if (state.currentPage * teachersPerPage < state.totalCount) {
                     state.currentPage++;
-                    console.log('Loading next page:', state.currentPage);
-                    fetchPage(state.searchQuery);
+                    ui.showLoadMoreButton(); // Show the Load More button if more teachers are available
                 } else {
-                    ui.hideLoadingSearch(); // Hide the search loading indicator once all pages are loaded
-                    $('#searchContainer, #resetButton').show();
+                    ui.hideLoadMoreButton(); // Hide the Load More button if all teachers are loaded
                 }
+                ui.hideLoadingSearch(); // Hide the search loading indicator once the page data is loaded
+                $('#searchContainer, #resetButton').show();
             } else {
                 ui.showNoResultsMessage();
                 ui.hideLoadingSearch();
@@ -130,6 +137,7 @@ jQuery(document).ready(function($) {
             ui.updateDisplay(podDataHtml); // Update the display with new HTML
             ui.appendReturnTopButton(); // Check and append 'Return to Top' button if not already present
             ui.showReturnTopButton(); // Ensure 'Return to Top' button is visible
+            ui.appendLoadMoreButton(); // Check and append 'Load More Teachers' button if not already present
         }
 
         function resetAndFetch(searchQuery = '') {
@@ -148,6 +156,10 @@ jQuery(document).ready(function($) {
         // Event Handlers
         $(document).on('click', '#scrollToTopButton', function() {
             $('html, body').animate({scrollTop: 0}, 'slow'); // Smooth scroll to top of page
+        });
+
+        $(document).on('click', '#loadMoreTeachersButton', function() {
+            fetchPage(state.searchQuery); // Fetch the next page of teachers when 'Load More Teachers' button is clicked
         });
 
         $(document).on('keypress', '#teacherSearchInput', (event) => {

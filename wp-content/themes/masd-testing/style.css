@@ -1725,10 +1725,6 @@ nav a {
 	height: 40px;
 }
 
-#searchButton {
-
-}
-
 .entry-content {
 	padding-top:10px;
 }
@@ -2432,4 +2428,21 @@ table.table_shadow th,
 table.table_shadow td {
     border: 1px solid #ddd;
     padding: 8px;
+}
+
+.load-more-button {
+    background-color: #003366; /* Dark blue background */
+    color: white; /* White text */
+    width: 100%; /* Full width of the screen */
+    padding: 20px; /* Appropriate padding for height */
+	margin-top:50px;
+	margin-bottom:50px;
+    text-align: center; /* Center the text */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 22px; /* Set font size */
+}
+
+.load-more-button:hover {
+    background-color: #00274c; /* Slightly darker blue on hover */
 }
