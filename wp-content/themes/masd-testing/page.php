@@ -43,28 +43,14 @@ if (is_front_page()) {
         $video_url = '';
 
         if ($video) {
-          // Check if the video field is an array of attachment IDs or an object with a guid property
-          if (is_array($video)) {
-            if (isset($video['guid'])) {
-              $video_url = $video['guid'];
-            } elseif (isset($video[0])) {
-              if (is_array($video[0]) && isset($video[0]['guid'])) {
-                $video_url = $video[0]['guid'];
-              } else {
-                $video_id = $video[0];
-                $video_url = wp_get_attachment_url($video_id);
-              }
-            } elseif (isset($video[0]['id'])) {
-              $video_id = $video[0]['id'];
-              $video_url = wp_get_attachment_url($video_id);
-            }
-          } elseif (is_numeric($video)) {
-            $video_url = wp_get_attachment_url($video);
-          } elseif (is_object($video) && isset($video->guid)) {
-            $video_url = $video->guid;
-          } elseif (is_string($video)) {
-            $video_url = $video;
-          }
+          if (is_array($video) && isset($video[0])) {
+            // Handle case where video is an array of IDs
+            $video_id = $video[0];
+            $video_url = wp_get_attachment_url($video_id);
+          } elseif (is_array($video) && isset($video['guid'])) {
+            // Handle case where video is an array containing guid
+            $video_url = $video['guid'];
+          } 
         }
 
         // Debug output to the console
