@@ -54,6 +54,9 @@ if (is_front_page()) {
                 $video_id = $video[0];
                 $video_url = wp_get_attachment_url($video_id);
               }
+            } elseif (isset($video[0]['id'])) {
+              $video_id = $video[0]['id'];
+              $video_url = wp_get_attachment_url($video_id);
             }
           } elseif (is_numeric($video)) {
             $video_url = wp_get_attachment_url($video);
