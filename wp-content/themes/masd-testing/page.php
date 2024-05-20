@@ -41,7 +41,8 @@ if (is_front_page()) {
 
         // Initialize video URL as an empty string
         $video_url = '';
-
+        
+        // video use cases: one case for local, one case for on the server. For reasons unknown as of yet, the video on the server outputs as a different array than local.
         if ($video) {
           if (is_array($video) && isset($video[0])) {
             // Handle case where video is an array of IDs
@@ -97,14 +98,23 @@ document.addEventListener('DOMContentLoaded', function() {
     slider.style.transform = `translateX(${translateValue}%)`;
 
     const currentSlide = slides[currentIndex];
-    const video = currentSlide.querySelector('video');
+    const currentVideo = currentSlide.querySelector('video');
     const playPauseButton = document.querySelector('.play-pause');
-    
-    if (video) {
+
+    // Pause all videos
+    slides.forEach(slide => {
+      const video = slide.querySelector('video');
+      if (video) {
+        video.pause();
+      }
+    });
+
+    // Play current video if it exists
+    if (currentVideo) {
       clearInterval(intervalId);
       playPauseButton.style.display = 'none';
-      video.play();
-      video.addEventListener('ended', function() {
+      currentVideo.play();
+      currentVideo.addEventListener('ended', function() {
         nextSlide();
         resetInterval();
       }, { once: true });
