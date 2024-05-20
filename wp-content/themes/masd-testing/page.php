@@ -42,16 +42,21 @@ if (is_front_page()) {
         // Initialize video URL as an empty string
         $video_url = '';
 
-        if (!empty($video_field)) {
-          // Handle video field if it is an array of attachment IDs
-          if (is_array($video_field) && isset($video_field[0])) {
-            $video_id = $video_field[0];
-            $video_url = wp_get_attachment_url($video_id);
+        if ($video_field) {
+          if (is_array($video_field)) {
+            // Handle case where video field is an array (assume first element is the ID)
+            if (isset($video_field[0])) {
+              $video_id = $video_field[0];
+              $video_url = wp_get_attachment_url($video_id);
+            }
           } elseif (is_numeric($video_field)) {
-            // Handle video field if it is a single attachment ID
+            // Handle case where video field is a single attachment ID
             $video_url = wp_get_attachment_url($video_field);
-          } elseif (is_string($video_field)) {
-            // Handle video field if it is a URL
+          } elseif (is_object($video_field) && isset($video_field->guid)) {
+            // Handle case where video field is an object with a guid property
+            $video_url = $video_field->guid;
+          } elseif (is_string($video_field) && filter_var($video_field, FILTER_VALIDATE_URL)) {
+            // Handle case where video field is already a URL
             $video_url = $video_field;
           }
         }
@@ -77,6 +82,7 @@ if (is_front_page()) {
     <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div>
   <?php endif; ?>
 </div>
+
 
 
 
