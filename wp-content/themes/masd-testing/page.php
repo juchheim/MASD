@@ -37,32 +37,24 @@ if (is_front_page()) {
         $image = $pod->display('image');
         $title = $pod->display('title');
         $link = $pod->display('link');
-        $video_field = $pod->field('video');
+        $video = $pod->field('video');
 
         // Initialize video URL as an empty string
         $video_url = '';
 
-        if ($video_field) {
-          if (is_array($video_field)) {
-            // Handle case where video field is an array (assume first element is the ID)
-            if (isset($video_field[0])) {
-              $video_id = $video_field[0];
-              $video_url = wp_get_attachment_url($video_id);
-            }
-          } elseif (is_numeric($video_field)) {
-            // Handle case where video field is a single attachment ID
-            $video_url = wp_get_attachment_url($video_field);
-          } elseif (is_object($video_field) && isset($video_field->guid)) {
-            // Handle case where video field is an object with a guid property
-            $video_url = $video_field->guid;
-          } elseif (is_string($video_field) && filter_var($video_field, FILTER_VALIDATE_URL)) {
-            // Handle case where video field is already a URL
-            $video_url = $video_field;
+        if ($video) {
+          // Check if the video field is an attachment object or an ID
+          if (is_array($video) && isset($video['guid'])) {
+            $video_url = $video['guid'];
+          } elseif (is_numeric($video)) {
+            $video_url = wp_get_attachment_url($video);
+          } else {
+            $video_url = $video;
           }
         }
 
         // Debug output to the console
-        echo "<script>console.log('Video field raw value: " . json_encode($video_field) . "');</script>";
+        echo "<script>console.log('Video field raw value: " . json_encode($video) . "');</script>";
         echo "<script>console.log('Video URL: " . $video_url . "');</script>";
 
         if (!empty($video_url)) {
@@ -82,7 +74,6 @@ if (is_front_page()) {
     <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div>
   <?php endif; ?>
 </div>
-
 
 
 
