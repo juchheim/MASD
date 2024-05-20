@@ -42,14 +42,16 @@ if (is_front_page()) {
         // Initialize video URL as an empty string
         $video_url = '';
 
-        if (!empty($video)) {
-          // Check if the video field is an array of attachment IDs
-          if (is_array($video) && isset($video[0])) {
-            $video_id = $video[0];
-            $video_url = wp_get_attachment_url($video_id);
+        if ($video) {
+          // Check if the video field is an attachment object or an ID
+          if (is_array($video) && isset($video['guid'])) {
+            $video_url = $video['guid'];
           } elseif (is_numeric($video)) {
             $video_url = wp_get_attachment_url($video);
-          } elseif (is_string($video)) {
+          } elseif (is_object($video) && isset($video->guid)) {
+            // Handle case where video field is an object with a guid property
+            $video_url = $video->guid;
+          } else {
             $video_url = $video;
           }
         }
@@ -186,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
   resetInterval();
   sliderContainer.classList.add('ready');
 });
+
 </script>
 
 <?php
@@ -321,11 +324,11 @@ if ($post) {
   }
 
   if ($slug == 'home' && get_current_blog_id() == 3) {
-    echo do_shortcode('[google_calendar_events calendar_id="c_780db5863d569f8a66f5a7123880304c2530a4fe26512efb8ef8b3a91aa3f63f@group.calendar.google.com" max results="5"]');
+    echo do_shortcode('[google_calendar_events calendar_id="c_780db5863d569f8a66f5a7123880304c2530a4fe26512efb8ef8b3a91aa3f63f@group.calendar.google.com" max_results="5"]');
   }
 
   if ($slug == 'home' && get_current_blog_id() == 4) {
-    echo do_shortcode('[google_calendar_events calendar_id="c_8771017d68265998645f0dc093e011e4a0cf0ec2f1628bf1556a540ccb0d7273@group.calendar.google.com" max results="5"]');
+    echo do_shortcode('[google_calendar_events calendar_id="c_8771017d68265998645f0dc093e011e4a0cf0ec2f1628bf1556a540ccb0d7273@group.calendar.google.com" max_results="5"]');
   }
 
   if ($slug == 'home' && get_current_blog_id() == 5) {
