@@ -343,4 +343,12 @@ function enqueue_leaflet_assets() {
 add_action('wp_enqueue_scripts', 'enqueue_leaflet_assets');
 
 
+function slider_enqueue_scripts() {
+    // Enqueue the slider JavaScript file
+    wp_enqueue_script('slider-script', get_template_directory_uri() . '/js/slider.js', array('jquery'), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'slider_enqueue_scripts');
+
+
+
 ?>
