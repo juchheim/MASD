@@ -25,23 +25,23 @@ if (is_front_page()) {
   <div class="slider-dots"></div>
   <div class="slider">
     <?php
-    // Fetch all slider items using Pods
     $pod = pods('slider');
     $params = array(
-      'limit' => -1, // No limit on the number of items fetched
-      'orderby' => 'menu_order ASC' // Sort by the order set in the admin
+      'limit' => -1,
+      'orderby' => 'menu_order ASC'
     );
     
     $pod->find($params);
     if ($pod->total() > 0) {
-      // Loop through each slider item
       while ($pod->fetch()) {
-        $image = $pod->display('image'); // Get the image URL
-        $title = $pod->display('title'); // Get the title
-        $link = $pod->display('link'); // Get the link
+        $image = $pod->display('image');
+        $title = $pod->display('title');
+        $link = $pod->display('link');
+        $video = $pod->display('video');
 
-        // Display each slider image, wrapping it in a link if a link is provided
-        if (!empty($link)) {
+        if (!empty($video)) {
+          echo "<div class='slider-image'><video src='".$video."' autoplay muted playsinline></video></div>";
+        } elseif (!empty($link)) {
           echo "<div class='slider-image'><a href='".$link."' target='_blank'><img src='".$image."' alt='".$title."' /></a></div>";
         } else {
           echo "<div class='slider-image'><img src='".$image."' alt='".$title."' /></div>";
@@ -50,53 +50,59 @@ if (is_front_page()) {
     }
     ?>
   </div>
-  <!-- Navigation and Control buttons, shown only if there is more than one slide -->
   <?php if ($pod->total() > 1) : ?>
-    <button class="prev">&#10094;</button> <!-- HTML entity for left arrow -->
-    <button class="next">&#10095;</button> <!-- HTML entity for right arrow -->
-    <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div> <!-- HTML entity for play/pause icons -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+    <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div>
   <?php endif; ?>
 </div>
 
+
+
 <script>
-// JavaScript to handle the slider functionality
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize variables and select DOM elements for the slider functionality.
-  // This includes the container, individual slides, and navigation dots.
-  // It also sets up variables to keep track of the current slide index, the interval ID for automatic slide transitions, and the play/pause state.
+  const sliderContainer = document.querySelector('.slider-container');
+  const slider = document.querySelector('.slider');
+  const slides = document.querySelectorAll('.slider .slider-image');
+  const slideCount = slides.length;
+  const dotsContainer = document.querySelector('.slider-dots');
+  let currentIndex = 0;
+  let intervalId;
+  let isPlaying = true;
 
-  const sliderContainer = document.querySelector('.slider-container'); // Get the slider container element
-  const slider = document.querySelector('.slider'); // Get the slider element that contains all the slides
-  const slides = document.querySelectorAll('.slider .slider-image'); // Get all individual slide elements
-  const slideCount = slides.length; // Get the total number of slides
-  const dotsContainer = document.querySelector('.slider-dots'); // Get the container element for the slider dots
-  let currentIndex = 0; // Initialize the current index to 0, representing the first slide
-  let intervalId; // Declare a variable to hold the ID of the interval for automatic slide transitions
-  let isPlaying = true; // Keep track of whether the slider is playing
-
-  // Set the width of the slider to be the number of slides times 100%
   slider.style.width = `${slideCount * 100}%`;
-
-  // Set the width of each slide to be 100% divided by the number of slides
   slides.forEach(slide => {
     slide.style.width = `${100 / slideCount}%`;
   });
 
-  // Function to update the slider position
   function updateSlider() {
     const translateValue = -currentIndex * (100 / slideCount);
     slider.style.transform = `translateX(${translateValue}%)`;
+
+    const currentSlide = slides[currentIndex];
+    const video = currentSlide.querySelector('video');
+    const playPauseButton = document.querySelector('.play-pause');
+    
+    if (video) {
+      clearInterval(intervalId);
+      playPauseButton.style.display = 'none';
+      video.play();
+      video.addEventListener('ended', function() {
+        nextSlide();
+        resetInterval();
+      }, { once: true });
+    } else {
+      playPauseButton.style.display = 'block';
+      resetInterval();
+    }
   }
 
-  // Function to show the next slide
   function nextSlide() {
     currentIndex = (currentIndex + 1) % slideCount;
     updateSlider();
     updateDots();
-    resetInterval();
   }
 
-  // Function to show the previous slide
   function prevSlide() {
     currentIndex = (currentIndex - 1 + slideCount) % slideCount;
     updateSlider();
@@ -104,78 +110,66 @@ document.addEventListener('DOMContentLoaded', function() {
     resetInterval();
   }
 
-  // Function to create dots for the slider
-function createDots() {
-  // Check if there are more than one slide
-  if (slideCount > 1) {
-    // Loop through each slide to create a corresponding dot
-    for (let i = 0; i < slides.length; i++) {
-      const dot = document.createElement('span'); // Create a new span element for the dot
-      dot.classList.add('slider-dot'); // Add the 'slider-dot' class to the dot
-      dot.dataset.index = i; // Set a data attribute with the index of the dot
-      // Add a click event listener to the dot
-      dot.addEventListener('click', function() {
-        currentIndex = parseInt(this.dataset.index); // Update the currentIndex to the clicked dot's index
-        updateSlider(); // Update the slider to show the corresponding slide
-        updateDots(); // Update the dots to reflect the current slide
-        resetInterval(); // Reset the interval for automatic sliding
-      });
-      dotsContainer.appendChild(dot); // Append the dot to the dots container
+  function createDots() {
+    if (slideCount > 1) {
+      for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('slider-dot');
+        dot.dataset.index = i;
+        dot.addEventListener('click', function() {
+          currentIndex = parseInt(this.dataset.index);
+          updateSlider();
+          updateDots();
+          resetInterval();
+        });
+        dotsContainer.appendChild(dot);
+      }
+      updateDots();
+    } else {
+      dotsContainer.style.display = 'none';
     }
-    updateDots(); // Initial call to update the dots to reflect the current slide
-  } else {
-    dotsContainer.style.display = 'none'; // Hide the dots container if there is only one slide
   }
-}
 
-  // Function to update the active dot
   function updateDots() {
-    const dots = document.querySelectorAll('.slider-dot'); // Select all dot elements
-    // Loop through each dot and update its 'active' class
+    const dots = document.querySelectorAll('.slider-dot');
     dots.forEach((dot, index) => {
-      // Add or remove the 'active' class based on whether the dot's index matches the current slide index
       dot.classList.toggle('active', index === currentIndex);
     });
   }
 
-  // Function to toggle play/pause
   function togglePlayPause() {
-    // Check if the slider is currently playing
+    const playPauseButton = document.querySelector('.play-pause');
     if (isPlaying) {
       clearInterval(intervalId);
-      playPauseButton.innerHTML = "&#9658;"; // Change to play icon
+      playPauseButton.innerHTML = "&#9658;";
     } else {
-      resetInterval(); // Restart the automatic slide transition
-      playPauseButton.innerHTML = "&#10074;&#10074;"; // Change to pause icon
+      resetInterval();
+      playPauseButton.innerHTML = "&#10074;&#10074;";
     }
     isPlaying = !isPlaying;
   }
 
-  // Function to reset the slide interval
   function resetInterval() {
-    clearInterval(intervalId); // Clear the existing interval that controls the automatic slide transition
-    intervalId = setInterval(nextSlide, 8000); // Start a new interval to automatically move to the next slide every 8 seconds
+    clearInterval(intervalId);
+    intervalId = setInterval(nextSlide, 8000);
   }
 
-  createDots(); // Create navigation dots for the slider
+  createDots();
 
-  const nextButton = document.querySelector('.next'); // Select the "next" button element
-  const prevButton = document.querySelector('.prev'); // Select the "previous" button element
-  const playPauseButton = document.querySelector('.play-pause'); // Select the "play/pause" button element
+  const nextButton = document.querySelector('.next');
+  const prevButton = document.querySelector('.prev');
+  const playPauseButton = document.querySelector('.play-pause');
 
-  // Add event listeners for navigation buttons if they exist
   if (nextButton && prevButton && playPauseButton) {
-    nextButton.addEventListener('click', nextSlide); // Move to the next slide when the "next" button is clicked
-    prevButton.addEventListener('click', prevSlide); // Move to the previous slide when the "prev" button is clicked
-    playPauseButton.addEventListener('click', togglePlayPause); // Toggle play/pause when the "play/pause" button is clicked
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    playPauseButton.addEventListener('click', togglePlayPause);
   }
 
-
-  resetInterval(); // Start the initial interval
-
-  // Make the slider visible
+  resetInterval();
   sliderContainer.classList.add('ready');
-}); // End of the DOMContentLoaded event listener callback function
+});
+
 </script>
 
 <?php
@@ -300,7 +294,8 @@ if ($post) {
     require 'school_staff.php';
   }
 
-  // Display Google Calendar events based on the site and page slug
+  // Display google calendar events based on the site and page slug. 
+  // Uses Simple Google Calendar plugin. Edit it's files to alter output (/plugins/simple-google-calendar/simple_google_calendar.php) 
   if ($slug == 'home' && get_current_blog_id() == 1) {
     echo do_shortcode('[google_calendar_events calendar_id="c_46f1e96c91dde30d948251d704ac1f5ba7e5f104d86eb6e7b254c15e9f093fe7@group.calendar.google.com" max_results="5"]');
   }
