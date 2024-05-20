@@ -37,10 +37,28 @@ if (is_front_page()) {
         $image = $pod->display('image');
         $title = $pod->display('title');
         $link = $pod->display('link');
-        $video = $pod->display('video');
+        $video = $pod->field('video');
 
-        if (!empty($video)) {
-          echo "<div class='slider-image'><video src='".$video."' autoplay muted playsinline></video></div>";
+        // Initialize video URL as an empty string
+        $video_url = '';
+
+        if ($video) {
+          // Check if the video field is an attachment object or an ID
+          if (is_array($video) && isset($video['guid'])) {
+            $video_url = $video['guid'];
+          } elseif (is_numeric($video)) {
+            $video_url = wp_get_attachment_url($video);
+          } else {
+            $video_url = $video;
+          }
+        }
+
+        // Debug output to the console
+        echo "<script>console.log('Video field raw value: " . json_encode($video) . "');</script>";
+        echo "<script>console.log('Video URL: " . $video_url . "');</script>";
+
+        if (!empty($video_url)) {
+          echo "<div class='slider-image'><video src='".$video_url."' autoplay muted playsinline></video></div>";
         } elseif (!empty($link)) {
           echo "<div class='slider-image'><a href='".$link."' target='_blank'><img src='".$image."' alt='".$title."' /></a></div>";
         } else {
@@ -56,6 +74,8 @@ if (is_front_page()) {
     <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div>
   <?php endif; ?>
 </div>
+
+
 
 
 
