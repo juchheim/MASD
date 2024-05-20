@@ -43,15 +43,21 @@ if (is_front_page()) {
         $video_url = '';
 
         if ($video) {
-          // Check if the video field is an attachment object or an ID
-          if (is_array($video) && isset($video['guid'])) {
-            $video_url = $video['guid'];
+          // Check if the video field is an array of attachment IDs or an object with a guid property
+          if (is_array($video)) {
+            if (isset($video['guid'])) {
+              $video_url = $video['guid'];
+            } elseif (isset($video[0])) {
+              $video_id = $video[0];
+              $video_url = wp_get_attachment_url($video_id);
+            } elseif (isset($video[0]['guid'])) {
+              $video_url = $video[0]['guid'];
+            }
           } elseif (is_numeric($video)) {
             $video_url = wp_get_attachment_url($video);
           } elseif (is_object($video) && isset($video->guid)) {
-            // Handle case where video field is an object with a guid property
             $video_url = $video->guid;
-          } else {
+          } elseif (is_string($video)) {
             $video_url = $video;
           }
         }
