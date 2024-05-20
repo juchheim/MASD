@@ -48,10 +48,12 @@ if (is_front_page()) {
             if (isset($video['guid'])) {
               $video_url = $video['guid'];
             } elseif (isset($video[0])) {
-              $video_id = $video[0];
-              $video_url = wp_get_attachment_url($video_id);
-            } elseif (isset($video[0]['guid'])) {
-              $video_url = $video[0]['guid'];
+              if (is_array($video[0]) && isset($video[0]['guid'])) {
+                $video_url = $video[0]['guid'];
+              } else {
+                $video_id = $video[0];
+                $video_url = wp_get_attachment_url($video_id);
+              }
             }
           } elseif (is_numeric($video)) {
             $video_url = wp_get_attachment_url($video);
@@ -83,6 +85,7 @@ if (is_front_page()) {
     <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div>
   <?php endif; ?>
 </div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
