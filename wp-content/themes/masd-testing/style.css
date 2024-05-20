@@ -1672,10 +1672,18 @@ nav a {
 
   }
 
-  .play-pause {
+  button.play-pause {
 	background-color:#00305e;
 	color: white;
 	opacity: 0.9;
+	cursor: pointer;
+  }
+  
+  /* Optionally, you can add hover effects to enhance the appearance */
+  button.play-pause:hover {
+	background-color: rgb(222, 1, 1);
+	border-color: #ccc; /* Change border color on hover */
+	color: white;
   }
 
   /* For mobile screens */

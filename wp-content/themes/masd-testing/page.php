@@ -24,43 +24,43 @@ if (is_front_page()) {
   <div class="slider-dots"></div>
   <div class="slider">
     <?php
+    // Fetch all slider items using Pods
     $pod = pods('slider');
     $params = array(
-      'limit' => -1, // Fetch all items without limit
-      'orderby' => 'menu_order ASC' // Order items by the menu order in ascending order
+      'limit' => -1, // No limit on the number of items fetched
+      'orderby' => 'menu_order ASC' // Sort by the order set in the admin
     );
     
-    // Fetch the items based on the parameters
     $pod->find($params);
-    if ($pod->total() > 0) { 
-      while ($pod->fetch()) { 
-        $image = $pod->display('image'); 
+    if ($pod->total() > 0) {
+      while ($pod->fetch()) {
+        $image = $pod->display('image');
         $title = $pod->display('title');
-        $link = $pod->display('link'); 
-        $video = $pod->field('video'); 
+        $link = $pod->display('link');
+        $video = $pod->field('video');
 
         // Initialize video URL as an empty string
         $video_url = '';
+
+        // Log the raw video field value
+        echo "<script>console.log('Video field raw value: " . json_encode($video) . "');</script>";
         
-        // Determine video URL based on the type of data in the video field
         if ($video) {
           if (is_array($video) && isset($video[0])) {
-            // Case where video is an array of IDs (local setup)
+            // Handle case where video is an array of IDs
             $video_id = $video[0];
             $video_url = wp_get_attachment_url($video_id);
           } elseif (is_array($video) && isset($video['guid'])) {
-            // Case where video is an array containing a guid (server setup)
+            // Handle case where video is an array containing guid
             $video_url = $video['guid'];
           } 
         }
 
-        echo "<script>console.log('Video field raw value: " . json_encode($video) . "');</script>";
+        // Log the constructed video URL
         echo "<script>console.log('Video URL: " . $video_url . "');</script>";
 
-        // Display the video if a video URL is found
         if (!empty($video_url)) {
           echo "<div class='slider-image slider-video-slide'><video src='".$video_url."' autoplay muted playsinline></video></div>";
-        // Otherwise, display the image with or without a link
         } elseif (!empty($link)) {
           echo "<div class='slider-image'><a href='".$link."' target='_blank'><img src='".$image."' alt='".$title."' /></a></div>";
         } else {
@@ -70,10 +70,10 @@ if (is_front_page()) {
     }
     ?>
   </div>
-  <?php if ($pod->total() > 1) : // Display navigation controls if there's more than one slide ?>
-    <button class="prev">&#10094;</button> <!-- Previous slide button -->
-    <button class="next">&#10095;</button> <!-- Next slide button -->
-    <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div> <!-- Play/pause button -->
+  <?php if ($pod->total() > 1) : ?>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+    <div id="play-pause-wrapper"><button class="play-pause">&#10074;&#10074;</button></div>
   <?php endif; ?>
 </div>
 
@@ -117,12 +117,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (currentVideo) {
       clearInterval(intervalId);
-      playPauseButton.style.display = 'none';
+      if (playPauseButton) {
+        playPauseButton.style.display = 'none';
+      }
       currentVideo.play();
       console.log('updateSlider: Playing video on slide', currentIndex);
       currentVideo.addEventListener('ended', handleVideoEnded, { once: true });
     } else {
-      playPauseButton.style.display = 'block';
+      if (playPauseButton) {
+        playPauseButton.style.display = 'block';
+      }
       resetInterval();
       console.log('updateSlider: No video on slide', currentIndex, 'resetting interval');
     }
@@ -131,9 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function handleVideoEnded() {
     console.log('handleVideoEnded: Video ended on slide', currentIndex);
     nextSlide(true);
-    // Reset the play/pause button to show the pause icon after a video ends
     const playPauseButton = document.querySelector('.play-pause');
-    playPauseButton.innerHTML = "&#10074;&#10074;";
+    if (playPauseButton) {
+      playPauseButton.innerHTML = "&#10074;&#10074;";
+    }
     isPlaying = true;
   }
 
@@ -191,11 +196,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isPlaying) {
       console.log('togglePlayPause: Pausing slideshow');
       clearInterval(intervalId);
-      playPauseButton.innerHTML = "&#9658;";
+      if (playPauseButton) {
+        playPauseButton.innerHTML = "&#9658;";
+      }
     } else {
       console.log('togglePlayPause: Resuming slideshow');
       resetInterval();
-      playPauseButton.innerHTML = "&#10074;&#10074;";
+      if (playPauseButton) {
+        playPauseButton.innerHTML = "&#10074;&#10074;";
+      }
     }
     isPlaying = !isPlaying;
   }
@@ -211,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
       currentVideo.addEventListener('ended', handleVideoEnded, { once: true });
     } else {
       console.log('resetInterval: No video detected on slide', currentIndex, 'setting interval for automatic sliding');
-      intervalId = setInterval(nextSlide, 8000);
+      intervalId = setInterval(() => nextSlide(), 8000);
     }
   }
 
