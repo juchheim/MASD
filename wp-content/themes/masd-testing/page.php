@@ -78,153 +78,165 @@ if (is_front_page()) {
 </div>
 
 <script>
-// Run as soon as the DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  // Get references to the slider container, slider, and individual slides
   const sliderContainer = document.querySelector('.slider-container');
   const slider = document.querySelector('.slider');
   const slides = document.querySelectorAll('.slider .slider-image');
-  const slideCount = slides.length; // Total number of slides
-  const dotsContainer = document.querySelector('.slider-dots'); // Container for navigation dots
-  let currentIndex = 0; // Index of the current slide
-  let intervalId; // ID of the interval for automatic slide transitions
-  let isPlaying = true; // Flag to track the play/pause state
+  const slideCount = slides.length;
+  const dotsContainer = document.querySelector('.slider-dots');
+  let currentIndex = 0;
+  let intervalId;
+  let isPlaying = true;
 
-  // Set the width of the slider to be equal to the number of slides times 100%
+  console.log('DOMContentLoaded: Slider initialized with', slideCount, 'slides');
+
   slider.style.width = `${slideCount * 100}%`;
   slides.forEach(slide => {
-    // Set the width of each slide to be a fraction of the total width (100% divided by the number of slides)
     slide.style.width = `${100 / slideCount}%`;
   });
 
-  // Function to update the slider position
   function updateSlider() {
-    // Calculate the translation value based on the current index
+    console.log('updateSlider: Updating slider position to index', currentIndex);
     const translateValue = -currentIndex * (100 / slideCount);
-    // Apply the translation to the slider
     slider.style.transform = `translateX(${translateValue}%)`;
 
-    const currentSlide = slides[currentIndex]; // Get the current slide element
-    const currentVideo = currentSlide.querySelector('video'); // Get the video element in the current slide (if any)
-    const playPauseButton = document.querySelector('.play-pause'); // Get the play/pause button
+    const currentSlide = slides[currentIndex];
+    const currentVideo = currentSlide.querySelector('video');
+    const playPauseButton = document.querySelector('.play-pause');
 
-    // Pause all videos
-    slides.forEach(slide => {
-      const video = slide.querySelector('video'); // Get the video element in each slide
+    console.log('updateSlider: Current slide', currentIndex, 'has video:', !!currentVideo);
+
+    slides.forEach((slide, index) => {
+      const video = slide.querySelector('video');
       if (video) {
-        video.pause(); // Pause the video if it exists
+        video.pause();
+        video.removeEventListener('ended', handleVideoEnded);
+        console.log('updateSlider: Paused video on slide', index);
       }
     });
 
-    // Play the current video if it exists
     if (currentVideo) {
-      clearInterval(intervalId); // Clear the automatic slide interval
-      playPauseButton.style.display = 'none'; // Hide the play/pause button
-      currentVideo.play(); // Play the video
-      // Add an event listener to move to the next slide when the video ends
-      currentVideo.addEventListener('ended', function() {
-        nextSlide(); // Move to the next slide
-        resetInterval(); // Reset the automatic slide interval
-      }, { once: true }); // Ensure the event listener is called only once
+      clearInterval(intervalId);
+      playPauseButton.style.display = 'none';
+      currentVideo.play();
+      console.log('updateSlider: Playing video on slide', currentIndex);
+      currentVideo.addEventListener('ended', handleVideoEnded, { once: true });
     } else {
-      playPauseButton.style.display = 'block'; // Show the play/pause button if there's no video
-      resetInterval(); // Reset the automatic slide interval
+      playPauseButton.style.display = 'block';
+      resetInterval();
+      console.log('updateSlider: No video on slide', currentIndex, 'resetting interval');
     }
   }
 
-  // Function to move to the next slide
-  function nextSlide() {
-    // Increment the current index, wrapping around to the start if necessary
+  function handleVideoEnded() {
+    console.log('handleVideoEnded: Video ended on slide', currentIndex);
+    nextSlide(true);
+    // Reset the play/pause button to show the pause icon after a video ends
+    const playPauseButton = document.querySelector('.play-pause');
+    playPauseButton.innerHTML = "&#10074;&#10074;";
+    isPlaying = true;
+  }
+
+  function nextSlide(fromVideoEnded = false) {
+    console.log('nextSlide: Moving to next slide from index', currentIndex);
     currentIndex = (currentIndex + 1) % slideCount;
-    updateSlider(); // Update the slider position
-    updateDots(); // Update the navigation dots
+    updateSlider();
+    updateDots();
+    if (!fromVideoEnded) {
+      resetInterval();
+      console.log('nextSlide: Interval reset after moving to slide', currentIndex);
+    }
   }
 
-  // Function to move to the previous slide
   function prevSlide() {
-    // Decrement the current index, wrapping around to the end if necessary
+    console.log('prevSlide: Moving to previous slide from index', currentIndex);
     currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-    updateSlider(); // Update the slider position
-    updateDots(); // Update the navigation dots
-    resetInterval(); // Reset the automatic slide interval
+    updateSlider();
+    updateDots();
+    resetInterval();
+    console.log('prevSlide: Interval reset after moving to slide', currentIndex);
   }
 
-  // Function to create navigation dots
   function createDots() {
     if (slideCount > 1) {
-      // Create a dot for each slide
       for (let i = 0; i < slides.length; i++) {
-        const dot = document.createElement('span'); // Create a new span element for the dot
-        dot.classList.add('slider-dot'); // Add the 'slider-dot' class to the dot
-        dot.dataset.index = i; // Store the slide index in the dot's dataset
-        // Add an event listener to move to the corresponding slide when the dot is clicked
+        const dot = document.createElement('span');
+        dot.classList.add('slider-dot');
+        dot.dataset.index = i;
         dot.addEventListener('click', function() {
-          currentIndex = parseInt(this.dataset.index); // Update the current index to the clicked dot's index
-          updateSlider(); // Update the slider position
-          updateDots(); // Update the navigation dots
-          resetInterval(); // Reset the automatic slide interval
+          currentIndex = parseInt(this.dataset.index);
+          updateSlider();
+          updateDots();
+          resetInterval();
+          console.log('createDots: Dot clicked, moving to slide', currentIndex);
         });
-        dotsContainer.appendChild(dot); // Add the dot to the container
+        dotsContainer.appendChild(dot);
       }
-      updateDots(); // Initialize the dots
+      updateDots();
     } else {
-      dotsContainer.style.display = 'none'; // Hide the dots container if there's only one slide
+      dotsContainer.style.display = 'none';
     }
   }
 
-  // Function to update the active state of the navigation dots
   function updateDots() {
-    const dots = document.querySelectorAll('.slider-dot'); // Get all dot elements
+    const dots = document.querySelectorAll('.slider-dot');
     dots.forEach((dot, index) => {
-      // Toggle the 'active' class based on the current slide index
       dot.classList.toggle('active', index === currentIndex);
     });
+    console.log('updateDots: Dots updated, current active dot', currentIndex);
   }
 
-  // Function to toggle the play/pause state
   function togglePlayPause() {
-    const playPauseButton = document.querySelector('.play-pause'); // Get the play/pause button
+    const playPauseButton = document.querySelector('.play-pause');
     if (isPlaying) {
-      clearInterval(intervalId); // Pause the automatic slide interval
-      playPauseButton.innerHTML = "&#9658;"; // Change to play icon
+      console.log('togglePlayPause: Pausing slideshow');
+      clearInterval(intervalId);
+      playPauseButton.innerHTML = "&#9658;";
     } else {
-      resetInterval(); // Resume the automatic slide interval
-      playPauseButton.innerHTML = "&#10074;&#10074;"; // Change to pause icon
+      console.log('togglePlayPause: Resuming slideshow');
+      resetInterval();
+      playPauseButton.innerHTML = "&#10074;&#10074;";
     }
-    isPlaying = !isPlaying; // Toggle the play/pause flag
+    isPlaying = !isPlaying;
   }
 
-  // Function to reset the automatic slide interval
   function resetInterval() {
-    clearInterval(intervalId); // Clear the existing interval
-    const currentSlide = slides[currentIndex]; // Get the current slide
-    const currentVideo = currentSlide.querySelector('video'); // Get the video element in the current slide
-    
-    // If there is a video on the current slide, wait for the video to end before moving to the next slide
+    console.log('resetInterval: Resetting interval');
+    clearInterval(intervalId);
+    const currentSlide = slides[currentIndex];
+    const currentVideo = currentSlide.querySelector('video');
+
     if (currentVideo) {
-      currentVideo.addEventListener('ended', nextSlide, { once: true });
+      console.log('resetInterval: Video detected on slide', currentIndex, 'waiting for it to end before moving to the next slide');
+      currentVideo.addEventListener('ended', handleVideoEnded, { once: true });
     } else {
-      intervalId = setInterval(nextSlide, 8000); // Set a new interval for automatic sliding
+      console.log('resetInterval: No video detected on slide', currentIndex, 'setting interval for automatic sliding');
+      intervalId = setInterval(nextSlide, 8000);
     }
   }
 
-  createDots(); // Create the navigation dots
+  createDots();
 
-  // Get references to the navigation buttons and play/pause button
   const nextButton = document.querySelector('.next');
   const prevButton = document.querySelector('.prev');
   const playPauseButton = document.querySelector('.play-pause');
 
-  // Add event listeners to the navigation buttons
   if (nextButton && prevButton && playPauseButton) {
-    nextButton.addEventListener('click', nextSlide); // Move to the next slide when clicked
-    prevButton.addEventListener('click', prevSlide); // Move to the previous slide when clicked
-    playPauseButton.addEventListener('click', togglePlayPause); // Toggle play/pause when clicked
+    nextButton.addEventListener('click', () => {
+      console.log('Next button clicked');
+      nextSlide();
+    });
+    prevButton.addEventListener('click', () => {
+      console.log('Previous button clicked');
+      prevSlide();
+    });
+    playPauseButton.addEventListener('click', togglePlayPause);
   }
 
-  updateSlider(); // Call updateSlider to initialize the slider state and check the first slide
-  sliderContainer.classList.add('ready'); // Indicate that the slider is ready
+  updateSlider();
+  sliderContainer.classList.add('ready');
 });
+
 
 </script>
 
