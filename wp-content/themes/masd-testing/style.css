@@ -1622,61 +1622,103 @@ nav a {
 
 /* updated slider to include nav arrows */
 
+/* CSS to ensure video stretches or shrinks to fit the slide content area */
 .slider-container {
 	position: relative;
-	width: 100%; /* Ensure the slider container spans the full width */
-	max-width: 100%; /* Maximum width is also 100% to enforce full width */
-	overflow: hidden; /* Ensures nothing overflows the container bounds */
+	overflow: hidden;
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
   }
   
   .slider {
-	display: flex; /* Displays images in a row */
-	transition: transform 0.5s ease-in-out; /* Smooth transition for sliding effect */
+	display: flex;
+	transition: transform 0.5s ease-in-out;
   }
   
-  .slider img {
-	width: 100%; /* Each image takes the full width of its parent */
-	flex-shrink: 0; /* Prevents images from shrinking */
-	display: block; /* Removes bottom space/gap */
+  .slider-image {
+	min-width: 100%;
+	position: relative;
+  }
+  
+  .slider-image video,
+  .slider-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
   }
   
   .prev, .next {
 	position: absolute;
-	top: 50%; /* Center vertically */
-	transform: translateY(-50%); /* Align button vertically */
-	z-index: 10; /* Ensure buttons are above images */
-	background-color: red; /* Button background color */
-	border: none; /* Removes border */
-	cursor: pointer; /* Cursor indicates clickable */
-	padding: 10px 20px; /* Button padding */
-	font-size: 16px; /* Text size */
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	border: none;
 	color: white;
-	opacity: 0.7; /* Button opacity */
-	transition: opacity 0.3s; /* Smooth transition for hover effect */
+	font-size: 30px;
+	cursor: pointer;
+	padding: 10px;
+	z-index: 10;
+	user-select: none;
   }
   
-  .prev { left: 10px; } /* Position Prev button on the left */
-  .next { right: 10px; } /* Position Next button on the right */
+  .prev {
+	left: 10px;
+  }
+  
+  .next {
+	right: 10px;
+  }
   
   .prev:hover, .next:hover {
-	opacity: 1; /* Full opacity on hover */
+	background-color: rgba(0, 0, 0, 0.7);
   }
-
+  
+  .slider-dots {
+	text-align: center;
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	z-index: 10;
+  }
+  
+  .slider-dot {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+	cursor: pointer;
+  }
+  
+  .slider-dot.active {
+	background-color: rgba(255, 255, 255, 0.9);
+  }
+  
   #play-pause-wrapper {
 	position: absolute;
-    bottom: 40px;
-    left: 50%;
-  	transform: translateX(-50%);
-    text-align: center;
-    z-index: 12;
-
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
   }
-
+  
   .play-pause {
-	background-color:#00305e;
+	background-color: rgba(0, 0, 0, 0.5);
+	border: none;
+	border-radius: 50%;
 	color: white;
-	opacity: 0.9;
+	font-size: 20px;
+	padding: 10px 20px;
+	cursor: pointer;
+	outline: none;
   }
+  
+  .play-pause:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+  }
+  
 
   /* For mobile screens */
 @media screen and (max-width: 768px) {
