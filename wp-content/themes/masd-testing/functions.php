@@ -336,5 +336,11 @@ function register_my_menus() {
 }
 add_action('init', 'register_my_menus');
 
+function enqueue_leaflet_assets() {
+    wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet/dist/leaflet.css');
+    wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet/dist/leaflet.js', array(), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_leaflet_assets');
+
 
 ?>

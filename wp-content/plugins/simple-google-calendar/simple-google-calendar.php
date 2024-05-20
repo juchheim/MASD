@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Google Calendar Events
+Plugin Name: Simple Google Calendar
 Description: A plugin to display Google Calendar events using a shortcode.
 Version: 1.0
 Author: Ernest Juchheim
@@ -8,80 +8,103 @@ Author: Ernest Juchheim
 
 // Function to fetch and display Google Calendar events
 function display_google_calendar_events($atts) {
+    // Set default shortcode attributes and merge with provided ones
     $atts = shortcode_atts(array(
-        'calendar_id' => '',
-        'max_results' => 5,
+        'calendar_id' => '', // Google Calendar ID
+        'max_results' => 5, // Number of events to display
     ), $atts);
 
+    // Check if the calendar ID is provided
     if (empty($atts['calendar_id'])) {
-        return '<p>Please provide the Google Calendar ID.</p>';
+        return '<p>Missing Google Calendar ID.</p>'; // Return an error message if not
     }
 
+    // Encode the calendar ID for use in the URL
     $calendar_id = urlencode($atts['calendar_id']);
     $api_key = 'AIzaSyC6fx9c_ePhFy3DHDeOFB-5iSFUtjBwtwk'; // Hardcoded API key
-    $max_results = intval($atts['max_results']);
+    $max_results = intval($atts['max_results']); // Ensure max_results is an integer
     $time_min = urlencode(date('c')); // Current date/time in RFC3339 format
 
+    // Construct the URL for the Google Calendar API request
     $url = "https://www.googleapis.com/calendar/v3/calendars/{$calendar_id}/events?key={$api_key}&maxResults={$max_results}&orderBy=startTime&singleEvents=true&timeMin={$time_min}";
 
+    // Fetch the events from the Google Calendar API
     $response = wp_remote_get($url);
 
+    // Check if the request failed
     if (is_wp_error($response)) {
-        return '<p>Unable to retrieve events at this time.</p>';
+        return '<p>Unable to retrieve events at this time.</p>'; // Return an error message if failed
     }
 
+    // Extract the body content from the HTTP response received from the Google Calendar API
     $body = wp_remote_retrieve_body($response);
+
+    // Decode the JSON-formatted string into a PHP associative array
+    // The second parameter 'true' converts the JSON string into an associative array instead of an object
     $data = json_decode($body, true);
 
+    // Check if there are no events
     if (empty($data['items'])) {
-        return '';
+        return ''; // Return an empty string if no events
     }
 
-    // Add the headline before the events
-    $output = '<div class="headline"><h1>Calendar of Events</h1></div>';
-    $output .= '<ul class="google-calendar-events" style="list-style: none; padding-left: 0; text-align: center;">';
+    // Initialize the output variable
+    // The $output variable will hold the HTML content that will be returned and displayed on the page.
+    // This content includes the headline (if on the home page) and the list of Google Calendar events.
+    // We start with an empty string and build the HTML content incrementally as we process the events.
+    $output = '';
 
+    // Check if the current page is the home page
+    if (is_front_page()) {
+        // Initialize the output with a headline if the page is the home page
+        $output .= '<div class="headline"><h1>Calendar of Events</h1></div>';
+    }
+
+    // Add the opening tag for the list of events
+    $output .= '<ul class="google-calendar-events">';
+
+    // Loop through each event and format the output
     foreach ($data['items'] as $event) {
-        $start = new DateTime($event['start']['dateTime'] ?? $event['start']['date']);
+        $start = new DateTime($event['start']['dateTime'] ?? $event['start']['date']); // Get the event start time
         $output .= '<li>';
-        $output .= '<h3 class="event-summary">' . esc_html($event['summary']) . '</h3>';
-        $output .= '<p class="event-date" style="margin: 0;"><em>' . $start->format('F j, Y, g:i a') . '</em></p>';
+        $output .= '<h3 class="event-summary">' . esc_html($event['summary']) . '</h3>'; // Event title
+        $output .= '<p class="event-date"><em>' . $start->format('F j, Y, g:i a') . '</em></p>'; // Event date and time
         if (!empty($event['location'])) {
-            $output .= '<p class="event-location" style="margin: 0;">' . esc_html($event['location']) . '</p>';
+            $output .= '<p class="event-location">' . esc_html($event['location']) . '</p>'; // Event location
         }
         if (!empty($event['description'])) {
-            $output .= '<p class="event-description" style="margin: 0;">' . wp_kses_post($event['description']) . '</p>';
+            $output .= '<p class="event-description">' . wp_kses_post($event['description']) . '</p>'; // Event description
         }
         $output .= '</li>';
     }
     $output .= '</ul>';
 
-    return $output;
+    return $output; // Return the formatted event list
 }
 
-// Register shortcode
+// Register the shortcode to display Google Calendar events
 function register_google_calendar_events_shortcode() {
     add_shortcode('google_calendar_events', 'display_google_calendar_events');
 }
 
-// Hook into WordPress
+// Hook the shortcode registration function into WordPress initialization
 add_action('init', 'register_google_calendar_events_shortcode');
 
-// Add admin menu item
+// Function to add an admin menu item for the plugin
 function google_calendar_events_add_admin_menu() {
     add_menu_page(
         'Google Calendar Events', // Page title
         'Google Calendar Events', // Menu title
-        'manage_options', // Capability
+        'manage_options', // Capability required to access this menu
         'google_calendar_events', // Menu slug
-        'google_calendar_events_admin_page', // Function to display the page
-        'dashicons-calendar-alt', // Icon URL
-        100 // Position
+        'google_calendar_events_admin_page', // Function to display the page content
+        'dashicons-calendar-alt', // Icon for the menu
+        100 // Position in the menu
     );
 }
 add_action('admin_menu', 'google_calendar_events_add_admin_menu');
 
-// Display admin page content
+// Function to display the content of the admin page
 function google_calendar_events_admin_page() {
     ?>
     <div class="wrap">

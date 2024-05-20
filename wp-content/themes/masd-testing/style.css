@@ -1236,6 +1236,21 @@ body.news-template-default .threeColumnSingle p {
 	font-style: normal;
 }
 
+/* Initial state for threeColumnSingle */
+.threeColumnSingle {
+    background-color: #f5f5f5; /* Set an initial background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Initial drop shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background color and box-shadow */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Hover effect for threeColumnSingle */
+.threeColumnSingle:hover {
+    background-color: #ffffff; /* Change background color to white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Expand the drop shadow */
+}
+
 .darkblue-div {
     background-color: #00274c;
     color: white;
@@ -1499,15 +1514,6 @@ header {
     width: 100%;
 }
 
-/* For mobile screens */
-@media screen and (max-width: 1000px) {
-    .menu-column {
-        width: 100%; /* Display as one column */
-        float: none;
-    }
-	#parallax { display: none; }
-}
-
 /*
 .menu-item {
 	float:left;
@@ -1662,6 +1668,7 @@ nav a {
     width: 100%;
     text-align: center;
     z-index: 12;
+
   }
 
   .play-pause {
@@ -1748,9 +1755,11 @@ nav a {
 	font-style: normal;
 }
 
+/*
 .entry-content ul {
 	padding-left:20%;
 }
+*/
 
 body.home .entry-header {
     display: none;
@@ -1763,7 +1772,7 @@ body.search .entry-title a {
 form.search-form input.search-submit {
     background-color: darkblue;
 	color: white;
-	border: 1px solid lightgra;
+	border: 1px solid lightgray;
 }
 
 .search-submit {
@@ -2460,3 +2469,80 @@ table.table_shadow td {
 .load-more-button:hover {
     background-color: #00274c; /* Slightly darker blue on hover */
 }
+
+
+.slider-media {
+	position: relative;
+	width: 100%;
+	height: auto;
+  }
+  
+.slider-media video,
+.slider-media img {
+	width: 100%;
+	height: auto;
+}
+  
+#map {
+	height: 600px;
+	width: 100%;
+}
+
+/* Hide breadcrumbs on the home page */
+body.home .breadcrumbs-container {
+	display: none;
+}
+
+/* Styles for Google Calendar Events */
+.google-calendar-events {
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+.google-calendar-events .event-summary {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+.google-calendar-events .event-date,
+.google-calendar-events .event-location,
+.google-calendar-events .event-description {
+    margin: 0.5em 0;
+}
+
+.headline h1 {
+    text-align: center;
+    font-size: 2em;
+    margin: 1em 0;
+}
+
+.news-page-image {
+	width:30%;
+	border-radius: 8px;
+}
+
+/* For mobile screens */
+@media screen and (max-width: 1000px) {
+    .menu-column {
+        width: 100%; /* Display as one column */
+        float: none;
+    }
+
+	#parallax { display: none; }
+
+	.news-page-image {
+		width:100%;
+	}
+}
+
+.news_image {
+	border-radius: 12px;
+}
+
+.google-calendar-events a {
+	color: rgb(222, 1, 1); 
+	font-weight: 700;
+}
+
+
