@@ -1312,20 +1312,6 @@ body.news-template-default .threeColumnSingle p {
 	text-decoration: underline;
 }
 
-.headline {
-	width:100%;
-	text-align: center;
-	padding:1px;
-	background-color: rgb(222, 1, 1);
-	color:white;
-	margin:50px 0 0 0;
-}
-
-.headline h1 {
-	text-shadow: 0px 1px 4px black;
-}
-
-
 .below_the_content {
 	margin:30px 0 10px 0;
 }
@@ -1958,13 +1944,13 @@ article .entry-header .entry-title {
 }
 
 #foreground {
-    background-image: url('/wp-content/uploads/2024/05/kids_one_mission-2.png');
+    background-image: url('/wp-content/uploads/2024/05/kids_one_vision.png');
     position: absolute;
     top: -200px;
     left: 0;
     right: 0;
     height: 500px;
-    background-position: center;
+    background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 10;
@@ -2520,10 +2506,20 @@ body.home .breadcrumbs-container {
     margin: 0.5em 0;
 }
 
+.headline {
+	width:100%;
+	text-align: center;
+	padding:12px 0 12px 0;
+	background-color: rgb(222, 1, 1);
+	color:white;
+	margin:0 0 0 0;
+}
+
 .headline h1 {
     text-align: center;
     font-size: 2em;
-    margin: 1em 0;
+    margin: 0 0;
+	text-shadow: 0px 1px 4px black;
 }
 
 .news-page-image {
@@ -2622,4 +2618,41 @@ body.home .breadcrumbs-container {
         width: 100%; /* Make the content take full width */
         text-align: center; /* Center the text for smaller screens */
     }
+}
+
+.google-calendar-button-wrapper {
+    text-align: center;
+    margin-top: 0px;
+}
+
+.google-calendar-button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+	margin-bottom:40px;
+    background-color: #00305e;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.google-calendar-button-wrapper a {
+	color: white;
+}
+
+.google-calendar-button:hover {
+    background-color: rgb(222, 1, 1);
+}
+
+.event-wrapper .event-summary {
+	color:darkblue;
+}
+
+.event-wrapper .event-description {
+	font-size:13px;
+}
+
+.event-wrapper .event-date {
+	font-weight: 700;
 }

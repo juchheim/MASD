@@ -11,7 +11,7 @@ function display_google_calendar_events($atts) {
     // Set default shortcode attributes and merge with provided ones
     $atts = shortcode_atts(array(
         'calendar_id' => '', // Google Calendar ID
-        'max_results' => 5, // Number of events to display
+        'max_results' => 6, // Number of events to display
     ), $atts);
 
     // Check if the calendar ID is provided
@@ -57,27 +57,42 @@ function display_google_calendar_events($atts) {
     // Check if the current page is the home page
     if (is_front_page()) {
         // Initialize the output with a headline if the page is the home page
-        $output .= '<div class="headline"><h1>Calendar of Events</h1></div>';
+        $output .= '<div class="headline"><h1>Upcoming Events</h1></div>';
     }
 
-    // Add the opening tag for the list of events
-    $output .= '<ul class="google-calendar-events">';
+    $output .= '<div class="threeColumn">';
 
     // Loop through each event and format the output
     foreach ($data['items'] as $event) {
-        $start = new DateTime($event['start']['dateTime'] ?? $event['start']['date']); // Get the event start time
-        $output .= '<li>';
+        $start = isset($event['start']['dateTime']) ? new DateTime($event['start']['dateTime']) : new DateTime($event['start']['date']); // Get the event start time
+        $output .= '<div class="threeColumnSingle">';
+        $output .= '<div class="event-wrapper">';
+
+        // Check if the event is an all-day event
+        if (isset($event['start']['date'])) {
+            $output .= '<p class="event-date">' . $start->format('F j, Y:') . ' All Day Event</p>'; // Display "All Day Event"
+        } else {
+            $output .= '<p class="event-date">' . $start->format('F j, Y: g:i a') . '</p>'; // Event date and time
+        }
+
         $output .= '<h3 class="event-summary">' . esc_html($event['summary']) . '</h3>'; // Event title
-        $output .= '<p class="event-date"><em>' . $start->format('F j, Y, g:i a') . '</em></p>'; // Event date and time
+
         if (!empty($event['location'])) {
             $output .= '<p class="event-location">' . esc_html($event['location']) . '</p>'; // Event location
         }
         if (!empty($event['description'])) {
             $output .= '<p class="event-description">' . wp_kses_post($event['description']) . '</p>'; // Event description
         }
-        $output .= '</li>';
+        $output .= '</div>';
+        $output .= '</div>'; // end threeColumnSingle
     }
-    $output .= '</ul>';
+
+    $output .= '</div>';
+
+    // Add a button linking to the Google Calendar after the events
+    $output .= '<div class="google-calendar-button-wrapper">';
+    $output .= '<a href="https://calendar.google.com/calendar/u/0/r?cid=' . esc_attr($atts['calendar_id']) . '" class="google-calendar-button" target="_blank">View Full Calendar</a>';
+    $output .= '</div>';
 
     return $output; // Return the formatted event list
 }
