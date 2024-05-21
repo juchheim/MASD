@@ -2722,3 +2722,15 @@ body.home .breadcrumbs-container {
     background-color: #f6f6f6;
 }
 
+.search .entry-header {
+	box-shadow: none;
+}
+
+.search .entry-summary {
+	text-align: center;
+}
+
+.search .page-header {
+	padding:5px;
+	margin:0;
+}
