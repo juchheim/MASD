@@ -49,14 +49,10 @@ if ($games->total_found() > 0) {
 
 // Calculate win percentage based on played games
 if ($played_games > 0) {
-    $win_percentage = ($total_wins / $played_games) * 100;
-    $win_percentage = intval($win_percentage); // Ensure no decimals
+    $win_percentage = (int)(($total_wins / $played_games) * 100);
 } else {
     $win_percentage = 0;
 }
-
-// Debugging: Check the values
-echo "<!-- Debugging: total_wins=$total_wins, played_games=$played_games, win_percentage=$win_percentage -->";
 
 // Output the statistics
 echo "<div class='headline'>";
@@ -65,14 +61,14 @@ echo "</div>";
 echo "<div class='statistics-container-wrapper'>"; // Start the statistics container wrapper
 echo "<div class='statistics-container'>"; // Start the statistics container
 echo "<div class='statistics-row'>";
-echo "<div class='stat-item'><span>Total<br>Games:</span> $total_games</div>";
-echo "<div class='stat-item'><span>Total<br>Wins:</span> $total_wins</div>";
-echo "<div class='stat-item'><span>Total<br>Losses:</span> $total_losses</div>";
-echo "<div class='stat-item'><span>Win<br>Percentage:</span> $win_percentage%</div>";
-echo "<div class='stat-item'><span>Home<br>Wins:</span> $total_home_wins</div>";
-echo "<div class='stat-item'><span>Home<br>Losses:</span> $total_home_losses</div>";
-echo "<div class='stat-item'><span>Away<br>Wins:</span> $total_away_wins</div>";
-echo "<div class='stat-item'><span>Away<br>Losses:</span> $total_away_losses</div>";
+echo "<div class='stat-item'>Total<br>Games: <span class='bold-value'>$total_games</span></div>";
+echo "<div class='stat-item'>Total<br>Wins: <span class='bold-value'>$total_wins</span></div>";
+echo "<div class='stat-item'>Total<br>Losses: <span class='bold-value'>$total_losses</span></div>";
+echo "<div class='stat-item'>Win<br>Percentage: <span class='bold-value'>$win_percentage%</span></div>";
+echo "<div class='stat-item'>Home<br>Wins: <span class='bold-value'>$total_home_wins</span></div>";
+echo "<div class='stat-item'>Home<br>Losses: <span class='bold-value'>$total_home_losses</span></div>";
+echo "<div class='stat-item'>Away<br>Wins: <span class='bold-value'>$total_away_wins</span></div>";
+echo "<div class='stat-item'>Away<br>Losses: <span class='bold-value'>$total_away_losses</span></div>";
 echo "</div>";
 echo "</div>"; // End the statistics container
 echo "</div>"; // End the statistics container wrapper
@@ -81,18 +77,25 @@ echo "</div>"; // End the statistics container wrapper
 $games->reset();
 echo "<div class='scoreboard-container'>"; // Start the container
 echo "<table class='rounded-corners'>"; // Start the table
-echo "<tr>
+echo "<thead>";
+echo "<tr class='table-header'>
         <th>Date</th>
         <th>Matchup</th>
         <th>Score</th>
         <th>Result</th>
       </tr>";
+echo "</thead>";
+echo "<tbody>";
 
 // Check if there are any games
 if (0 == $games->total_found()) {
     echo '<tr><td colspan="4">No games found.</td></tr>';
 } else {
+    $row_class = '';
     while ($games->fetch()) {
+        // Alternate row color
+        $row_class = ($row_class == 'lightgray-row') ? '' : 'lightgray-row';
+
         // Retrieve fields
         $home_game = $games->field('home_game');
         $opposing_team = $games->field('opposing_team');
@@ -136,7 +139,7 @@ if (0 == $games->total_found()) {
         $matchup = $home_game ? "vs" : "at";
 
         // Output the scoreboard row for each game
-        echo "<tr>
+        echo "<tr class='$row_class'>
                 <td>$game_date</td>
                 <td>Yazoo City High School $matchup $opposing_team</td>
                 <td class='$result_class'>$score_display</td>
@@ -145,6 +148,7 @@ if (0 == $games->total_found()) {
     }
 }
 
+echo "</tbody>";
 echo "</table>"; // End the table
 echo "</div>"; // End the container
 ?>
