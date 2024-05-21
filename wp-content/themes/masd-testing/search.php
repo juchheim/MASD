@@ -8,7 +8,15 @@
  */
 
 get_header();
+
 ?>
+<div class="breadcrumbs-container">
+  <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+    <?php if (function_exists('bcn_display')) {
+      bcn_display(); // Display breadcrumb navigation if the function exists
+    } ?>
+  </div>
+</div>
 
 	<main id="primary" class="site-main">
 
