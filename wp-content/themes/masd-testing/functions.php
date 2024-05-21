@@ -350,5 +350,13 @@ function slider_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'slider_enqueue_scripts');
 
 
+function add_custom_news_page_class($classes) {
+    if (is_page('news')) { // Check if the current page is the "news" page
+        $classes[] = 'news-page';
+    }
+    return $classes;
+}
+add_filter('body_class', 'add_custom_news_page_class');
+
 
 ?>
