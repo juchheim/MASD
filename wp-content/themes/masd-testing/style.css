@@ -2602,3 +2602,24 @@ body.home .breadcrumbs-container {
 	font-size: 16px !important;
 	font-weight: 700;
 }
+
+/* Media query for screens smaller than 1000px */
+@media (max-width: 1000px) {
+    .news-page .threeColumnSingle {
+        flex-direction: column; /* Stack the items vertically */
+        align-items: center;
+		width:90%;
+    }
+    .news-page .news-page-image-container {
+        margin-right: 0; /* Remove the right margin */
+        margin-bottom: 20px; /* Add bottom margin for spacing */
+    }
+    .news-page .news-page-image {
+        width: 100%; /* Make the image take full width */
+        max-width: 300px; /* Set a max-width for the image */
+    }
+    .news-page .news-content {
+        width: 100%; /* Make the content take full width */
+        text-align: center; /* Center the text for smaller screens */
+    }
+}
