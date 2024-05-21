@@ -2737,3 +2737,7 @@ body.home .breadcrumbs-container {
 	background-color: rgb(222, 1, 1);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
+
+.teacher-template-default .single_wrapper img {
+	border-radius: 10px;
+}
