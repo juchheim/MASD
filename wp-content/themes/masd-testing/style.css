@@ -1705,6 +1705,7 @@ nav a {
 
 #searchContainer button.searchButton, #searchContainer button.resetButton {
     padding: 12px 20px;
+	margin: 0 0 0 10px;
     font-size: 18px;
     background-color: darkblue;
     color: white;
@@ -1712,6 +1713,7 @@ nav a {
     border-radius: 4px;
     transition: background-color 0.3s ease;
 	cursor: pointer;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 #searchContainer button.resetButton {
@@ -2159,11 +2161,12 @@ body::after {
     border-radius: 8px;
     padding: 12px 24px;
 	margin-top:24px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 /* Hover effect */
 .wp-block-button .wp-block-button__link:hover {
-    background-color: rgb(222, 1, 1);  /* Darker shade for hover */
+    background-color: #00305e;  /* Darker shade for hover */
 }
 
 
@@ -2186,7 +2189,7 @@ body::after {
 
 /* Style for the summary element on hover */
 .wp-block-details summary:hover {
-    color: rgb(222, 1, 1);  /* WordPress blue for hover state */
+    color: rgb(222, 1, 1);  
 }
 
 /*
@@ -2513,6 +2516,7 @@ body.home .breadcrumbs-container {
 	background-color: rgb(222, 1, 1);
 	color:white;
 	margin:0 0 0 0;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 .headline h1 {
@@ -2634,7 +2638,8 @@ body.home .breadcrumbs-container {
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 22px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 .google-calendar-button-wrapper a {
