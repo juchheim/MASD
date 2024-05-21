@@ -2661,3 +2661,53 @@ body.home .breadcrumbs-container {
 .event-wrapper .event-date {
 	font-weight: 700;
 }
+
+
+.statistics-container-wrapper {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+	margin-top:30px;
+    margin-bottom: 20px;
+}
+
+.statistics-container {
+    text-align: center;
+    width: 80.75%; 
+    margin-bottom: 20px; 
+}
+
+.statistics-headline {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.statistics-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the statistics items horizontally */
+}
+
+.stat-item {
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+	background-color: #00305e;
+	color: white;
+}
+
+.stat-item span {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .stat-item {
+        flex: 100%;
+    }
+}
+
+
