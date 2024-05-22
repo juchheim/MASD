@@ -2153,8 +2153,10 @@ body::after {
 }
 
 .news_home_image {
-	border-radius: 8px;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
+
 /* Custom style for all Gutenberg button blocks */
 .wp-block-button .wp-block-button__link {
     background-color: rgb(222, 1, 1);;  /* Change to your preferred color */
@@ -2750,3 +2752,4 @@ body.home .breadcrumbs-container {
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 	border-radius: 10px;
 }
+
