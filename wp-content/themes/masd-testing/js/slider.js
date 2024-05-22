@@ -43,13 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
       console.log('updateSlider: Current slide', currentIndex, 'has video:', !!currentVideo);
 
-      // Pause all videos and remove event listeners
+      // Pause and reset all videos and remove event listeners
       allSlides.forEach((slide, index) => {
           const video = slide.querySelector('video');
           if (video) {
               video.pause();
+              video.currentTime = 0; // Reset video time to 0
               video.removeEventListener('ended', handleVideoEnded);
-              console.log('updateSlider: Paused video on slide', index);
+              console.log('updateSlider: Paused and reset video on slide', index);
           }
       });
 
