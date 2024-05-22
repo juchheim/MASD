@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const currentVideo = currentSlide.querySelector('video'); // Check if the current slide contains a video element
       const playPauseButton = document.querySelector('.play-pause'); // Get the play/pause button from the document
 
-
       console.log('updateSlider: Current slide', currentIndex, 'has video:', !!currentVideo);
 
       // Pause all videos and remove event listeners
@@ -92,10 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
     isPlaying = true;
   }
 
-
   // Function to move to the next slide
   function nextSlide(fromVideoEnded = false) {
     console.log('nextSlide: Moving to next slide from index', currentIndex);
+
+    if (slideCount <= 1) {
+        console.log('Only one slide, not advancing.');
+        return;
+    }
 
     // Increment the current index to move to the next slide
     currentIndex++; 
@@ -105,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update the navigation dots to highlight the current slide
     updateDots();
-
 
     // If we reach the end of the slider, reset to the first slide
     if (currentIndex === totalSlides - 1) {
@@ -135,6 +137,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to move to the previous slide.
   function prevSlide() {
       console.log('prevSlide: Moving to previous slide from index', currentIndex);
+
+      if (slideCount <= 1) {
+          console.log('Only one slide, not advancing.');
+          return;
+      }
+
       currentIndex--;
       updateSlider();
       updateDots();
@@ -241,23 +249,22 @@ document.addEventListener('DOMContentLoaded', function() {
   const playPauseButton = document.querySelector('.play-pause'); // Get the play/pause button
 
   // Check if the next, previous, and play/pause buttons exist before adding event listeners
-if (nextButton && prevButton && playPauseButton) {
-  // Add a click event listener to the "next" button to move to the next slide
-  nextButton.addEventListener('click', () => {
-      console.log('Next button clicked');
-      nextSlide(); // Call the function to move to the next slide
-  });
-  
-  // Add a click event listener to the "previous" button to move to the previous slide
-  prevButton.addEventListener('click', () => {
-      console.log('Previous button clicked');
-      prevSlide(); // Call the function to move to the previous slide
-  });
-  
-  // Add a click event listener to the play/pause button to toggle the slideshow's play/pause state
-  playPauseButton.addEventListener('click', togglePlayPause); // Call the function to toggle play/pause state
-}
+  if (nextButton && prevButton && playPauseButton) {
+    // Add a click event listener to the "next" button to move to the next slide
+    nextButton.addEventListener('click', () => {
+        console.log('Next button clicked');
+        nextSlide(); // Call the function to move to the next slide
+    });
 
+    // Add a click event listener to the "previous" button to move to the previous slide
+    prevButton.addEventListener('click', () => {
+        console.log('Previous button clicked');
+        prevSlide(); // Call the function to move to the previous slide
+    });
+
+    // Add a click event listener to the play/pause button to toggle the slideshow's play/pause state
+    playPauseButton.addEventListener('click', togglePlayPause); // Call the function to toggle play/pause state
+  }
 
   sliderContainer.classList.add('ready'); // Mark the slider as ready
   setTimeout(() => {

@@ -2697,7 +2697,7 @@ body.home .breadcrumbs-container {
     margin: 5px;
     padding: 14px 10px 0 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
 	background-color: #00305e;
 	color: white;
