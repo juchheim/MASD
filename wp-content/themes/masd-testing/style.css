@@ -2753,3 +2753,7 @@ body.home .breadcrumbs-container {
 	border-radius: 10px;
 }
 
+.staff-hr {
+	padding:0;
+	margin:20px 0 20px 0;
+}

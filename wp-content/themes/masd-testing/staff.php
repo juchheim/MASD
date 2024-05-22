@@ -32,7 +32,7 @@
                     echo "<img class='staffPhoto' src='/wp-content/uploads/2024/04/no_image_available.jpg' alt='No image available' />";
                 }
 
-                echo "<h2>" . esc_html($first_name) . " " . esc_html($last_name) . "</h2><hr>";
+                echo "<h2>" . esc_html($first_name) . " " . esc_html($last_name) . "</h2><hr class='staff-hr'>";
                 if ($title) {
                     echo "<p>" . esc_html($title) . "</p>";
                 }
