@@ -1241,7 +1241,7 @@ body.news-template-default .threeColumnSingle p {
 }
 
 .darkblue-div a {
-	color: white;
+	color: white !important;
 	text-decoration: none;
 }
 
@@ -1733,11 +1733,10 @@ nav a {
 	font-style: normal;
 }
 
-/*
 .entry-content ul {
-	padding-left:20%;
+	padding-left:33%;
 }
-*/
+
 
 body.home .entry-header {
     display: none;
@@ -2524,6 +2523,10 @@ body.home .breadcrumbs-container {
 
 	.news-page-image {
 		width:100%;
+	}
+
+	.entry-content ul {
+		padding-left:10%;
 	}
 }
 

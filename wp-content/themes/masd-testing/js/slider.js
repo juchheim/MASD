@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (playPauseButton) {
             playPauseButton.style.display = 'none'; // Hide the play/pause button when a video is playing
         }
+      /*  currentVideo.muted = false; */
         currentVideo.play(); // Play the video on the current slide
         console.log('updateSlider: Playing video on slide', currentIndex);
         currentVideo.addEventListener('ended', handleVideoEnded, { once: true }); // When the video ends, transition to the next slide
