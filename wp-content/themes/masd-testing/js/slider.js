@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const video = slide.querySelector('video');
           if (video) {
               video.pause();
-              video.currentTime = 0; // Reset video time to 0
+          //    video.currentTime = 0; // Reset video time to 0
               video.removeEventListener('ended', handleVideoEnded);
               console.log('updateSlider: Paused and reset video on slide', index);
           }
@@ -266,6 +266,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add a click event listener to the play/pause button to toggle the slideshow's play/pause state
     playPauseButton.addEventListener('click', togglePlayPause); // Call the function to toggle play/pause state
   }
+
+  // Add an event listener for when the slider's transition ends
+  slider.addEventListener('transitionend', () => {
+    // Find the previous slide. If currentIndex - 1 is less than 0 (when currentIndex is 0),
+    // it means we are at the beginning, so we need to get the last actual slide (excluding the clone).
+    const previousSlide = allSlides[currentIndex - 1] || allSlides[allSlides.length - 1]; // get previous slide or get the last slide
+    
+    // Check if the previous slide contains a video element
+    const previousVideo = previousSlide.querySelector('video');
+    
+    // If there's a video on the previous slide, reset its playback to the start
+    if (previousVideo) {
+        previousVideo.currentTime = 0; // Set the video's current time to 0, effectively resetting it
+        console.log('transitionend: Reset video on previous slide', currentIndex - 1);
+    }
+  });
+
 
   sliderContainer.classList.add('ready'); // Mark the slider as ready
   setTimeout(() => {

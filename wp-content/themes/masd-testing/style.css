@@ -1060,38 +1060,6 @@ footer {
 	text-align: center;
 }
 
-.threeColumnSingle {
-    background-color: #f2f2f2;
-    padding: 20px;
-    text-align: center;
-	border-radius: 8px;
-}
-
-.threeColumnSingle {
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
-    background-color: #f0f0f0; /* Default background color */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow effect */
-}
-
-.threeColumnSingle:hover {
-    background-color: #f0f0f0; /* Light grey background on hover */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow effect */
-}
-
-.threeColumnSingle h2 {
-	margin:0;
-	padding:0;
-}
-
-.threeColumnSingle p {
-	margin:0;
-	padding:0;
-}
-
-.threeColumnSingle a {
-	color:darkblue;
-}
-
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
@@ -1244,6 +1212,7 @@ body.news-template-default .threeColumnSingle p {
     transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background color and box-shadow */
     padding: 20px;
     border-radius: 5px;
+	text-align: center;
 }
 
 /* Hover effect for threeColumnSingle */
@@ -1281,9 +1250,6 @@ body.news-template-default .threeColumnSingle p {
 	text-decoration: underline;
 }
 
-
-
-
 .gray-div {
     background-color: rgb(222, 1, 1);
     color: white;
@@ -1311,6 +1277,20 @@ body.news-template-default .threeColumnSingle p {
 .gray-div a:hover {
 	color: white;
 	text-decoration: underline;
+}
+
+.threeColumnSingle h2 {
+	margin:0;
+	padding:0;
+}
+
+.threeColumnSingle p {
+	margin:0;
+	padding:0;
+}
+
+.threeColumnSingle a {
+	color:darkblue;
 }
 
 .below_the_content {
@@ -2379,7 +2359,8 @@ th, td {
 }
 
 .wp-block-image img {
-	border-radius: 15px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
 }
 
 .image-top-margin {
