@@ -2,6 +2,13 @@
 document.addEventListener('DOMContentLoaded', function() {
   const sliderContainer = document.querySelector('.slider-container'); // Get the container of the slider
   const slider = document.querySelector('.slider'); // Get the slider element
+
+  // Check if the slider container and slider elements exist
+  if (!sliderContainer || !slider) {
+    console.log('Slider elements not found on this page.');
+    return; // Exit the script if the slider is not present
+  }
+
   const slides = document.querySelectorAll('.slider .slider-image'); // Get all the slide elements
   const slideCount = slides.length; // Get the number of slides
   const dotsContainer = document.querySelector('.slider-dots'); // Get the container for the dots
@@ -48,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const video = slide.querySelector('video');
           if (video) {
               video.pause();
-          //    video.currentTime = 0; // Reset video time to 0
+              // video.currentTime = 0; // Reset video time to 0
               video.removeEventListener('ended', handleVideoEnded);
               console.log('updateSlider: Paused and reset video on slide', index);
           }
@@ -72,7 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
         resetInterval();  // Restart the interval for automatic slide transitions
         console.log('updateSlider: No video on slide', currentIndex, 'resetting interval');
       }
+  }
 
+  // Function to reset the video
+  function resetVideo(slide) {
+      const video = slide.querySelector('video');
+      if (video) {
+          video.pause();
+          video.currentTime = 0; // Reset video time to 0
+          console.log('resetVideo: Reset video on slide');
+      }
   }
 
   // Function to handle when a video ends
@@ -102,37 +118,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Increment the current index to move to the next slide
-    currentIndex++; 
+    currentIndex++;
 
     // Update the slider's position to show the next slide
-    updateSlider(); 
+    updateSlider();
 
     // Update the navigation dots to highlight the current slide
     updateDots();
 
     // If we reach the end of the slider, reset to the first slide
     if (currentIndex === totalSlides - 1) {
-      // After a short delay, reset the slider position to show the first actual slide
-      setTimeout(() => {
-          slider.style.transition = 'none'; // Temporarily disable transitions for the reset. Otherwise jankiness happens.
-          currentIndex = 1; // Reset the index to the first actual slide (after the cloned last slide)
-          updateSlider(); // Update the slider position immediately
-          setTimeout(() => {
-              slider.style.transition = ''; // Re-enable transitions
-              updateDots(); // Update dots to reflect the current slide after reset
-          }, 20); // Small delay to ensure the slider update takes effect before re-enabling transitions
-      }, 500); // Delay the reset to allow the slide transition to complete smoothly
+        // After a short delay, reset the slider position to show the first actual slide
+        setTimeout(() => {
+            slider.style.transition = 'none'; // Temporarily disable transitions for the reset. Otherwise jankiness happens.
+            currentIndex = 1; // Reset the index to the first actual slide (after the cloned last slide)
+            updateSlider(); // Update the slider position immediately
+            setTimeout(() => {
+                slider.style.transition = ''; // Re-enable transitions
+                updateDots(); // Update dots to reflect the current slide after reset
+            }, 20); // Small delay to ensure the slider update takes effect before re-enabling transitions
+        }, 500); // Delay the reset to allow the slide transition to complete smoothly
     }
 
-      // If the transition to the next slide was not triggered by a video ending
-      if (!fromVideoEnded) {
-        // Reset the interval for automatic sliding
-        resetInterval(); 
-        
-        // Log that the interval has been reset after moving to the next slide
-        console.log('nextSlide: Interval reset after moving to slide', currentIndex);
-      }
-
+    // If the transition to the next slide was not triggered by a video ending
+    if (!fromVideoEnded) {
+      // Reset the interval for automatic sliding
+      resetInterval(); 
+      
+      // Log that the interval has been reset after moving to the next slide
+      console.log('nextSlide: Interval reset after moving to slide', currentIndex);
+    }
   }
 
   // Function to move to the previous slide.
@@ -267,22 +282,22 @@ document.addEventListener('DOMContentLoaded', function() {
     playPauseButton.addEventListener('click', togglePlayPause); // Call the function to toggle play/pause state
   }
 
-  // Add an event listener for when the slider's transition ends
   slider.addEventListener('transitionend', () => {
-    // Find the previous slide. If currentIndex - 1 is less than 0 (when currentIndex is 0),
-    // it means we are at the beginning, so we need to get the last actual slide (excluding the clone).
-    const previousSlide = allSlides[currentIndex - 1] || allSlides[allSlides.length - 1]; // get previous slide or get the last slide
-    
-    // Check if the previous slide contains a video element
-    const previousVideo = previousSlide.querySelector('video');
-    
-    // If there's a video on the previous slide, reset its playback to the start
-    if (previousVideo) {
-        previousVideo.currentTime = 0; // Set the video's current time to 0, effectively resetting it
-        console.log('transitionend: Reset video on previous slide', currentIndex - 1);
+    // Reset the video on the previous slide
+    const previousSlideIndex = (currentIndex - 1 < 0) ? totalSlides - 2 : currentIndex - 1;
+    const previousSlide = allSlides[previousSlideIndex];
+    resetVideo(previousSlide);
+
+    // Handle the case where we are transitioning to the cloned first slide from the real last slide
+    if (currentIndex === 0) {
+        resetVideo(allSlides[totalSlides - 2]);
+    }
+
+    // Handle the case where we are transitioning to the cloned last slide from the real first slide
+    if (currentIndex === totalSlides - 1) {
+        resetVideo(allSlides[1]);
     }
   });
-
 
   sliderContainer.classList.add('ready'); // Mark the slider as ready
   setTimeout(() => {
