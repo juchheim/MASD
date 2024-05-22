@@ -2680,6 +2680,10 @@ body.home .breadcrumbs-container {
     margin-bottom: 10px;
 }
 
+.headline h1 {
+	font-size:26px;
+}
+
 .statistics-row {
     display: flex;
     flex-wrap: wrap;
@@ -2739,5 +2743,10 @@ body.home .breadcrumbs-container {
 }
 
 .teacher-template-default .single_wrapper img {
+	border-radius: 10px;
+}
+
+.single_wrapper img {
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 	border-radius: 10px;
 }

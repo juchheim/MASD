@@ -358,5 +358,13 @@ function add_custom_news_page_class($classes) {
 }
 add_filter('body_class', 'add_custom_news_page_class');
 
+/* useful for checking to see if a custom post type is registered
+add_action('wp_footer', function() {
+    global $wp_rewrite;
+    echo '<pre>';
+    print_r($wp_rewrite->rules);
+    echo '</pre>';
+});
+*/
 
 ?>
