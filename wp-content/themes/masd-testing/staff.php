@@ -1,4 +1,4 @@
-<!-- <div class="threeColumn"> -->
+<div class="threeColumn">
     <?php
     $slug = get_post_field('post_name', get_the_ID());
     $pod = pods('staff');
@@ -23,13 +23,6 @@
                 'priority' => $pod->field('priority')
             );
         }
-    }
-
-    // Determine the column class based on the number of staff members
-    if (count($staff_members) == 2) {
-        echo "<div class='twoColumn'>";
-    } else {
-        echo "<div class='threeColumn'>";
     }
 
     if (count($staff_members) == 1) {
@@ -64,4 +57,4 @@
         <?php
     }
     ?>
-<!-- </div> -->
+</div>
