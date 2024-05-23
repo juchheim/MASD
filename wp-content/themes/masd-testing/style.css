@@ -1250,7 +1250,7 @@ body.news-template-default .threeColumnSingle p {
 	text-decoration: underline;
 }
 
-.gray-div {
+.red-div {
     background-color: rgb(222, 1, 1);
     color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Example shadow */
@@ -1258,23 +1258,23 @@ body.news-template-default .threeColumnSingle p {
 	border-radius: 10px;
 }
 
-.gray-div:hover {
+.red-div:hover {
     background-color: rgb(222, 1, 1); /* Same as normal state */
     color: white; /* Same as normal state */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Same as normal state */
 }
 
-.gray-div a:hover, .darkblue-div a:focus {
+.red-div a:hover, .darkblue-div a:focus {
     color: white; /* Keeps text white on hover and focus */
     text-decoration: none; /* Ensures no decoration on hover and focus */
 }
 
-.gray-div a {
-	color: white;
+.red-div a {
+	color: white !important;
 	text-decoration: none;
 }
 
-.gray-div a:hover {
+.red-div a:hover {
 	color: white;
 	text-decoration: underline;
 }
@@ -1544,6 +1544,10 @@ nav a {
     text-decoration: underline; /* Add underline on hover for better usability */
 }
 
+.search-and-reset-buttons {
+	display: inline;
+}
+
 /* Responsive styles */
 @media (max-width: 800px) {
     .schools-column {
@@ -1555,7 +1559,7 @@ nav a {
 	}
 
 	.schools_subnav { 
-		min-height: 440px;
+		min-height: 500px;
 	}
 
 	.hamburger-icon {
@@ -1583,6 +1587,11 @@ nav a {
     .footer-row {
         flex-direction: column; /* Stacks the footer columns vertically */
     }
+
+	.search-and-reset-buttons {
+		display: block;
+		margin-top:20px;
+	}
 
 }
 
@@ -1726,6 +1735,7 @@ nav a {
 
 .entry-content {
 	padding-top:10px;
+	padding: 10px 12% 0 12%;
 }
 
 .entry-content p {
@@ -1735,6 +1745,7 @@ nav a {
 
 .entry-content ul {
 	padding-left:33%;
+	padding-right:15%;
 }
 
 
@@ -1909,9 +1920,12 @@ article .entry-header .entry-title {
     margin: 20px auto; /* Centers the button horizontally */
     background-color: darkblue;
     color: white;
-    padding: 10px 20px;
+    padding: 20px 24px;
     border: none; /* Removes any default border */
     cursor: pointer; /* Changes the cursor to a pointer on hover */
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+	font-size:18px;
 }
 
 #parallax {
@@ -2289,6 +2303,9 @@ ul li {
 	.search-submit {
 		margin-top:10px;
 	}
+	#resetButton {
+		padding-top:20px;
+	}
 }
 
 /* Font size adjustments for headings in the navigation */
@@ -2527,6 +2544,17 @@ body.home .breadcrumbs-container {
 
 	.entry-content ul {
 		padding-left:10%;
+		padding-right:0;
+	}
+
+	.wp-block-button {
+		display: block !important;
+  		margin: 0 auto !important;
+	}
+
+	#teacherSearchInput {
+		width: 210px;
+		margin-left:10px;
 	}
 }
 
@@ -2740,4 +2768,44 @@ body.home .breadcrumbs-container {
 .staff-hr {
 	padding:0;
 	margin:20px 0 20px 0;
+}
+
+.entry-content a {
+	color: #00305e;
+}
+
+.elementor-widget-container h2 {
+	font-size: 22px;
+	color: black;
+	padding:0;
+	margin:0;
+}
+
+.elementor-widget-container p {
+	color: black;
+	font-family: "Poppins", sans-serif;
+}
+
+.elementor-tab-content {
+	font-family: "Poppins", sans-serif !important;
+}
+
+.empty {
+	background-color: white;
+	box-shadow: none;
+	transition: none;
+}
+
+.empty:hover {
+	background-color: white;
+	box-shadow: none;
+}
+
+.twoColumn {
+	display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 70%;
+    margin: 0 auto;
 }

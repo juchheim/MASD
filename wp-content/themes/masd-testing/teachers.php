@@ -10,8 +10,10 @@
 
 <div id="searchContainer" style="text-align:center; margin-bottom:20px;">
     <input type="text" id="teacherSearchInput" placeholder="Search by name..." />
-    <button id="searchButton" class="searchButton">Search</button>
-    <button id="resetButton" class="resetButton">Reset</button>
+    <div class="search-and-reset-buttons">
+        <button id="searchButton" class="searchButton">Search</button>
+        <button id="resetButton" class="resetButton">Reset</button>
+    </div>
 </div>
 
 <div id="loadingMore" style="display:none;">
