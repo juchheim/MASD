@@ -91,7 +91,7 @@ function display_google_calendar_events($atts) {
 
     // Add a button linking to the Google Calendar after the events
     $output .= '<div class="google-calendar-button-wrapper">';
-    $output .= '<a href="https://calendar.google.com/calendar/u/0/r?cid=' . esc_attr($atts['calendar_id']) . '" class="google-calendar-button" target="_blank">View Full Calendar</a>';
+    $output .= '<a href="/google-calendar/" class="google-calendar-button">View Full Calendar</a>';
     $output .= '</div>';
 
     return $output; // Return the formatted event list
