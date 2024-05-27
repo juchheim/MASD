@@ -7,6 +7,7 @@ const Calendar = () => {
   const [events, setEvents] = useState([]);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [expandedEventId, setExpandedEventId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -16,6 +17,8 @@ const Calendar = () => {
         setEvents(events);
       } catch (error) {
         console.error('Error fetching events:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -111,9 +114,14 @@ const Calendar = () => {
 
   return (
     <div className="calendar">
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
+      {loading && <div className="loading-bar"></div>}
+      {!loading && (
+        <>
+          {renderHeader()}
+          {renderDays()}
+          {renderCells()}
+        </>
+      )}
     </div>
   );
 };
