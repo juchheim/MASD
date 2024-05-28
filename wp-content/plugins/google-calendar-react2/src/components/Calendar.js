@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, addDays, isSameMonth, isSameDay } from 'date-fns';
 import getEvents from '../services/googleCalendarService';
-import './Calendar.css'; // Import the CSS file
+import './Calendar.css';
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
@@ -13,37 +13,37 @@ const Calendar = () => {
     const fetchEvents = async () => {
       try {
         const events = await getEvents();
-        console.log('Fetched events:', events);
         setEvents(events);
       } catch (error) {
         console.error('Error fetching events:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
-    fetchEvents();
+    const initialSetup = async () => {
+      await fetchEvents();
+      setLoading(false);
+    };
+
+    initialSetup();
   }, []);
 
   const handleEventClick = (eventId) => {
     setExpandedEventId(expandedEventId === eventId ? null : eventId);
   };
 
-  const renderHeader = () => {
-    return (
-      <div className="header row flex-middle">
-        <div className="col col-start">
-          <div className="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>&#9664;</div>
-        </div>
-        <div className="col col-center">
-          <span>{format(currentMonth, 'MMMM yyyy')}</span>
-        </div>
-        <div className="col col-end" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
-          <div className="icon">&#9654;</div>
-        </div>
+  const renderHeader = () => (
+    <div className="header row flex-middle">
+      <div className="col col-start">
+        <div className="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>&#9664;</div>
       </div>
-    );
-  };
+      <div className="col col-center">
+        <span>{format(currentMonth, 'MMMM yyyy')}</span>
+      </div>
+      <div className="col col-end" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
+        <div className="icon">&#9654;</div>
+      </div>
+    </div>
+  );
 
   const renderDays = () => {
     const days = [];
@@ -80,6 +80,7 @@ const Calendar = () => {
             className={`col cell ${!isSameMonth(day, monthStart)
               ? 'disabled' : isSameDay(day, new Date()) ? 'selected' : ''}`}
             key={day}
+            onClick={() => handleEventClick(cloneDay)}
           >
             <span className="number">{formattedDate}</span>
             <div className="events">
