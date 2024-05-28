@@ -88,7 +88,10 @@ const Calendar = () => {
                 <div
                   key={event.id}
                   className={`event ${expandedEventId === event.id ? 'expanded' : ''}`}
-                  onClick={() => handleEventClick(event.id)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent the event click from bubbling up to the cell click
+                    handleEventClick(event.id);
+                  }}
                 >
                   <div className="event-summary">{event.summary}</div>
                   {expandedEventId === event.id && (
