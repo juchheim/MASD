@@ -19,6 +19,10 @@
     cursor: pointer;
   }
   
+  .header .month-year {
+    font-weight: bold;
+  }
+
   .days {
     display: flex;
     background-color: #f0f0f0;

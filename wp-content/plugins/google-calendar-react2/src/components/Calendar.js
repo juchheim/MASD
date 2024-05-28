@@ -37,7 +37,7 @@ const Calendar = () => {
         <div className="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>&#9664;</div>
       </div>
       <div className="col col-center">
-        <span>{format(currentMonth, 'MMMM yyyy')}</span>
+        <span className="month-year">{format(currentMonth, 'MMMM yyyy')}</span>
       </div>
       <div className="col col-end" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
         <div className="icon">&#9654;</div>
