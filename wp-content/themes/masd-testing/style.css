@@ -69,6 +69,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  html {
 	line-height: 1.15;
 	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
 }
 
 /* Sections
@@ -2817,19 +2818,18 @@ body.home .breadcrumbs-container {
     gap: 20px;
     justify-content: center; /* Center the gallery */
     padding: 20px;
-	margin-bottom:40px;
+	margin-bottom:30px;
 }
 
 /* Styling for media item groups */
 .media-item-group {
     background-color: #00305e;
-    padding: 10px;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin: 0 0 10px 0;
-    padding: 0 20px 0 20px;
+    padding: 0 10px 0 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -2840,7 +2840,7 @@ body.home .breadcrumbs-container {
     margin-bottom: 10px;
 }
 
-.media-item {
+.media-item, .grouped-media-item {
     flex: 1 1 calc(16.66% - 20px); /* 16.66% for six columns, minus the gap */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
@@ -2854,7 +2854,7 @@ body.home .breadcrumbs-container {
     margin-bottom: 10px; /* Add bottom margin for spacing within groups */
 }
 
-.media-item img, .media-item video {
+.media-item img, .grouped-media-item img, .media-item video {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     max-width: 100%;
     height: auto;
@@ -2862,7 +2862,7 @@ body.home .breadcrumbs-container {
     border-radius: 10px;
 }
 
-.media-item:hover {
+.media-item:hover, .grouped-media-item:hover {
     background-color: white;
 }
 
@@ -2885,7 +2885,6 @@ body.home .breadcrumbs-container {
 
 /* Styling for video section */
 .media-gallery-videos {
-    margin-top: 0px;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
@@ -2918,40 +2917,20 @@ body.home .breadcrumbs-container {
     margin-bottom: 20px;
 }
 
-.video-item h4 {
-	padding-bottom:10px;
-}
-
-.video-item p {
-	padding-top:20px;
-}
-
 @media (max-width: 992px) {
-    .media-item {
-        flex: 1 1 calc(25% - 20px); /* Four columns on small screens */
-    }
-
-    .video-item {
+    .media-item, .grouped-media-item, .video-item {
         flex: 1 1 calc(50% - 20px); /* Two columns */
     }
 }
 
 @media (max-width: 768px) {
-    .media-item {
-        flex: 1 1 calc(33.333% - 20px); /* Three columns on extra small screens */
-    }
-
-    .video-item {
+    .media-item, .grouped-media-item, .video-item {
         flex: 1 1 calc(50% - 20px); /* Two columns */
     }
 }
 
 @media (max-width: 576px) {
-    .media-item {
-        flex: 1 1 calc(50% - 20px); /* Two columns on very small screens */
-    }
-
-    .video-item {
+    .media-item, .grouped-media-item, .video-item {
         flex: 1 1 calc(100% - 20px); /* One column on very small screens */
     }
 }
