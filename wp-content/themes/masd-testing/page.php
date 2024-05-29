@@ -250,6 +250,11 @@ if ($post) {
   if ($slug == 'volleyball') {
     require 'athletics_volleyball.php';
   }
+
+  if($slug == 'media-gallery') {
+    require 'media-gallery.php';
+  }
+
 ?>
 
   <!-- Close tags from staff (staff won't work otherwise, am troubleshooting) -->

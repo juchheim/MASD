@@ -2809,3 +2809,149 @@ body.home .breadcrumbs-container {
     max-width: 70%;
     margin: 0 auto;
 }
+
+/* Ensure the gallery container is centered */
+.media-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Center the gallery */
+    padding: 20px;
+	margin-bottom:40px;
+}
+
+/* Styling for media item groups */
+.media-item-group {
+    background-color: #00305e;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 10px 0;
+    padding: 0 20px 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.media-item-group h3 {
+    width: 100%; /* Make the title span the full width of the group */
+    color: white; /* White text for contrast */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.media-item {
+    flex: 1 1 calc(16.66% - 20px); /* 16.66% for six columns, minus the gap */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    margin-bottom: 10px; /* Add bottom margin for spacing within groups */
+}
+
+.media-item img, .media-item video {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px; /* Add space between media and text */
+    border-radius: 10px;
+}
+
+.media-item:hover {
+    background-color: white;
+}
+
+.media-item h4 {
+    margin: 5px 0;
+}
+
+.media-item p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.grouped-media-item img {
+    border-radius: 10px;
+    margin: 7px 0 0 0;
+    padding: 0 0 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Styling for video section */
+.media-gallery-videos {
+    margin-top: 0px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.media-gallery-videos h3 {
+    margin-bottom: 20px;
+}
+
+.video-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.video-item {
+    flex: 1 1 calc(50% - 20px); /* Two columns */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.video-item h4 {
+	padding-bottom:10px;
+}
+
+.video-item p {
+	padding-top:20px;
+}
+
+@media (max-width: 992px) {
+    .media-item {
+        flex: 1 1 calc(25% - 20px); /* Four columns on small screens */
+    }
+
+    .video-item {
+        flex: 1 1 calc(50% - 20px); /* Two columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .media-item {
+        flex: 1 1 calc(33.333% - 20px); /* Three columns on extra small screens */
+    }
+
+    .video-item {
+        flex: 1 1 calc(50% - 20px); /* Two columns */
+    }
+}
+
+@media (max-width: 576px) {
+    .media-item {
+        flex: 1 1 calc(50% - 20px); /* Two columns on very small screens */
+    }
+
+    .video-item {
+        flex: 1 1 calc(100% - 20px); /* One column on very small screens */
+    }
+}

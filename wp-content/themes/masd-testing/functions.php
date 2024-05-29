@@ -167,6 +167,13 @@ function custom_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'custom_enqueue_scripts');
 
+function enqueue_fancybox_assets() {
+    wp_enqueue_style('fancybox-css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css');
+    wp_enqueue_script('fancybox-js', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_fancybox_assets');
+
+
 
 // hide certain post type fields from the admin
 function hide_editor_custom_post_type() {
@@ -207,8 +214,6 @@ add_action('init', 'hide_post_type_from_main_site');
 
 
 
-
-
 // Enable manual sorting for the 'slider' custom post type and set initial sorting by menu_order
 function enable_manual_ordering_for_slider($query) {
     global $pagenow;
@@ -229,6 +234,36 @@ function enable_manual_ordering_for_slider($query) {
 add_action('pre_get_posts', 'enable_manual_ordering_for_slider');
 
 
+function create_media_gallery_cpt() {
+    $args = array(
+        'label' => 'Media Gallery',
+        'public' => true,
+        'supports' => array('title', 'editor', 'thumbnail', 'page-attributes'),
+        // other args...
+    );
+    register_post_type('media_gallery', $args);
+}
+add_action('init', 'create_media_gallery_cpt');
+
+
+// Enable manual sorting for the 'media_gallery' custom post type and set initial sorting by menu_order
+function enable_manual_ordering_for_media_gallery($query) {
+    global $pagenow;
+
+    // Ensure we are in the admin area and on the edit screen for the 'media_gallery' post type
+    if (is_admin() && $pagenow == 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] == 'media_gallery') {
+        // Check if the orderby parameter is not already set (to avoid overriding if user chooses a different order)
+        if (!isset($_GET['orderby'])) {
+            $query->set('orderby', 'menu_order');
+            // Check if the order parameter is not already set
+            if (!isset($_GET['order'])) {
+                // Set the default order to ASC
+                $query->set('order', 'ASC');
+            }
+        }
+    }
+}
+add_action('pre_get_posts', 'enable_manual_ordering_for_media_gallery');
 
 
 
@@ -336,12 +371,13 @@ function register_my_menus() {
 }
 add_action('init', 'register_my_menus');
 
+/*
 function enqueue_leaflet_assets() {
     wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet/dist/leaflet.css');
     wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet/dist/leaflet.js', array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_leaflet_assets');
-
+*/
 
 function slider_enqueue_scripts() {
     // Enqueue the slider JavaScript file
@@ -366,5 +402,6 @@ add_action('wp_footer', function() {
     echo '</pre>';
 });
 */
+
 
 ?>

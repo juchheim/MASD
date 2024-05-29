@@ -31,6 +31,10 @@
     <!-- Link to an older version of Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
     <?php wp_head(); ?> <!-- Triggers the 'wp_head' action, which allows WordPress and plugins to inject necessary elements into the <head> section. 
         These elements include stylesheets, scripts, meta tags, and other resources required for the theme and plugins to function correctly. -->
 
