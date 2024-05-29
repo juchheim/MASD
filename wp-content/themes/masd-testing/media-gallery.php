@@ -13,11 +13,11 @@
     if ($pods->total() > 0) : // Check if there are any media_gallery items
         while ($pods->fetch()) : // Fetch each item
             // Retrieve post data
-            $title = $pods->display('title'); // Get the title of the media item
-            $images = $pods->field('image'); // Get the images field
-            $videos = $pods->field('video'); // Get the videos field (assuming 'video' is the field name for videos)
-            $caption = $pods->field('caption'); // Get the caption field
-            $menu_order = $pods->field('menu_order'); // Get the menu_order field
+            $title = $pods->display('title'); 
+            $images = $pods->field('image'); 
+            $videos = $pods->field('video'); 
+            $caption = $pods->field('caption');
+            $menu_order = $pods->field('menu_order'); 
 
             // Display images
             if (!empty($images)) : // Check if there are any images
@@ -32,7 +32,7 @@
                             ?>
                             <div class="grouped-media-item">
                                 <a href="<?php echo esc_url($full_size_url); ?>" data-fancybox="gallery" data-caption="<?php echo esc_attr($lightbox_caption); ?>">
-                                    <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($title); ?>"> <!-- Display the image with a link to the full-size image -->
+                                    <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy"> <!-- Lazy load the image with the loading attribute -->
                                 </a>
                             </div>
                         <?php endforeach; ?>
@@ -46,7 +46,7 @@
                     ?>
                     <div class="media-item" data-menu-order="<?php echo esc_attr($menu_order); ?>">
                         <a href="<?php echo esc_url($full_size_url); ?>" data-fancybox="gallery" data-caption="<?php echo esc_attr($lightbox_caption); ?>">
-                            <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($title); ?>"> <!-- Display the image with a link to the full-size image -->
+                            <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy"> <!-- Lazy load the image with the loading attribute -->
                         </a>
                         <h4><?php echo esc_html($title); ?></h4> <!-- Display the title of the media item -->
                     </div>
