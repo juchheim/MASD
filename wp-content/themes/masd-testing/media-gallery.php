@@ -17,7 +17,7 @@
             $images = $pods->field('image'); 
             $videos = $pods->field('video'); 
             $caption = $pods->field('caption');
-            $menu_order = $pods->field('menu_order'); 
+            $menu_order = $pods->field('menu_order'); // menu_order = drag and drop ordering in admin
 
             // Display images
             if (!empty($images)) : // Check if there are any images
@@ -104,11 +104,6 @@ jQuery(document).ready(function($) {
             "thumbs",
             "close"
         ]
-    });
-
-    // Log menu_order values to the console
-    $('.media-item, .media-item-group').each(function() {
-        console.log('menu_order:', $(this).data('menu-order'));
     });
 });
 </script>
