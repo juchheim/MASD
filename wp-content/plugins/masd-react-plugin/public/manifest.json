@@ -1,6 +1,6 @@
 {
-  "short_name": "MASD",
-  "name": "Mississippi Achievement School District",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
