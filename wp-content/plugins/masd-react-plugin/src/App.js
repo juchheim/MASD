@@ -1,8 +1,7 @@
-// src/App.js
+/* global OneSignal */
 import React, { useState } from 'react';
-import NotificationTest from './NotificationTest';
-import Modal from './Modal';
-import { requestNotificationPermission, subscribeUserToPush } from './index';
+import Modal from './Modal'; // Ensure Modal component is correctly imported
+import './index.css'; // Ensure you import the CSS file if modal styles are in index.css
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,16 +18,17 @@ function App() {
     setPermissionError(null);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     console.log('User confirmed notification permission');
     setIsModalOpen(false);
-    requestNotificationPermission().then((permission) => {
-      console.log('Notification permission granted:', permission);
-      subscribeUserToPush();
-    }).catch((error) => {
-      console.error('Failed to get notification permission:', error);
-      setPermissionError('Failed to get notification permission. Please allow notifications in your browser settings.');
-    });
+    try {
+      window.OneSignal.push(function() {
+        OneSignal.showSlidedownPrompt();
+      });
+    } catch (error) {
+      console.error('Failed to get notification permission or subscribe user:', error);
+      setPermissionError('Failed to get notification permission or subscribe user. Please allow notifications in your browser settings.');
+    }
   };
 
   return (
@@ -44,7 +44,6 @@ function App() {
             onCancel={handleCloseModal}
           />
         )}
-        <NotificationTest />
       </header>
     </div>
   );

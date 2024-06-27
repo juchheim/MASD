@@ -1,32 +1,30 @@
-// src/serviceWorkerRegistration.js
+// serviceWorkerRegistration.js
 
 const isLocalhost = Boolean(
     window.location.hostname === 'localhost' ||
-      // [::1] is the IPv6 localhost address.
-      window.location.hostname === '[::1]' ||
-      // 127.0.0.0/8 are considered localhost for IPv4.
-      window.location.hostname.match(
-        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-      )
+    window.location.hostname === '[::1]' ||
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+    )
   );
   
   export function register(config) {
-    if ('serviceWorker' in navigator) {
-      // The URL constructor is available in all browsers that support SW.
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
       if (publicUrl.origin !== window.location.origin) {
         return;
       }
   
       window.addEventListener('load', () => {
-        const swUrl = `${process.env.PUBLIC_URL}/push-sw.js`;
+        const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
   
         if (isLocalhost) {
           checkValidServiceWorker(swUrl, config);
   
           navigator.serviceWorker.ready.then(() => {
             console.log(
-              'This web app is being served cache-first by a service worker.'
+              'This web app is being served cache-first by a service ' +
+              'worker. To learn more, visit https://cra.link/PWA'
             );
           });
         } else {
@@ -49,7 +47,8 @@ const isLocalhost = Boolean(
             if (installingWorker.state === 'installed') {
               if (navigator.serviceWorker.controller) {
                 console.log(
-                  'New content is available and will be used when all tabs for this page are closed.'
+                  'New content is available and will be used when all ' +
+                  'tabs for this page are closed. See https://cra.link/PWA.'
                 );
   
                 if (config && config.onUpdate) {
